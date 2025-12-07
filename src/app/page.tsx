@@ -1,10 +1,11 @@
-import { ModeToggle } from "@/components/theme/mode-toggle";
+import ExploreSection from "@/components/ui/ExploreSection";
+import HeroSection from "@/components/ui/HeroSection";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center ">
-      <h2 className="text-4xl">devdaman</h2>
-      <ModeToggle />
+    <div className="mt-12">
+      <HeroSection />
+      <ExploreSection />
     </div>
   );
 }
