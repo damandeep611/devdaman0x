@@ -39,10 +39,10 @@ const blogPosts = [
 export default function MyContentSection() {
   return (
     <div className='max-w-7xl mx-auto px-6 py-12'>
-       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left Column: Writings */}
           <div className="lg:col-span-7 space-y-8">
-            <div className="flex items-center gap-2 mb-8">
+            <div className="flex items-center gap-2">
                 <span className="h-px w-8 bg-muted-foreground/50"></span>
                 <span className="text-sm font-mono text-muted-foreground uppercase tracking-widest">
                     Latest Writing
@@ -59,7 +59,7 @@ export default function MyContentSection() {
                         transition={{ delay: index * 0.1 }}
                         className="group flex flex-col sm:flex-row gap-6 items-start p-4 rounded-3xl hover:bg-muted/50 transition-colors duration-300"
                     >
-                        <div className="relative w-full sm:w-32 aspect-4/3 sm:aspect-square rounded-2xl overflow-hidden bg-secondary shrink-0 border border-border">
+                        <div className="relative w-full sm:w-32 aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden bg-secondary shrink-0 border border-border">
                              <Image 
                                 src={post.image} 
                                 alt={post.title} 
@@ -94,7 +94,14 @@ export default function MyContentSection() {
           </div>
 
           {/* Right Column: Sidebar */}
-          <div className="lg:col-span-5 space-y-10">
+          <div className="lg:col-span-5 space-y-8">
+            <div className="flex items-center gap-2">
+                <span className="h-px w-8 bg-muted-foreground/50"></span>
+                <span className="text-sm font-mono text-muted-foreground uppercase tracking-widest">
+                    Explore
+                </span>
+            </div>
+
             {/* Medium Promotion */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
