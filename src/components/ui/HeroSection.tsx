@@ -32,7 +32,7 @@ const itemVariants: Variants = {
 
 export default function HeroSection() {
   return (
-     <section className="w-full mx-auto min-h-screen flex flex-col justify-between pt-24 pb-10">
+    <section className="w-full mx-auto min-h-screen flex flex-col justify-between pt-32 pb-10">
       <div className="max-w-3xl mx-auto w-full px-6">
         {/* Profile Section */}
         <motion.div
@@ -44,69 +44,73 @@ export default function HeroSection() {
           {/* Avatar */}
           <motion.div variants={itemVariants} className="shrink-0">
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                <Image
-                    src="/pfp-main.png"
-                    alt="Daman"
-                    fill
-                    className="object-cover"
-                    priority
-                />
+              <Image
+                src="/download.png"
+                alt="Daman"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
           </motion.div>
 
           {/* Info */}
           <div className="space-y-4 pt-2">
             <motion.h1
-                variants={itemVariants}
-                className="text-3xl md:text-4xl font-medium tracking-tight "
+              variants={itemVariants}
+              className="text-3xl md:text-4xl font-medium tracking-tight "
             >
-                Daman
+              Hey I&apos;m Daman
             </motion.h1>
 
             <motion.div variants={itemVariants} className="space-y-2">
-                <p className="text-lg md:text-xl font-serif italic ">
-                    Designer & Developer.
-                </p>
-                <p className=" font-light">
-                    Devoted romanticizer of digital products.
-                </p>
+              <p className="text-lg md:text-xl font-serif italic ">
+                Designer & Developer.
+              </p>
+              <p className=" font-light">
+                Devoted romanticizer of digital products.
+              </p>
             </motion.div>
 
-            <motion.div 
-                variants={itemVariants} 
-                className="flex items-center justify-center md:justify-start gap-2  text-sm"
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center justify-center md:justify-start gap-2  text-sm"
             >
-                <MapPin size={14} />
-                <span>India</span>
+              <MapPin size={14} />
+              <span>India</span>
             </motion.div>
           </div>
         </motion.div>
 
         {/* Navigation Pills */}
-        <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 flex flex-wrap justify-center md:justify-start gap-3"
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="mt-12 flex flex-wrap justify-center md:justify-start gap-3"
         >
-             {[
-               { label: "About me", href: "#", icon: null },
-               { label: "Resume", href: "/resume.pdf", icon: null },
-               { label: "Email", href: "mailto:hello@example.com", icon: Mail },
-               { label: "GitHub", href: "https://github.com", icon: FaGithub },
-               { label: "LinkedIn", href: "https://linkedin.com", icon: FaLinkedin },
-               { label: "Twitter", href: "https://twitter.com", icon: XIcon },
-             ].map((item) => (
-               <motion.a
-                 key={item.label}
-                 variants={itemVariants}
-                 href={item.href}
-                 className="flex items-center gap-2 px-4 py-2 border border-border text-sm rounded-full transition-all"
-               >
-                 {item.icon && <item.icon size={14} />}
-                 {item.label}
-               </motion.a>
-             ))}
+          {[
+            { label: "About me", href: "#", icon: null },
+            { label: "Resume", href: "/resume.pdf", icon: null },
+            { label: "Email", href: "mailto:hello@example.com", icon: Mail },
+            { label: "GitHub", href: "https://github.com", icon: FaGithub },
+            {
+              label: "LinkedIn",
+              href: "https://linkedin.com",
+              icon: FaLinkedin,
+            },
+            { label: "Twitter", href: "https://twitter.com", icon: XIcon },
+          ].map((item) => (
+            <motion.a
+              key={item.label}
+              variants={itemVariants}
+              href={item.href}
+              className="flex items-center gap-2 px-4 py-2 border border-border text-sm rounded-full transition-all"
+            >
+              {item.icon && <item.icon size={14} />}
+              {item.label}
+            </motion.a>
+          ))}
         </motion.div>
       </div>
 
@@ -115,5 +119,5 @@ export default function HeroSection() {
         <PhotoGallery />
       </div>
     </section>
-  )
+  );
 }

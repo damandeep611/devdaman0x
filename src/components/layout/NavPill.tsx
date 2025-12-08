@@ -73,27 +73,38 @@ export default function NavPill() {
         </motion.button>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center bg-transparent rounded-full px-0 sm:px-1 shrink-0">
+        <nav
+          className="flex items-center bg-transparent rounded-full px-0 sm:px-1 shrink-0"
+          aria-label="Main-navigation"
+        >
           {navItems.map((item) => {
             const isActive = isActiveRoute(isPathname, item.href);
             return (
               <Link
                 key={item.id}
                 href={item.href}
-                className={` relative px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none ${
+                className={`relative px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none ${
                   isActive
-                    ? "bg-zinc-700 text-white"
-                    : "text-zinc-200 hover:text-zinc-300 hover:bg-zinc-800/50 "
+                    ? "text-white"
+                    : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"
                 }`}
                 style={{
                   WebkitTapHighlightColor: "transparent",
                 }}
               >
-                {item.label}
+                {isActive && (
+                  <motion.span
+                    layoutId="active-pill"
+                    className="absolute inset-0 bg-zinc-700 rounded-full"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    style={{ borderRadius: 9999 }}
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
               </Link>
             );
           })}
-        </div>
+        </nav>
 
         {/* Theme Toggle */}
         <ModeToggle />
