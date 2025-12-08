@@ -55,7 +55,7 @@ const PhotoGallery: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
 
-  const bleedOffset = 50; // pixels for bleed on each side
+  const bleedOffset = 40; // pixels for bleed on each side
 
   useEffect(() => {
     if (containerRef.current) {
@@ -67,6 +67,54 @@ const PhotoGallery: React.FC = () => {
 
   return (
     <div className="w-full overflow-hidden py-16 md:py-20 relative cursor-grab active:cursor-grabbing">
+      {/* 1. Top-left Arrow: "checkout ai image gallery for more" */}
+      <div className="absolute top-0 left-4 md:left-20 flex flex-col items-start z-10 opacity-80 -rotate-6 pointer-events-none">
+        <span className="font-mono italic text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide max-w-[150px] leading-tight">
+          checkout ai image gallery for more
+        </span>
+        <svg
+          width="40"
+          height="50"
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-muted-foreground animate-bounce ml-8"
+          style={{ animationDuration: "2.5s" }}
+        >
+          {/* Curvy arrow pointing down-right */}
+          <path d="M10,10 C30,10 50,40 50,80" />
+          <path d="M25,65 C35,75 50,80 50,80" />
+          <path d="M75,65 C65,75 50,80 50,80" />
+        </svg>
+      </div>
+
+      {/* 2. Top-right Arrow: "huge prompt library" (Different style) */}
+      <div className="absolute top-0 right-4 md:right-20 flex flex-col items-end z-10 opacity-80 rotate-3 pointer-events-none">
+        <span className="font-mono italic text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide text-right max-w-[150px] leading-tight">
+          Prompt library
+        </span>
+        <svg
+          width="55"
+          height="45"
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-muted-foreground animate-pulse mr-8"
+          style={{ animationDuration: "3s" }}
+        >
+          {/* Loopy arrow pointing down-left */}
+          <path d="M90,10 C70,10 60,30 50,80" />
+          <path d="M25,70 C35,80 50,80 50,80" />
+          <path d="M70,60 C60,75 50,80 50,80" />
+        </svg>
+      </div>
+
       <motion.div
         ref={containerRef}
         drag="x"
