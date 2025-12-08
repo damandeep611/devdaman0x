@@ -2,31 +2,50 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail,X, Send } from 'lucide-react';
-import Image from 'next/image';
-import { ModeToggle } from '../theme/mode-toggle';
+import { Mail, X, Send } from "lucide-react";
+import { ModeToggle } from "../theme/mode-toggle";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export type NavItem = 'Home' | 'Blog' | 'Work';
+const navItems = [
+  {
+    id: "home-page",
+    label: "Home",
+    href: "/",
+  },
+  {
+    id: "blog-page",
+    label: "Blog",
+    href: "/blog",
+  },
+  {
+    id: "work-page",
+    label: "Work",
+    href: "/work",
+  },
+];
 
-const tabs: NavItem[] = ['Home', 'Blog', 'Work'];
+const isActiveRoute = (pathname: string, href: string): boolean => {
+  if (href === "/") {
+    return pathname === "/";
+  }
+  return pathname.startsWith(href);
+};
 
-export default function NavPill()  {
-  const [activeTab, setActiveTab] = useState<NavItem>('Home');
+export default function NavPill() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const isPathname = usePathname();
 
   return (
     <div className="fixed top-6 sm:top-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3 w-[calc(100%-24px)] sm:w-auto max-w-lg">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
         className="flex items-center justify-between sm:justify-start w-full sm:w-auto gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-full border border-neutral-800 bg-[#111111]/80 backdrop-blur-md shadow-2xl shadow-black/50"
       >
         {/* Profile Section */}
         <div className="flex items-center gap-2 sm:gap-3 pl-1 sm:pl-2 pr-1 sm:pr-4 cursor-pointer group shrink-0">
-          <div className="relative overflow-hidden rounded-full w-8 h-8 sm:w-9 sm:h-9 border border-neutral-700">
-            <Image  src="/pfp-main.png" alt='navpill-profile-image' width={50} height={50} className='object-cover w-full h-full transition-transform duration-500 group-hover:scale-110'/>
-          </div>
           <span className="hidden sm:block text-sm font-semibold text-neutral-200 tracking-tight group-hover:text-white transition-colors">
             devDaman
           </span>
@@ -38,10 +57,12 @@ export default function NavPill()  {
         {/* Action Button: Mail */}
         <motion.button
           onClick={() => setIsContactOpen(!isContactOpen)}
-          whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.1)' }}
+          whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
           whileTap={{ scale: 0.95 }}
           className={`p-2 sm:p-2.5 rounded-full transition-colors relative shrink-0 ${
-            isContactOpen ? 'bg-neutral-800 text-white' : 'text-neutral-400 hover:text-white'
+            isContactOpen
+              ? "bg-neutral-800 text-white"
+              : "text-neutral-400 hover:text-white"
           }`}
           aria-label="Contact"
         >
@@ -53,49 +74,47 @@ export default function NavPill()  {
 
         {/* Navigation Tabs */}
         <div className="flex items-center bg-transparent rounded-full px-0 sm:px-1 shrink-0">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`${
-                activeTab === tab ? '' : 'hover:text-neutral-200'
-              } relative px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-300 focus:outline-none`}
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-              }}
-            >
-              {activeTab === tab && (
-                <motion.div
-                  layoutId="active-pill"
-                  className="absolute inset-0 bg-neutral-800 rounded-full"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <span className={`relative z-10 ${activeTab === tab ? 'text-white' : 'text-neutral-400'}`}>
-                {tab}
-              </span>
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isActive = isActiveRoute(isPathname, item.href);
+            return (
+              <Link
+                key={item.id}
+                href={item.href}
+                className={` relative px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none ${
+                  isActive
+                    ? "bg-zinc-700 text-white"
+                    : "text-zinc-200 hover:text-zinc-300 hover:bg-zinc-800/50 "
+                }`}
+                style={{
+                  WebkitTapHighlightColor: "transparent",
+                }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Theme Toggle */}
-        <ModeToggle/>
+        <ModeToggle />
       </motion.nav>
 
       {/* Contact Card */}
       <AnimatePresence>
         {isContactOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -20, scale: 0.95, filter: 'blur(4px)' }}
-            transition={{ type: 'spring', duration: 0.5, bounce: 0.35 }}
+            initial={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -20, scale: 0.95, filter: "blur(4px)" }}
+            transition={{ type: "spring", duration: 0.5, bounce: 0.35 }}
             className="w-full sm:w-96 bg-[#111111]/90 backdrop-blur-2xl border border-neutral-800 rounded-3xl shadow-[0_40px_80px_-15px_rgba(0,0,0,0.8)] overflow-hidden"
           >
             <div className="p-5 sm:p-6">
               <div className="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
-                  <h3 className="text-white font-semibold text-base sm:text-lg">Contact</h3>
+                  <h3 className="text-white font-semibold text-base sm:text-lg">
+                    Contact
+                  </h3>
                   <p className="text-neutral-500 text-[10px] sm:text-xs mt-0.5">
                     Let&apos;s discuss your next project
                   </p>
@@ -108,7 +127,10 @@ export default function NavPill()  {
                 </button>
               </div>
 
-              <form className="space-y-3 sm:space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form
+                className="space-y-3 sm:space-y-4"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <div className="space-y-1.5 sm:space-y-2">
                   <label className="text-[10px] sm:text-xs font-medium text-neutral-400 ml-1">
                     Email
