@@ -9,6 +9,9 @@ import {
 import Image from "next/image";
 import { FaGithub, FaLinkedin,  } from "react-icons/fa";
 import PhotoGallery from "./PhotoGallery";
+import { RiTwitterXFill } from "react-icons/ri";
+import { SiReaddotcv } from "react-icons/si";
+import { TfiInfo } from "react-icons/tfi";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -43,12 +46,12 @@ export default function HeroSection() {
         >
           {/* Avatar */}
           <motion.div variants={itemVariants} className="shrink-0">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <div className="relative w-36 h-32 md:w-48 md:h-40 rounded-b-full overflow-hidden  ">
               <Image
                 src="/download.png"
                 alt="Daman"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>
@@ -67,16 +70,13 @@ export default function HeroSection() {
               <p className="text-lg md:text-xl font-serif italic ">
                 Designer & Developer.
               </p>
-              <p className=" font-light">
-                Devoted romanticizer of digital products.
-              </p>
             </motion.div>
 
             <motion.div
               variants={itemVariants}
               className="flex items-center justify-center md:justify-start gap-2  text-sm"
             >
-              <MapPin size={14} />
+              <MapPin size={16} className="text-orange-200" />
               <span>India</span>
             </motion.div>
           </div>
@@ -90,16 +90,15 @@ export default function HeroSection() {
           className="mt-12 flex flex-wrap justify-center md:justify-start gap-3"
         >
           {[
-            { label: "About me", href: "#", icon: null },
-            { label: "Resume", href: "/resume.pdf", icon: null },
+            { label: "About me", href: "#", icon: TfiInfo },
+            { label: "Resume", href: "/resume.pdf", icon: SiReaddotcv },
             { label: "Email", href: "mailto:hello@example.com", icon: Mail },
             { label: "GitHub", href: "https://github.com", icon: FaGithub },
             {
-              label: "LinkedIn",
-              href: "https://linkedin.com",
-              icon: FaLinkedin,
+              label: "Twitter",
+              href: "https://twitter.com",
+              icon: RiTwitterXFill,
             },
-            { label: "Twitter", href: "https://twitter.com", icon: XIcon },
           ].map((item) => (
             <motion.a
               key={item.label}

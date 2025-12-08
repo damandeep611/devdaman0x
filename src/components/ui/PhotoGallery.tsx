@@ -69,7 +69,7 @@ const PhotoGallery: React.FC = () => {
     <div className="w-full overflow-hidden py-16 md:py-20 relative cursor-grab active:cursor-grabbing">
       {/* 1. Top-left Arrow: "checkout ai image gallery for more" */}
       <div className="absolute top-0 left-4 md:left-20 flex flex-col items-start z-10 opacity-80 -rotate-6 pointer-events-none">
-        <span className="font-mono italic text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide max-w-[150px] leading-tight">
+        <span className="font-mono italic  text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide max-w-[150px] leading-tight">
           checkout ai image gallery for more
         </span>
         <svg
@@ -94,7 +94,7 @@ const PhotoGallery: React.FC = () => {
       {/* 2. Top-right Arrow: "huge prompt library" (Different style) */}
       <div className="absolute top-0 right-4 md:right-20 flex flex-col items-end z-10 opacity-80 rotate-3 pointer-events-none">
         <span className="font-mono italic text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide text-right max-w-[150px] leading-tight">
-          Prompt library
+          With Prompt library
         </span>
         <svg
           width="55"
