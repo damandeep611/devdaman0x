@@ -3,11 +3,10 @@ import React from "react";
 import { motion, Variants } from "framer-motion";
 import {
   Mail,
-  XIcon,
   MapPin
 } from "lucide-react";
 import Image from "next/image";
-import { FaGithub, FaLinkedin,  } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import PhotoGallery from "./PhotoGallery";
 import { RiTwitterXFill } from "react-icons/ri";
 import { SiReaddotcv } from "react-icons/si";

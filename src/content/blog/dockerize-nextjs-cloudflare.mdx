@@ -1,0 +1,101 @@
+---
+title: "Dockerize Next.js & Deploy on Cloudflare"
+description: "A step-by-step guide to containerizing a Next.js 15 application using multi-stage builds and deploying it to the edge."
+date: "2024-12-12"
+author: "Dev Daman"
+tags: ["DevOps", "Docker", "Next.js", "Cloudflare"]
+image: "/logos/laptopisometric.png"
+---
+
+# Dockerizing Next.js: The Right Way
+
+Containerizing a Next.js application isn't just `COPY . .`. To get a production-ready image that is small, secure, and fast, you need **Multi-Stage Builds**.
+
+Let's walk through creating an optimized Dockerfile and deploying it.
+
+## The Optimized Dockerfile
+
+We will split our build into three stages:
+1.  **Deps**: Install dependencies.
+2.  **Builder**: Build the Next.js app.
+3.  **Runner**: The minimal production runtime.
+
+```dockerfile
+# 1. Install Dependencies
+FROM node:18-alpine AS deps
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
+
+# 2. Build the App
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+# Disable telemetry for privacy
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build
+
+# 3. Production Image
+FROM node:18-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Create a non-root user for security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy necessary files only
+COPY --from=builder /app/public ./public
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+ENV PORT 3000
+
+CMD ["node", "server.js"]
+```
+
+### Key Optimizations:
+- **`standalone` mode**: Next.js can output a standalone folder with only the necessary files. You need to enable this in `next.config.ts`:
+  ```ts
+  const nextConfig = {
+    output: 'standalone',
+  };
+  ```
+- **Non-root user**: Running as `root` is a security risk. We create a `nextjs` user.
+- **Alpine Linux**: Uses a lightweight Linux distribution to keep image size down.
+
+## Deploying to Cloudflare (Workers vs Pages vs Containers)
+
+Cloudflare is famous for **Workers** (Edge functions), but they don't natively support Docker containers in the traditional sense yet (though standard Next.js on Pages is great).
+
+However, for a *Dockerized* deployment, we often look at platforms that support containers on the edge or serverless, like **Fly.io** or **Railway**, while using Cloudflare as the DNS/Proxy/CDN layer.
+
+**Wait! Cloudflare released "Workers for Platforms" and highly supports Next.js via `opennext` on Cloudflare Pages.**
+
+If you *must* use Docker, you are likely deploying to a VPS or a container runner (like AWS ECS or Google Cloud Run) and proxied by Cloudflare.
+
+### The "Cloudflare Way" (No Docker)
+
+If you want the true Cloudflare experience, skip Docker and use **Cloudflare Pages**:
+
+1. Connect your GitHub repo to Cloudflare Pages.
+2. Framework Preset: `Next.js`.
+3. Build Command: `npx @cloudflare/next-on-pages`.
+4. Deploy.
+
+This converts your Next.js API routes into **Cloudflare Workers**, running globally at the edge with 0ms cold starts (mostly).
+
+## Summary
+
+- **Docker**: Best for portability, complex backends, and hosting on AWS/GCP/Fly.io.
+- **Cloudflare Pages**: Best for pure Next.js apps that want global edge performance without managing containers.
+
+Choose the right tool for the job!

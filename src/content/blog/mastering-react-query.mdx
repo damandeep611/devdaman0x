@@ -1,0 +1,119 @@
+---
+title: "Mastering React Query with Next.js: From 0 to 100"
+description: "Stop managing server state in useEffect. Learn how to leverage TanStack Query (React Query) in Next.js 14+ for robust, caching, and optimistic updates."
+date: "2024-12-10"
+author: "Dev Daman"
+tags: ["React", "Next.js", "TanStack Query", "State Management"]
+image: "/logos/laptop3dicon.png"
+---
+
+# Mastering React Query with Next.js
+
+Managing server state in React applications used to be a nightmare of `useEffect`, `useState`, and endless loading flags. If you are still writing manual fetch logic in 2025, it's time for a paradigm shift.
+
+Enter **TanStack Query** (formerly React Query). It's not just a data fetching library; it's an **async state manager** that handles caching, synchronization, and server state updates for you.
+
+## Why "Server State" is Different
+
+Client state (UI themes, modal open/close) is synchronous and local. Server state (user profile, list of todos) is:
+- **Asynchronous**: You don't know when it arrives.
+- **Shared**: Other users can change it.
+- **Stale**: The moment you fetch it, it might be outdated.
+
+React Query treats server state with these constraints in mind.
+
+## Setting up in Next.js App Router
+
+In the App Router, we need to bridge the gap between Server Components and the Client-side Query Client.
+
+### 1. Create a Provider
+
+Since the `QueryClient` holds the cache, we need to ensure it's created once per request on the server (if doing SSR) or once per session on the client.
+
+```tsx
+// providers.tsx
+'use client'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useState } from 'react'
+
+export default function Providers({ children }) {
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+      },
+    },
+  }))
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      {children}
+    </QueryClientProvider>
+  )
+}
+```
+
+## Hydration: The Holy Grail
+
+Next.js is great at fetching data on the server. React Query is great at managing it on the client. **Hydration** lets us pass server-fetched data to the client cache immediately.
+
+In your Server Component:
+
+```tsx
+// page.tsx
+import { HydrationBoundary, dehydrate, QueryClient } from '@tanstack/react-query'
+import { getTodos } from './api'
+
+export default async function TodosPage() {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['todos'],
+    queryFn: getTodos,
+  })
+
+  return (
+    // Dehydrate the state to send it to the client
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <TodosList />
+    </HydrationBoundary>
+  )
+}
+```
+
+Now, `<TodosList />` can use `useQuery({ queryKey: ['todos'] })` and it will have data *instantly* without a loading spinner.
+
+## Optimistic Updates
+
+The true power of React Query shines when mutating data. We can update the UI *before* the server responds.
+
+```tsx
+const mutation = useMutation({
+  mutationFn: updateTodo,
+  onMutate: async (newTodo) => {
+    // Cancel outgoing refetches
+    await queryClient.cancelQueries({ queryKey: ['todos'] })
+
+    // Snapshot previous value
+    const previousTodos = queryClient.getQueryData(['todos'])
+
+    // Optimistically update
+    queryClient.setQueryData(['todos'], (old) => [...old, newTodo])
+
+    return { previousTodos }
+  },
+  onError: (err, newTodo, context) => {
+    // Rollback on error
+    queryClient.setQueryData(['todos'], context.previousTodos)
+  },
+  onSettled: () => {
+    // Refetch to ensure true synchronization
+    queryClient.invalidateQueries({ queryKey: ['todos'] })
+  },
+})
+```
+
+## Conclusion
+
+React Query removes thousands of lines of boilerplate code. By treating server state as a cache rather than a local variable, you gain resilience, speed, and a much better developer experience.

@@ -152,3 +152,28 @@ body {
 *::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Code Blocks (rehype-pretty-code) */
+figure[data-rehype-pretty-code-figure] {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+figure[data-rehype-pretty-code-figure] pre {
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 0;
+}
+
+/* Fix for prose conflicts on code blocks */
+figure[data-rehype-pretty-code-figure] code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}

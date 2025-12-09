@@ -1,0 +1,67 @@
+---
+title: "Understanding Postgres Database Structure: First Principles"
+description: "Peeling back the layers of PostgreSQL. Pages, Tuples, WALs, and B-Trees. How data is actually stored on disk."
+date: "2024-12-13"
+author: "Dev Daman"
+tags: ["Database", "Postgres", "System Design", "Backend"]
+image: "/logos/paper3dicon.png"
+---
+
+# Postgres Fundamentals: Beyond SQL
+
+We write `SELECT * FROM users`, but what actually happens on the disk? Understanding the internal architecture of PostgreSQL makes you a better backend engineer, capable of debugging slow queries and optimizing storage.
+
+## The Storage Hierarchy
+
+At the lowest level, Postgres is just a file system manager.
+
+1.  **Heap Files**: Where your table data lives.
+2.  **WAL (Write-Ahead Log)**: The journal of changes.
+3.  **Index Files**: B-Trees (or others) for fast lookups.
+
+### 1. The Page (8KB Block)
+
+Postgres divides its storage files into fixed-size units called **Pages** (default 8KB).
+
+When you fetch a single row, Postgres doesn't just read that row. It loads the **entire 8KB page** into memory (The Buffer Pool).
+
+**Implication**: If your "hot" data is scattered across many pages, you perform excessive I/O. Clustering data (organizing it physically on disk) can drastically improve performance.
+
+### 2. Tuples (Rows) & MVCC
+
+Postgres uses **MVCC (Multi-Version Concurrency Control)**. This means when you `UPDATE` a row, Postgres **does not** overwrite the old data.
+
+Instead, it:
+1.  Marks the old tuple (row) as "dead" (invisible to future transactions).
+2.  Inserts a *new* tuple with the updated data.
+
+**The Problem**: Bloat.
+If you update a table frequently, it fills up with "dead tuples". The process called **VACUUM** runs in the background to reclaim this space.
+
+### 3. The Write-Ahead Log (WAL)
+
+Durability (The 'D' in ACID) is guaranteed by the WAL.
+Before data is written to the main data files (Heap), the change is appended to the WAL file.
+
+- **Crash Recovery**: If the power plug is pulled, Postgres replays the WAL on startup to restore the state.
+- **Replication**: Read Replicas work by streaming WAL records from the primary.
+
+## Indexes: The B-Tree
+
+`CREATE INDEX ON users(email);`
+
+This creates a separate file containing a **B-Tree** data structure.
+- The leaves of the tree contain `(key, TID)` pairs.
+- **TID (Tuple ID)** points to the specific Page and Offset in the Heap file.
+
+**Index Scan**:
+1.  Traverse B-Tree to find the email.
+2.  Get the TID.
+3.  Go to the Heap file and fetch the row.
+
+**Index Only Scan**:
+If you only select the email (`SELECT email FROM users...`), Postgres can answer purely from the Index file without touching the Heap. This is blazing fast.
+
+## Conclusion
+
+Postgres is an engineering marvel. By understanding Pages, MVCC, and Indexes, you stop treating the database as a black box and start designing schemas that scale.

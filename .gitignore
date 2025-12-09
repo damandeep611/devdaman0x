@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# content-collections
+.content-collections
+
 # testing
 /coverage
 
