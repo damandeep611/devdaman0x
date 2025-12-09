@@ -2,6 +2,7 @@
 
 import type React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 
@@ -124,11 +125,12 @@ export function BlogCard() {
       href="/blogpage"
       footer={
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-white/60 shadow-sm">
-            <img
+          <div className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white/60 shadow-sm">
+            <Image
               src="https://avatars.githubusercontent.com/u/99176180?v=4"
               alt="Daman"
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
           <div className="flex flex-col">

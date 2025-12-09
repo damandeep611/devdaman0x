@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion} from 'framer-motion';
 
 
@@ -45,7 +46,7 @@ const IMAGES: GalleryImage[] = [
   },
   {
     id: 6,
-    src: "blob:https://aistudio.google.com/b970e5cc-5d3f-4934-ad2e-14f95fee27a6",
+    src: "https://picsum.photos/id/40/400/300",
     alt: "Workspace",
     rotation: 5,
   },
@@ -137,10 +138,11 @@ const PhotoGallery: React.FC = () => {
               transition: { duration: 0.2 },
             }}
           >
-            <img
+            <Image
               src={img.src}
               alt={img.alt}
-              className="w-full h-full object-cover filter brightness-[0.8] hover:brightness-100 transition-all duration-300"
+              fill
+              className="object-cover filter brightness-[0.8] hover:brightness-100 transition-all duration-300"
             />
             {/* Subtle gloss effect */}
             <div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />

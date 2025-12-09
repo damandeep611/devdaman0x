@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react";
+import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
 // --- Types ---
@@ -145,10 +146,11 @@ export default function FolderAnimation () {
                   zIndex: index, // visual stacking order
                 }}
               >
-                <img
+                <Image
                   src={card.imageUrl}
                   alt="Work preview"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </motion.div>
             ))}
