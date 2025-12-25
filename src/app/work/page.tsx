@@ -1,229 +1,247 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion";
-import { ArrowRight, Github, Globe } from "lucide-react";
-import Link from "next/link";
-import {
-  SiNextdotjs,
-  SiTailwindcss,
-  SiPostgresql,
-  SiDrizzle,
-  SiCloudinary,
-  SiOpenai,
-  SiAuth0,
-  SiNodedotjs,
-  SiSupabase,
-} from "react-icons/si";
+import { motion } from "framer-motion";
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
+interface ProjectData {
+  title: string;
+  category: string;
+  year: string;
+  image: string;
+  insight: string;
+  description: string;
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
+  tech: string[];
+}
 
-const projects = [
+const projects: ProjectData[] = [
   {
-    id: 1,
-    title: "buildxSkill",
+    title: "Kinetix Studio",
+    category: "Creative Engineering",
+    year: "2024",
+    image: "https://picsum.photos/1200/800?random=50",
+    insight:
+      "Pushing the boundaries of real-time 3D interaction for modern browsers.",
     description:
-      "Skill learning management tool with daily/weekly performance analytics, AI-integrated bulk task creation, and time tracking workflows.",
-    techIcons: [SiNextdotjs, SiTailwindcss, SiPostgresql, SiDrizzle, SiAuth0],
-    gradient: "from-blue-600 to-cyan-500",
-    link: "#",
-    github: "#",
-    status: "All Systems Operational",
+      "Developing a performant web-based engine for high-fidelity animations. The challenge was maintaining 60FPS while rendering complex procedural shaders and interactive lighting systems.",
+
+    tech: ["WebGL", "Three.js", "React", "Rust"],
   },
   {
-    id: 2,
-    title: "synap.directory",
+    title: "Lumina Health",
+    category: "Product Design",
+    year: "2023",
+    image: "https://picsum.photos/1200/800?random=51",
+    insight:
+      "A patient-centric dashboard focusing on clarity and empathetic user flows.",
     description:
-      "A curated library tool to discover resources for modern app building, marketing, and AI tools.",
-    techIcons: [SiNextdotjs, SiDrizzle, SiCloudinary, SiPostgresql, SiAuth0],
-    gradient: "from-purple-600 to-pink-500",
-    link: "#",
-    github: "#",
-    status: "Scaling",
+      "A complete overhaul of the patient intake system for a major healthcare provider. We reduced the onboarding time by 40% using advanced progressive disclosure techniques.",
+
+    tech: ["Figma", "React", "Typescript", "Tailwind"],
   },
   {
-    id: 3,
-    title: "matrixprompt",
+    title: "Vortex Labs",
+    category: "Brand Systems",
+    year: "2023",
+    image: "https://picsum.photos/1200/800?random=52",
+    insight:
+      "Redefining the identity of a next-gen AI startup through generative aesthetics.",
     description:
-      "AI stock image application for finding high-quality prompts and modifying existing images with generative AI.",
-    techIcons: [SiNextdotjs, SiOpenai, SiTailwindcss, SiCloudinary],
-    gradient: "from-emerald-500 to-teal-500",
-    link: "#",
-    github: "#",
-    status: "Beta Access",
-  },
-  {
-    id: 4,
-    title: "writerflow",
-    description:
-      "AI-integrated writing platform for novels with single-click comic style panel generation and storytelling assistance.",
-    techIcons: [SiNextdotjs, SiOpenai, SiSupabase, SiNodedotjs],
-    gradient: "from-orange-500 to-amber-500",
-    link: "#",
-    github: "#",
-    status: "In Development",
+      "Creating a living brand identity that responds to live data inputs. The logo evolves based on the company's real-time training processing power.",
+
+    tech: ["Processing", "p5.js", "SVG Animation", "Next.js"],
   },
 ];
 
+interface ProjectSectionProps extends ProjectData {
+  index: number;
+}
+
+const ProjectSection: React.FC<ProjectSectionProps> = ({
+  title,
+  category,
+  year,
+  image,
+  insight,
+  index,
+}) => {
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={`flex flex-col ${
+        isEven ? "md:flex-row" : "md:flex-row-reverse"
+      } gap-12 items-center mb-32 group`}
+    >
+      {/* Visual Side */}
+      <div className="w-full md:w-3/5 relative cursor-pointer">
+        <div className="relative aspect-16/10 rounded-4xl overflow-hidden shadow-2xl bg-secondary border-8 border-border">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-foreground/5 group-hover:bg-transparent transition-colors duration-500" />
+
+          <div className="absolute top-6 right-6 px-3 py-1 bg-popover/60 backdrop-blur-md rounded-full text-[10px] font-bold text-foreground tracking-widest border border-border">
+            {year}
+          </div>
+        </div>
+
+        <div
+          className={`absolute -top-4 ${
+            isEven ? "-right-4" : "-left-4"
+          } w-24 h-8 bg-brand-green/15 backdrop-blur-sm border border-brand-green/20 rotate-12 z-20 shadow-sm`}
+        />
+      </div>
+
+      {/* Content Side */}
+      <div className="w-full md:w-2/5 space-y-6 text-center md:text-left">
+        <div className="space-y-2">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-green">
+            {category}
+          </span>
+          <h3 className="text-4xl font-bold  tracking-tight">{title}</h3>
+        </div>
+
+        <p className="text-muted-foreground leading-relaxed font-medium italic serif">
+          {insight}
+        </p>
+
+        <div className="pt-4 flex justify-center md:justify-start">
+          <motion.button
+            whileHover={{ x: 8 }}
+            className="flex items-center gap-4 group/btn"
+          >
+            <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center  transition-transform group-hover/btn:-rotate-45">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] ">
+              Read Case Study
+            </span>
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 export default function WorkPage() {
   return (
-    <section className="w-full mx-auto min-h-screen pt-32 pb-20">
-      <div className="max-w-5xl mx-auto w-full px-6">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-12"
-        >
-          {/* Header */}
-          <div className="space-y-4 max-w-3xl">
-            <motion.h1
-              variants={itemVariants}
-              className="text-3xl md:text-4xl font-medium tracking-tight text-foreground"
-            >
-              Selected Work
-            </motion.h1>
-            <motion.p
-              variants={itemVariants}
-              className="text-lg md:text-xl font-serif italic text-muted-foreground"
-            >
-              Building digital products with a focus on experience and
-              performance.
-            </motion.p>
+    <div className="mt-40 max-w-6xl mx-auto">
+      {/* Header Bar */}
+      <div className="  border-b border-border">
+        <div className="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+          <div className="flex items-center gap-6">
+            <span className="text-[10px] font-bold tracking-[0.5em] uppercase ">
+              Selected Projects
+            </span>
+            <div className="w-12 h-px " />
+            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-brand-green">
+              Archive 24/25
+            </span>
           </div>
+        </div>
+      </div>
+      {/* work cards section */}
+      <div className=" py-20">
+        {/* Title Section */}
+        <div className="mb-32 space-y-6 max-w-2xl">
+          <h2 className="text-7xl font-bold  tracking-tighter leading-[0.9]">
+            Work as an <br />{" "}
+            <span className="text-brand-green italic font-serif ">
+              Inquiry.
+            </span>
+          </h2>
+          <p className="text-xl  font-medium leading-relaxed">
+            I believe great products are born from curiosity. This gallery is a
+            record of my attempts to bridge aesthetic elegance with technical
+            precision.
+          </p>
+        </div>
+        {/* Project List */}
+        <div className="space-y-40">
+          {projects.map((p, i) => (
+            <ProjectSection key={p.title} index={i} {...p} />
+          ))}
+        </div>
+      </div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                className="group relative flex flex-col rounded-4xl border border-zinc-200/60 dark:border-zinc-800/60 bg-white dark:bg-[#09090b] overflow-hidden hover:shadow-2xl hover:shadow-zinc-200/20 dark:hover:shadow-black/40 transition-all duration-500 ring-1 ring-inset ring-transparent hover:ring-zinc-200 dark:hover:ring-zinc-800"
+      {/* Bento Philosophy Section */}
+      <div className=" grid grid-cols-1 md:grid-cols-3 gap-8 ">
+        <div className="md:col-span-2 p-12 b rounded-[2.5rem] bg-foreground text-background flex flex-col justify-between min-h-[400px]">
+          <div className="space-y-6">
+            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-background/40">
+              Philosophy
+            </span>
+            <h3 className="text-4xl font-bold font-serif italic leading-tight">
+              Function is the baseline, <br /> Delight is the goal.
+            </h3>
+          </div>
+          <div className="pt-12 flex flex-wrap gap-3">
+            {[
+              "Pixel Perfect",
+              "Motion First",
+              "Human Centric",
+              "Scalable Architecture",
+            ].map((t) => (
+              <span
+                key={t}
+                className="px-4 py-2 bg-background/10 rounded-full text-[10px] font-bold uppercase tracking-widest"
               >
-                {/* Image Section */}
-                <div
-                  className={`relative h-72 w-full overflow-hidden bg-linear-to-br ${project.gradient}`}
-                >
-                  <div className="absolute inset-0 bg-white/5 dark:bg-black/5 mix-blend-overlay" />{" "}
-                  {/* Noise/Texture overlay placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center perspective-1000">
-                    <motion.div className="w-[85%] h-[85%] bg-zinc-950 rounded-lg shadow-2xl translate-y-12 rotate-x-6 group-hover:translate-y-8 group-hover:rotate-0 transition-all duration-700 ease-out border border-white/10 overflow-hidden flex flex-col">
-                      {/* Mockup Header */}
-                      <div className="h-6 bg-zinc-900 border-b border-white/5 flex items-center px-3 gap-1.5 shrink-0">
-                        <div className="w-2 h-2 rounded-full bg-red-500/20" />
-                        <div className="w-2 h-2 rounded-full bg-yellow-500/20" />
-                        <div className="w-2 h-2 rounded-full bg-green-500/20" />
-                      </div>
-                      {/* Mockup Body */}
-                      <div className="flex-1 flex">
-                        {/* Sidebar */}
-                        <div className="w-12 border-r border-white/5 bg-zinc-900/50 flex flex-col gap-2 p-2">
-                          <div className="w-full aspect-square rounded bg-white/5" />
-                          <div className="w-full aspect-square rounded bg-white/5" />
-                          <div className="w-full aspect-square rounded bg-white/5" />
-                        </div>
-                        {/* Main Content */}
-                        <div className="flex-1 p-3 space-y-2">
-                          <div className="h-2 w-1/3 bg-white/10 rounded-full" />
-                          <div className="grid grid-cols-2 gap-2">
-                            <div className="h-16 rounded bg-white/5 border border-white/5" />
-                            <div className="h-16 rounded bg-white/5 border border-white/5" />
-                          </div>
-                          <div className="h-20 rounded bg-white/5 border border-white/5 w-full" />
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                {/* Content Section */}
-                <div className="flex flex-col flex-1 p-6 md:p-8 gap-5">
-                  {/* Title & Links */}
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h2 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-                        {project.title}
-                      </h2>
-                      <div className="flex flex-wrap gap-x-2 mt-2">
-                        {project.techIcons.map((Icon, index) => (
-                          <div
-                            key={index}
-                            className="text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors"
-                          >
-                            <Icon size={16} />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <Link
-                        href={project.link}
-                        className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                      >
-                        <Globe size={16} />
-                      </Link>
-                      <Link
-                        href={project.github}
-                        className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                      >
-                        <Github size={16} />
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  {/* Footer */}
-                  <div className="mt-auto pt-5 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800/60">
-                    <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/5 border border-emerald-500/10">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-[10px] uppercase tracking-wider font-semibold text-emerald-600 dark:text-emerald-400">
-                        {project.status}
-                      </span>
-                    </div>
-
-                    <Link
-                      href={project.link}
-                      className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors group/link"
-                    >
-                      View Project{" "}
-                      <ArrowRight
-                        size={14}
-                        className="-translate-x-1 opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300"
-                      />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
+                {t}
+              </span>
             ))}
           </div>
-        </motion.div>
+        </div>
+
+        <div className="p-12 bg-card border border-border rounded-[2.5rem] shadow-xl shadow-foreground/5 flex flex-col justify-between">
+          <div className="space-y-4">
+            <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-muted-foreground">
+              Services
+            </span>
+            <ul className="space-y-4 pt-4">
+              {[
+                "Product Design",
+                "Full-stack Dev",
+                "Design Systems",
+                "3D Interaction",
+              ].map((s) => (
+                <li
+                  key={s}
+                  className="text-lg font-bold  flex items-center gap-3"
+                >
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-green" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="pt-8 relative">
+            <div className="pt-8 relative">
+              <div className="font-(family-name:--font-geist-caveat) text-brand-green/40 text-4xl -rotate-12 absolute -top-8 right-0">
+                Expertise
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

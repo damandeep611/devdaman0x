@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import NavPill from "@/components/layout/NavPill";
 import Footer from "@/components/layout/Footer";
+
+const geistCaveat = Caveat({
+  variable: "--font-geist-caveat",
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${geistCaveat.variable} antialiased`}
       >
         <ThemeProvider attribute="class" enableSystem disableTransitionOnChange>
           <NavPill />

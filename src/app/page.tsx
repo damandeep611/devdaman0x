@@ -22,9 +22,8 @@ export default function Home() {
     }));
 
   return (
-    <div className="mt-12 ">
+    <div className="mt-12  flex flex-col items-center w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <HeroSection />
-
       <SkillsSection />
       <MyContentSection posts={latestPosts} />
       <ExploreSection />

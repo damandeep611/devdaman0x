@@ -32,7 +32,10 @@ export default function BlogPostClient({ post, code }: { post: Post; code: strin
           href="/blog"
           className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft
+            size={16}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
           <span>Back to writing</span>
         </Link>
 
@@ -53,7 +56,7 @@ export default function BlogPostClient({ post, code }: { post: Post; code: strin
             {post.title}
           </h1>
 
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          <p className="text-xl text-foreground leading-relaxed">
             {post.description}
           </p>
 
@@ -74,16 +77,16 @@ export default function BlogPostClient({ post, code }: { post: Post; code: strin
                 <span>{post.author}</span>
               </div>
             )}
-             <div className="flex items-center gap-2">
-                <Clock size={16} />
-                <span>5 min read</span>
+            <div className="flex items-center gap-2">
+              <Clock size={16} />
+              <span>5 min read</span>
             </div>
           </div>
         </div>
 
         {/* Cover Image */}
         {post.image && (
-          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-secondary border border-border">
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-secondary border border-border">
             <Image
               src={post.image}
               alt={post.title}

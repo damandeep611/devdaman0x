@@ -4,99 +4,161 @@
 :root {
   --radius: 0.625rem;
   
-    /* Backgrounds */
-  --background: #ffffff;
-  --foreground: #09090b;
+  /* =========================
+     Base Palette (Light) - Clean, Technical, Crisp
+     ========================= */
+  --background: #fdfdfd; /* Nearly pure white, professional paper feel */
+  --foreground: #1a1a1a; /* Soft black for readability */
+
+  /* UI Shell */
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+
+  /* Primary Action */
+  --primary: #2e2e2e; /* Bauhaus Charcoal */
+  --primary-foreground: #ffffff;
+
+  /* Secondary / Muted */
+  --secondary: #f2f2f2; /* Light Gray */
+  --secondary-foreground: #1a1a1a;
+  --muted: #f4f4f5;
+  --muted-foreground: #737373; /* Neutral Gray */
+
+  /* Borders & Dividers */
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #1a1a1a;
+
+  /* =========================
+     Component Specific: The "Work Folder" (Dossier)
+     ========================= */
+  /* A tangible, "physical" file folder look */
+  --folder-face: #f0f0f0;         /* Main body surface */
+  --folder-back: #e4e4e4;         /* The back part visible behind */
+  --folder-border: #d4d4d4;       /* Subtle edge definition */
+  --folder-clip: #bfbfbf;         /* Metallic clip */
+  --folder-clip-accent: #a3a3a3;  /* Clip shadow/detail */
   
-    /* Card & Popovers */
-    --card: #ffffff;
-    --card-foreground: #09090b;
-    --popover: #ffffff;
-    --popover-foreground: #09090b;
+  /* Project Card Accents (Sophisticated, not primary colors) */
+  --project-1: #3b82f6; /* Technical Blue */
+  --project-2: #10b981; /* Success Green */
+  --project-3: #6366f1; /* Indigo */
   
-    /* Primary */
-    --primary: #18181b;
-    --primary-foreground: #fafafa;
+  /* Brand Specific */
+  --brand-green: #059669; /* Emerald 600 - Professional Green */
+
+  /* =========================
+     Component Specific: The "Creator Studio" (Explore Section)
+     ========================= */
+  --studio-panel: #ffffff;
+  --studio-panel-foreground: #09090b;
+  --studio-panel-border: #e4e4e7;
+  --studio-monitor-bg: #f4f4f5;
+  --recording-red: #ef4444;
   
-    /* Secondary */
-    --secondary: #f4f4f5;
-    --secondary-foreground: #18181b;
+  /* Sticky Note - Warm & Organic */
+  --note-bg: #fffce6;
+  --note-border: #fef08a;
+  --note-text: #78350f;
+
+  /* Charts/Data */
+  --chart-1: #e76e50;
+  --chart-2: #2a9d8f;
+  --chart-3: #e9c46a;
+  --chart-4: #f4a261;
+  --chart-5: #e76e50;
+
+  /* Status */
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+}
+
+.dark {
+  /* =========================
+     Base Palette (Dark) - Deep, Cinematic, OLED-Friendly
+     ========================= */
+  --background: #050505; /* True void black */
+  --foreground: #fafafa;
+
+  /* UI Shell */
+  --card: #0a0a0a;       /* Slightly lighter than bg */
+  --card-foreground: #fafafa;
+  --popover: #0a0a0a;
+  --popover-foreground: #fafafa;
+
+  /* Primary Action */
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+
+  /* Secondary / Muted */
+  --secondary: #1a1a1a; /* Deep charcoal */
+  --secondary-foreground: #fafafa;
+  --muted: #262626;
+  --muted-foreground: #a3a3a3;
+
+  /* Borders & Dividers */
+  --border: #262626;     /* Subtle dark grey */
+  --input: #262626;
+  --ring: #d4d4d8;
+
+  /* =========================
+     Component Specific: The "Work Folder" (Dossier)
+     ========================= */
+  /* Sleek, tactical dark mode folder */
+  --folder-face: #171717;         /* Neutral dark surface */
+  --folder-back: #0f0f0f;         /* Shadowed back panel */
+  --folder-border: #333333;       /* Crisp edge */
+  --folder-clip: #404040;         /* Dark metal */
+  --folder-clip-accent: #525252;  
   
-    /* Muted */
-    --muted: #f4f4f5;
-    --muted-foreground: #71717a;
+  /* Project Card Accents (Luminous in dark mode) */
+  --project-1: #3b82f6; /* Blue */
+  --project-2: #10b981; /* Emerald */
+  --project-3: #6366f1; /* Indigo */
+
+  /* Brand Specific */
+  --brand-green: #10b981; /* Brighter Emerald for Dark Mode */
+
+  /* =========================
+     Component Specific: The "Creator Studio" (Explore Section)
+     ========================= */
+  --studio-panel: #09090b;
+  --studio-panel-foreground: #fafafa;
+  --studio-panel-border: #27272a;
+  --studio-monitor-bg: #000000;
+  --recording-red: #ef4444;
   
-    /* Accent */
-    --accent: #f4f4f5;
-    --accent-foreground: #18181b;
-  
-    /* Destructive */
-    --destructive: #ef4444;
-    --destructive-foreground: #fafafa;
-  
-    /* Borders & Inputs */
-    --border: #e4e4e7;
-    --input: #e4e4e7;
-    --ring: #18181b;
-  
-    /* Charts */
-    --chart-1: #e76e50;
-    --chart-2: #2a9d8f;
-    --chart-3: #e9c46a;
-    --chart-4: #f4a261;
-    --chart-5: #e76e50;
-  }
-  
-  .dark {
-    /* Backgrounds */
-    --background: #000000;
-    --foreground: #fafafa;
-  
-    /* Card & Popovers */
-    --card: #09090b;
-    --card-foreground: #fafafa;
-    --popover: #09090b;
-    --popover-foreground: #fafafa;
-  
-    /* Primary */
-    --primary: #f4f4f5;
-    --primary-foreground: #18181b;
-  
-    /* Secondary */
-    --secondary: #27272a;
-    --secondary-foreground: #fafafa;
-  
-    /* Muted */
-    --muted: #27272a;
-    --muted-foreground: #a1a1aa;
-  
-    /* Accent */
-    --accent: #27272a;
-    --accent-foreground: #fafafa;
-  
-    /* Destructive */
-    --destructive: #7f1d1d;
-    --destructive-foreground: #fafafa;
-  
-    /* Borders & Inputs */
-    --border: #27272a;
-    --input: #27272a;
-    --ring: #d4d4d8;
-  
-    /* Charts */
-    --chart-1: #220458;
-    --chart-2: #2a9d8f;
-    --chart-3: #e9c46a;
-    --chart-4: #f4a261;
-    --chart-5: #e76e50;
+  /* Sticky Note - Dark Mode Adaptation */
+  --note-bg: #27272a; 
+  --note-border: #3f3f46;
+  --note-text: #e4e4e7;
+
+  /* Charts */
+  --chart-1: #220458;
+  --chart-2: #2a9d8f;
+  --chart-3: #e9c46a;
+  --chart-4: #f4a261;
+  --chart-5: #e76e50;
+
+  /* Status */
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
 }
 
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
---color-card: var(--card);
+
+  --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
   --color-popover: var(--popover);
@@ -120,17 +182,40 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  
+  /* Brand & Custom Colors */
+  --color-brand-green: var(--brand-green);
+  
+  --color-folder-face: var(--folder-face);
+  --color-folder-back: var(--folder-back);
+  --color-folder-border: var(--folder-border);
+  --color-folder-clip: var(--folder-clip);
+  --color-folder-clip-accent: var(--folder-clip-accent);
+
+  --color-project-1: var(--project-1);
+  --color-project-2: var(--project-2);
+  --color-project-3: var(--project-3);
+
+  --color-studio-panel: var(--studio-panel);
+  --color-studio-panel-foreground: var(--studio-panel-foreground);
+  --color-studio-panel-border: var(--studio-panel-border);
+  --color-studio-monitor-bg: var(--studio-monitor-bg);
+  --color-recording-red: var(--recording-red);
+  --color-note-bg: var(--note-bg);
+  --color-note-border: var(--note-border);
+  --color-note-text: var(--note-text);
 
   --radius-sm: calc(var(--radius) - 4px);
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
 }
 
 /* Base styles */
 body {
   background-color: var(--color-background);
-    color: var(--color-foreground);
+  color: var(--color-foreground);
 }
+
 * {
   scrollbar-width: thin;
   scrollbar-color: #515151 transparent;

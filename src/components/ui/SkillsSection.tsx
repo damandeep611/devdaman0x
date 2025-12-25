@@ -14,66 +14,64 @@ import {
   SiDocker, 
   SiGraphql,
 } from "react-icons/si";
-import FolderAnimation from './FolderAnimation';
-
+import WorkFolder from "./WorkFolder";
 
 const techStack = [
-  { 
-    name: "Node.js", 
-    icon: SiNodedotjs, 
-    iconColor: "group-hover:text-[#339933]"
+  {
+    name: "Node.js",
+    icon: SiNodedotjs,
+    iconColor: "group-hover:text-[#339933]",
   },
-  { 
-    name: "Bun", 
-    icon: SiBun, 
-    iconColor: "group-hover:text-[#fbf0df]"
+  {
+    name: "Bun",
+    icon: SiBun,
+    iconColor: "group-hover:text-[#fbf0df]",
   },
-  { 
-    name: "React", 
-    icon: SiReact, 
-    iconColor: "group-hover:text-[#61dafb]"
+  {
+    name: "React",
+    icon: SiReact,
+    iconColor: "group-hover:text-[#61dafb]",
   },
-  { 
-    name: "PostgreSQL", 
-    icon: SiPostgresql, 
-    iconColor: "group-hover:text-[#4169e1]"
+  {
+    name: "PostgreSQL",
+    icon: SiPostgresql,
+    iconColor: "group-hover:text-[#4169e1]",
   },
-  { 
-    name: "Golang", 
-    icon: SiGo, 
-    iconColor: "group-hover:text-[#00add8]"
+  {
+    name: "Golang",
+    icon: SiGo,
+    iconColor: "group-hover:text-[#00add8]",
   },
-  { 
-    name: "Drizzle", 
-    icon: SiDrizzle, 
-    iconColor: "group-hover:text-[#C5F74F]"
+  {
+    name: "Drizzle",
+    icon: SiDrizzle,
+    iconColor: "group-hover:text-[#C5F74F]",
   },
-  { 
-    name: "JavaScript", 
-    icon: SiJavascript, 
-    iconColor: "group-hover:text-[#F7DF1E]"
+  {
+    name: "JavaScript",
+    icon: SiJavascript,
+    iconColor: "group-hover:text-[#F7DF1E]",
   },
-  { 
-    name: "TypeScript", 
-    icon: SiTypescript, 
-    iconColor: "group-hover:text-[#3178c6]"
+  {
+    name: "TypeScript",
+    icon: SiTypescript,
+    iconColor: "group-hover:text-[#3178c6]",
   },
-  { 
-    name: "Docker", 
-    icon: SiDocker, 
-    iconColor: "group-hover:text-[#2496ED]"
+  {
+    name: "Docker",
+    icon: SiDocker,
+    iconColor: "group-hover:text-[#2496ED]",
   },
-  { 
-    name: "GraphQL", 
-    icon: SiGraphql, 
-    iconColor: "group-hover:text-[#E10098]"
+  {
+    name: "GraphQL",
+    icon: SiGraphql,
+    iconColor: "group-hover:text-[#E10098]",
   },
 ];
 
-
 const fadeIn: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const staggerContainer: Variants = {
@@ -81,9 +79,9 @@ const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 export default function SkillsSection() {
@@ -99,7 +97,7 @@ export default function SkillsSection() {
           <div className="mb-10">
             <motion.span
               variants={fadeIn}
-              className="block text-emerald-500 font-medium tracking-widest text-xs uppercase mb-4"
+              className="block text-brand-green font-medium tracking-widest text-xs uppercase mb-4"
             >
               Expertise
             </motion.span>
@@ -107,12 +105,12 @@ export default function SkillsSection() {
               variants={fadeIn}
               className="text-4xl md:text-5xl font-light tracking-tight font-serif italic "
             >
-              The Tech Stack
+              Work & Skills
             </motion.h2>
           </div>
           <motion.p
             variants={fadeIn}
-            className=" mb-14 max-w-xl text-lg leading-relaxed font-light"
+            className=" mb-8 max-w-xl text-lg leading-relaxed font-light"
           >
             React ecosystem enjoyer-
             <span className=" font-medium">
@@ -125,7 +123,7 @@ export default function SkillsSection() {
             </span>{" "}
             goes deeper than surface-level integrations.
           </motion.p>
-          <div className="flex flex-wrap gap-10 items-center">
+          <div className="flex flex-wrap gap-6 items-center">
             {techStack.map((tech) => (
               <motion.div
                 key={tech.name}
@@ -137,7 +135,7 @@ export default function SkillsSection() {
                 />
                 {/* Tooltip */}
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20">
-                  <div className="relative bg-zinc-900 text-zinc-300 text-[10px] tracking-wider font-medium px-3 py-1.5 rounded-full border border-zinc-800 shadow-2xl whitespace-nowrap">
+                  <div className="relative bg-popover text-popover-foreground text-[10px] tracking-wider font-medium px-3 py-1.5 rounded-full border border-border shadow-2xl whitespace-nowrap">
                     {tech.name}
                   </div>
                 </div>
@@ -152,7 +150,7 @@ export default function SkillsSection() {
           variants={fadeIn}
           className="flex justify-center lg:justify-end perspective-1000"
         >
-          <FolderAnimation />
+          <WorkFolder />
         </motion.div>
       </div>
     </div>

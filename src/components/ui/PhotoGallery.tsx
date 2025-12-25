@@ -1,156 +1,193 @@
 "use client"
 
-import React, { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
-import { motion} from 'framer-motion';
+import React from "react";
+import { motion, Variants } from "framer-motion";
 
-
-export interface GalleryImage {
-  id: number;
-  src: string;
-  alt: string;
-  rotation: number;
-}
-// Mock images approximating the content in the screenshot
-const IMAGES: GalleryImage[] = [
+const IMAGES = [
   {
-    id: 1,
-    src: "/images/drawing.png",
-    alt: "Architecture",
-    rotation: -4,
+    src: "https://picsum.photos/400/500?random=11",
+    label: "Studio Vibes",
+    tape: true,
   },
   {
-    id: 2,
-    src: "/images/surf.png",
-
-    alt: "Coffee",
-    rotation: 4,
+    src: "https://picsum.photos/400/500?random=22",
+    label: "Late Nights",
+    tape: false,
   },
   {
-    id: 3,
-    src: "/images/samurai.png",
-    alt: "Coding",
-    rotation: -4,
+    src: "https://picsum.photos/400/500?random=33",
+    label: "Architecture",
+    tape: true,
   },
   {
-    id: 4,
-    src: "/images/japan.png",
-    alt: "Music",
-    rotation: 5,
+    src: "https://picsum.photos/400/500?random=44",
+    label: "Minimalism",
+    tape: false,
   },
   {
-    id: 5,
-    src: "/images/pool.png",
-    alt: "Conference",
-    rotation: -4,
-  },
-  {
-    id: 6,
-    src: "https://picsum.photos/id/40/400/300",
-    alt: "Workspace",
-    rotation: 5,
+    src: "https://picsum.photos/400/500?random=55",
+    label: "Pure Focus",
+    tape: true,
   },
 ];
 
+const cardVariants: Variants = {
+  initial: (i: number) => ({
+    y: 80,
+    opacity: 0,
+    rotate: i % 2 === 0 ? -15 : 15,
+    x: -30,
+    scale: 0.9,
+  }),
+  animate: (i: number) => {
+    const center = 2;
+    const offset = i - center;
+    const rotate = offset * 7 + (i % 2 === 0 ? 2 : -2);
+    const x = offset * 48;
+    const y = Math.abs(offset) * 15 + (i % 2 === 0 ? 5 : 0);
+
+    return {
+      y,
+      opacity: 1,
+      rotate,
+      x,
+      scale: 1,
+      zIndex: 10 - Math.abs(offset),
+      transition: {
+        delay: 0.2 + i * 0.12,
+        duration: 1.2,
+        type: "spring",
+        stiffness: 90,
+        damping: 15,
+      },
+    };
+  },
+  hover: {
+    y: -40,
+    rotate: 0,
+    scale: 1.12,
+    zIndex: 50,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 25,
+    },
+  },
+};
+
 const PhotoGallery: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-
-  const bleedOffset = 40; // pixels for bleed on each side
-
-  useEffect(() => {
-    if (containerRef.current) {
-      setWidth(
-        containerRef.current.scrollWidth - containerRef.current.offsetWidth
-      );
-    }
-  }, []);
-
   return (
-    <div className="w-full overflow-hidden py-16 md:py-20 relative cursor-grab active:cursor-grabbing">
-      {/* 1. Top-left Arrow: "checkout ai image gallery for more" */}
-      <div className="absolute top-0 left-4 md:left-20 flex flex-col items-start z-10 opacity-80 -rotate-6 pointer-events-none">
-        <span className="font-mono italic  text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide max-w-[150px] leading-tight">
-          checkout ai image gallery for more
-        </span>
-        <svg
-          width="40"
-          height="50"
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-muted-foreground animate-bounce ml-8"
-          style={{ animationDuration: "2.5s" }}
-        >
-          {/* Curvy arrow pointing down-right */}
-          <path d="M10,10 C30,10 50,40 50,80" />
-          <path d="M25,65 C35,75 50,80 50,80" />
-          <path d="M75,65 C65,75 50,80 50,80" />
-        </svg>
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-20 overflow-visible relative">
+      <div className="w-full order-2 md:order-1 relative">
+        <ImageFan />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-green/5 rounded-full blur-3xl -z-10 opacity-60" />
       </div>
 
-      {/* 2. Top-right Arrow: "huge prompt library" (Different style) */}
-      <div className="absolute top-0 right-4 md:right-20 flex flex-col items-end z-10 opacity-80 rotate-3 pointer-events-none">
-        <span className="font-mono italic text-xs md:text-sm font-medium text-muted-foreground mb-1 tracking-wide text-right max-w-[150px] leading-tight">
-          With Prompt library
-        </span>
-        <svg
-          width="55"
-          height="45"
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-muted-foreground animate-pulse mr-8"
-          style={{ animationDuration: "3s" }}
-        >
-          {/* Loopy arrow pointing down-left */}
-          <path d="M90,10 C70,10 60,30 50,80" />
-          <path d="M25,70 C35,80 50,80 50,80" />
-          <path d="M70,60 C60,75 50,80 50,80" />
-        </svg>
-      </div>
-
-      <motion.div
-        ref={containerRef}
-        drag="x"
-        dragConstraints={{ right: bleedOffset, left: -(width + bleedOffset) }}
-        whileTap={{ cursor: "grabbing" }}
-        className="flex gap-5 md:gap-8"
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: -bleedOffset, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-      >
-        {IMAGES.map((img, index) => (
-          <motion.div
-            key={img.id}
-            className="relative min-w-[200px] h-[140px] md:min-w-[300px] md:h-[200px] rounded-md overflow-hidden shadow-2xl  shrink-0"
-            style={{ rotate: img.rotation, zIndex: index }}
-            whileHover={{
-              scale: 1.1,
-              rotate: 0,
-              zIndex: 50,
-              transition: { duration: 0.2 },
-            }}
+      <div className="text-center md:text-left order-1 md:order-2 space-y-6 relative">
+        <div className="hidden md:block absolute -left-20 top-0 text-brand-green/40">
+          <svg
+            width="60"
+            height="60"
+            viewBox="0 0 100 100"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
           >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              className="object-cover filter brightness-[0.8] hover:brightness-100 transition-all duration-300"
-            />
-            {/* Subtle gloss effect */}
-            <div className="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-          </motion.div>
-        ))}
-      </motion.div>
+            <path d="M 80 20 Q 50 20 20 80" />
+            <path d="M 15 70 L 20 80 L 30 75" />
+          </svg>
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-xs font-bold tracking-[0.4em] uppercase text-brand-green/60">
+            Visual Diary
+          </h2>
+          <h3 className="text-5xl font-bold  font-serif italic leading-[1.1]">
+            Perspective <br />
+            <span className="text-muted-foreground">&</span> Exploration.
+          </h3>
+        </div>
+        <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto md:mx-0 font-medium">
+          Designing is about more than just interfaces. It&apos;s about light,
+          texture, and the world around us. These are the snapshots that fuel my
+          creative process.
+        </p>
+        <motion.div
+          whileHover={{ x: 10 }}
+          className="pt-6 inline-flex items-center gap-3 text-brand-green font-bold cursor-pointer group"
+        >
+          <span className="text-sm uppercase tracking-widest border-b-2 border-brand-green/20 group-hover:border-brand-green transition-colors pb-1">
+            Browse Gallery
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14m-7-7 7 7-7 7" />
+          </svg>
+        </motion.div>
+      </div>
     </div>
   );
 };
 
 export default PhotoGallery;
+
+const ImageFan: React.FC = () => {
+  return (
+    <div className="relative h-[450px] md:h-[550px] w-full flex items-center justify-center md:justify-start overflow-visible">
+      <div className="relative w-full max-w-md flex justify-center items-center h-full z-10 perspective-2000">
+        {IMAGES.map((item, i) => (
+          <motion.div
+            key={i}
+            custom={i}
+            variants={cardVariants}
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+            className="absolute w-44 h-60 md:w-60 md:h-80 rounded-sm overflow-visible border-8 border-card bg-card group cursor-pointer"
+            style={{
+              transformOrigin: "bottom center",
+              boxShadow:
+                "0 10px 30px -10px rgba(0,0,0,0.15), 0 2px 5px -2px rgba(0,0,0,0.1)",
+            }}
+          >
+            {/* Washi Tape Effect */}
+            {item.tape && (
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-6 bg-brand-green/20 dark:bg-brand-green/40 border border-brand-green/10 dark:border-brand-green/20 backdrop-blur-sm -rotate-2 z-20 shadow-sm opacity-80" />
+            )}
+
+            <div className="relative w-full h-[82%] overflow-hidden bg-muted">
+              <img
+                src={item.src}
+                alt={item.label}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.05)] pointer-events-none" />
+            </div>
+
+            {/* Polaroid Bottom Label Area */}
+            <div className="h-[18%] flex items-center justify-center px-2">
+              <span className="font-handwriting text-muted-foreground text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+                {item.label}
+              </span>
+              <span className="font-handwriting text-muted-foreground/30 text-xs md:text-sm absolute group-hover:opacity-0 transition-opacity">
+                #{i + 1}
+              </span>
+            </div>
+
+            {/* Card Lift Shadow */}
+            <div className="absolute -inset-1 bg-foreground/5 blur-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};

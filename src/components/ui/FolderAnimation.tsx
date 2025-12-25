@@ -113,14 +113,14 @@ export default function FolderAnimation () {
           */}
           <motion.div
             variants={folderBackVariants}
-            className="absolute inset-0 bg-[#C8D0D6] rounded-2xl shadow-sm origin-bottom"
+            className="absolute inset-0 bg-folder-back rounded-2xl shadow-sm origin-bottom"
             style={{
               transform: "translateZ(-20px)",
               transformStyle: "preserve-3d",
             }}
           >
             {/* The Tab on top-left */}
-            <div className="absolute -top-4 left-0 w-28 h-6 bg-[#C8D0D6] rounded-t-xl" />
+            <div className="absolute -top-4 left-0 w-28 h-6 bg-folder-back rounded-t-xl" />
           </motion.div>
 
           {/* 
@@ -140,7 +140,7 @@ export default function FolderAnimation () {
                 key={card.id}
                 custom={{ i: index, r: card.rotation }}
                 variants={cardVariants}
-                className="absolute w-44 h-32 rounded-lg bg-white shadow-md border-2 border-white overflow-hidden origin-bottom"
+                className="absolute w-44 h-32 rounded-lg bg-card shadow-md border-2 border-card overflow-hidden origin-bottom"
                 style={{
                   transformOrigin: "bottom center",
                   zIndex: index, // visual stacking order
@@ -163,7 +163,7 @@ export default function FolderAnimation () {
           */}
           <motion.div
             variants={folderFrontVariants}
-            className="absolute bottom-0 left-0 right-0 h-[85%] bg-linear-to-b from-[#EFF6FF] to-[#DBEAFE] rounded-2xl flex items-center justify-center border-t border-white/60 shadow-folder"
+            className="absolute bottom-0 left-0 right-0 h-[85%] bg-folder-face rounded-2xl flex items-center justify-center border-t border-folder-border shadow-folder"
             style={{
               transformOrigin: "bottom",
               transformStyle: "preserve-3d",
@@ -174,14 +174,14 @@ export default function FolderAnimation () {
             <div className="absolute inset-0 rounded-2xl shadow-inner-light pointer-events-none" />
 
             {/* Emoji Icon */}
-            <div className="relative z-10 bg-white/80 backdrop-blur-sm rounded-full p-3 shadow-sm w-16 h-16 flex items-center justify-center text-3xl">
+            <div className="relative z-10 bg-card/80 backdrop-blur-sm rounded-full p-3 shadow-sm w-16 h-16 flex items-center justify-center text-3xl">
               📂
             </div>
           </motion.div>
 
           {/* Shadow beneath the folder for grounding */}
           <div
-            className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-4 bg-black/10 blur-xl rounded-full"
+            className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-4/5 h-4 bg-foreground/10 blur-xl rounded-full"
             style={{ transform: "translateZ(-40px)" }}
           />
         </motion.div>
@@ -191,7 +191,7 @@ export default function FolderAnimation () {
       <motion.div
         initial={{ opacity: 0.6, y: 0 }}
         whileHover={{ opacity: 1, y: -2 }}
-        className="cursor-pointer text-slate-500 font-medium text-lg tracking-wide hover:text-blue-500 transition-colors"
+        className="cursor-pointer text-muted-foreground font-medium text-lg tracking-wide hover:text-brand-green transition-colors"
       >
         Recent Projects
       </motion.div>
