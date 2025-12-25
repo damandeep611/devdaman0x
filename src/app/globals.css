@@ -263,3 +263,9 @@ figure[data-rehype-pretty-code-figure] code {
   font-family: var(--font-mono);
   font-size: 0.875rem;
 }
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+}

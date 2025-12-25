@@ -1,96 +1,122 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-
+import { Mail, Calendar, Github, Twitter, Linkedin, Youtube, ExternalLink } from "lucide-react";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 import PhotoGallery from "./PhotoGallery";
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto min-h-screen flex flex-col justify-between pt-32 pb-10">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full mb-12">
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
-        >
-          <div className="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden border-8 border-border shadow-2xl bg-secondary -rotate-3 hover:rotate-0 transition-transform duration-500">
-            <img
-              src="/download.png"
-              alt="Daman's Profile"
-              className="w-full h-full object-contain scale-110"
-            />
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="text-center md:text-left max-w-md"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold  tracking-tight leading-[1.1]">
-            Hey I&apos;m
-            <span className="text-brand-green pl-2 relative inline-block">
-              Daman
-            </span>
-          </h1>
-          <p className="mt-4 text-2xl font-medium text-muted-foreground font-serif italic">
-            Designer & Developer.
-          </p>
-          <div className="flex items-center justify-center md:justify-start gap-2 mt-4 text-muted-foreground font-semibold tracking-wide">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-brand-green"
-            >
-              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span className="text-sm uppercase tracking-[0.2em]">India</span>
-          </div>
-        </motion.div>
-      </div>
-      {/* Section 2: Links */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="flex flex-wrap justify-center gap-4 mt-4 mb-12"
+    <section className="w-full mx-auto min-h-screen flex flex-col pt-32 pb-10 px-4">
+      {/* Profile Card Container */}
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-3xl mx-auto mb-24"
       >
-        <TagChip label="Email" href="mailto:hello@example.com" />
-        <TagChip label="Resume" href="#" />
-        <TagChip label="Twitter" href="#" />
-        <TagChip label="YouTube" href="#" />
+        {/* Header: Avatar & Info */}
+        <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-8">
+          <div className="flex flex-row items-center gap-6">
+            <div className="relative shrink-0">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-border shadow-sm">
+                <img
+                  src="/download.png"
+                  alt="Daman's Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-brand-green rounded-full border-2 border-background flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              </div>
+            </div>
+            
+            <div className="flex flex-col">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+                Daman
+              </h1>
+              <span className="text-lg text-muted-foreground font-medium">
+                Software Engineer
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 self-start md:self-center">
+             <div className="text-sm font-medium text-muted-foreground hidden md:block mr-2">
+                Based in India
+             </div>
+             <ModeToggle />
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full border-b border-dashed border-border mb-8" />
+
+        {/* Bio Section */}
+        <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+          <p>
+            <span className="text-foreground font-semibold">Hey! I&apos;m Daman</span>, 
+            a full-stack developer and designer who loves turning abstract ideas into 
+            functional, beautiful products.
+          </p>
+          <p>
+            I&apos;m flexible working with various tech stacks, though I currently obsess over 
+            <span className="text-foreground font-medium"> Next.js</span>, 
+            <span className="text-foreground font-medium"> TypeScript</span>, and 
+            <span className="text-foreground font-medium"> Golang</span>. 
+            I build for the web with a focus on interaction and performance.
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-4 mt-8">
+          <a 
+            href="#"
+            className="flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-lg font-medium hover:opacity-90 transition-opacity"
+          >
+            <Calendar className="w-4 h-4" />
+            <span>Book an intro call</span>
+          </a>
+          <a 
+            href="mailto:hello@example.com"
+            className="flex items-center gap-2 px-5 py-2.5 bg-secondary text-secondary-foreground border border-border rounded-lg font-medium hover:bg-secondary/80 transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            <span>Send an email</span>
+          </a>
+        </div>
+
+        {/* Socials */}
+        <div className="mt-10">
+          <p className="text-sm font-bold text-foreground mb-4">Here are my socials</p>
+          <div className="flex flex-wrap gap-6 items-center">
+            <SocialLink href="#" icon={<Github className="w-5 h-5" />} label="GitHub" />
+            <SocialLink href="#" icon={<Twitter className="w-5 h-5" />} label="Twitter" />
+            <SocialLink href="#" icon={<Linkedin className="w-5 h-5" />} label="LinkedIn" />
+            <SocialLink href="#" icon={<Youtube className="w-5 h-5" />} label="YouTube" />
+            <SocialLink href="#" icon={<ExternalLink className="w-5 h-5" />} label="Resume" />
+          </div>
+        </div>
       </motion.div>
 
-      {/* Image Gallery */}
-      <div className="mt-6 w-full mx-auto">
+      {/* Visual Diary / PhotoGallery Section */}
+      <div className="w-full mx-auto">
         <PhotoGallery />
       </div>
     </section>
   );
 }
 
-interface TagChipProps {
-  label: string;
-  href: string;
+function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
+  return (
+    <a 
+      href={href}
+      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
+    >
+      <span className="group-hover:scale-110 transition-transform duration-200">
+        {icon}
+      </span>
+      <span className="font-medium">{label}</span>
+    </a>
+  );
 }
-
-const TagChip: React.FC<TagChipProps> = ({ label, href }) => (
-  <motion.a
-    href={href}
-    whileHover={{ scale: 1.05, y: -2 }}
-    whileTap={{ scale: 0.95 }}
-    className="px-6 py-2.5 rounded-full border border-border bg-card text-sm font-semibold text-muted-foreground shadow-sm hover:border-brand-green hover:text-brand-green transition-all duration-300"
-  >
-    {label}
-  </motion.a>
-);
