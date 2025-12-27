@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const IMAGES = [
   {
@@ -100,38 +101,25 @@ const PhotoGallery: React.FC = () => {
         </div>
         <div className="space-y-2">
           <h2 className="text-xs font-bold tracking-[0.4em] uppercase text-brand-green/60">
-            Visual Diary
+            Gen AI Library
           </h2>
           <h3 className="text-5xl font-bold  font-serif italic leading-[1.1]">
-            Perspective <br />
+            Workflows | Prompts <br />
             <span className="text-muted-foreground">&</span> Exploration.
           </h3>
         </div>
         <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto md:mx-0 font-medium">
-          Designing is about more than just interfaces. It&apos;s about light,
-          texture, and the world around us. These are the snapshots that fuel my
-          creative process.
+          Contains Generative AI workflows, Prompts, Images and references to
+          the tools used. Comphrehensive guides also for local setups.
         </p>
         <motion.div
           whileHover={{ x: 10 }}
           className="pt-6 inline-flex items-center gap-3 text-brand-green font-bold cursor-pointer group"
         >
           <span className="text-sm uppercase tracking-widest border-b-2 border-brand-green/20 group-hover:border-brand-green transition-colors pb-1">
-            Browse Gallery
+            Browse
           </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 12h14m-7-7 7 7-7 7" />
-          </svg>
+          <ArrowRight size={16} />
         </motion.div>
       </div>
     </div>

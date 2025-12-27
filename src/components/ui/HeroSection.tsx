@@ -54,13 +54,11 @@ export default function HeroSection() {
             ideas into functional, beautiful products.
           </p>
           <p>
-            I&apos;m flexible working with various tech stacks, though I
-            currently obsess over
+            I&apos;m flexible working with various tech stacks, & expertise in
             <span className="text-foreground font-medium"> Next.js</span>,
             <span className="text-foreground font-medium"> TypeScript</span>,
             and
-            <span className="text-foreground font-medium"> Golang</span>. I
-            build for the web with a focus on interaction and performance.
+            <span className="text-foreground font-medium"> Golang</span>
           </p>
         </div>
 
