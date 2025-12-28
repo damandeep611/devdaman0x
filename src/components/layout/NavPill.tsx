@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, X, Send } from "lucide-react";
+import { Mail } from "lucide-react";
 import { ModeToggle } from "../theme/mode-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
