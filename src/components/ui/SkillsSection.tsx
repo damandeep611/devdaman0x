@@ -86,31 +86,31 @@ const staggerContainer: Variants = {
 
 export default function SkillsSection() {
   return (
-    <div className="max-w-7xl mx-auto px-6 ">
-      <div className="mb-40 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 w-full">
+      <div className="mb-24 md:mb-40 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          <div className="mb-10">
+          <div className="mb-8 md:mb-10 text-center lg:text-left">
             <motion.span
               variants={fadeIn}
-              className="block text-brand-green font-medium tracking-widest text-xs uppercase mb-4"
+              className="block text-brand-green font-medium tracking-widest text-xs uppercase mb-3 md:mb-4"
             >
               Expertise
             </motion.span>
             <motion.h2
               variants={fadeIn}
-              className="text-4xl md:text-5xl font-light tracking-tight font-serif italic "
+              className="text-3xl md:text-5xl font-light tracking-tight font-serif italic "
             >
               Work & Skills
             </motion.h2>
           </div>
           <motion.p
             variants={fadeIn}
-            className=" mb-8 max-w-xl text-lg leading-relaxed font-light"
+            className="mb-8 max-w-xl text-base md:text-lg leading-relaxed font-light mx-auto lg:mx-0 text-center lg:text-left"
           >
             React ecosystem enjoyer-
             <span className=" font-medium">
@@ -123,7 +123,7 @@ export default function SkillsSection() {
             </span>{" "}
             goes deeper than surface-level integrations.
           </motion.p>
-          <div className="flex flex-wrap gap-6 items-center">
+          <div className="flex flex-wrap gap-4 md:gap-6 items-center justify-center lg:justify-start">
             {techStack.map((tech) => (
               <motion.div
                 key={tech.name}
@@ -131,7 +131,7 @@ export default function SkillsSection() {
                 className="group relative cursor-pointer"
               >
                 <tech.icon
-                  className={`w-5 h-5 transition-all duration-500  group-hover:scale-110 ${tech.iconColor}`}
+                  className={`w-6 h-6 md:w-5 md:h-5 transition-all duration-500  group-hover:scale-110 ${tech.iconColor}`}
                 />
                 {/* Tooltip */}
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20">
@@ -148,7 +148,7 @@ export default function SkillsSection() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="flex justify-center lg:justify-end perspective-1000"
+          className="flex justify-center lg:justify-end perspective-1000 mt-8 lg:mt-0"
         >
           <WorkFolder />
         </motion.div>

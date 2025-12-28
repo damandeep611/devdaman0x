@@ -78,14 +78,14 @@ const cardVariants: Variants = {
 
 const PhotoGallery: React.FC = () => {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-20 overflow-visible relative">
-      <div className="w-full order-2 md:order-1 relative">
+    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 md:mb-20 overflow-hidden lg:overflow-visible relative px-4">
+      <div className="w-full order-2 lg:order-1 relative">
         <ImageFan />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-green/5 rounded-full blur-3xl -z-10 opacity-60" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-green/5 rounded-full blur-3xl -z-10 opacity-60" />
       </div>
 
-      <div className="text-center md:text-left order-1 md:order-2 space-y-6 relative">
-        <div className="hidden md:block absolute -left-20 top-0 text-brand-green/40">
+      <div className="text-center lg:text-left order-1 lg:order-2 space-y-4 md:space-y-6 relative">
+        <div className="hidden lg:block absolute -left-20 top-0 text-brand-green/40">
           <svg
             width="60"
             height="60"
@@ -100,26 +100,26 @@ const PhotoGallery: React.FC = () => {
           </svg>
         </div>
         <div className="space-y-2">
-          <h2 className="text-xs font-bold tracking-[0.4em] uppercase text-brand-green/60">
+          <h2 className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-brand-green/60">
             Gen AI Library
           </h2>
-          <h3 className="text-5xl font-bold  font-serif italic leading-[1.1]">
+          <h3 className="text-3xl md:text-5xl font-bold font-serif italic leading-[1.1]">
             Workflows | Prompts <br />
             <span className="text-muted-foreground">&</span> Exploration.
           </h3>
         </div>
-        <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto md:mx-0 font-medium">
+        <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-sm mx-auto lg:mx-0 font-medium">
           Contains Generative AI workflows, Prompts, Images and references to
-          the tools used. Comphrehensive guides also for local setups.
+          the tools used. Comprehensive guides also for local setups.
         </p>
         <motion.div
           whileHover={{ x: 10 }}
-          className="pt-6 inline-flex items-center gap-3 text-brand-green font-bold cursor-pointer group"
+          className="pt-4 md:pt-6 inline-flex items-center gap-3 text-brand-green font-bold cursor-pointer group"
         >
-          <span className="text-sm uppercase tracking-widest border-b-2 border-brand-green/20 group-hover:border-brand-green transition-colors pb-1">
+          <span className="text-xs md:text-sm uppercase tracking-widest border-b-2 border-brand-green/20 group-hover:border-brand-green transition-colors pb-1">
             Browse
           </span>
-          <ArrowRight size={16} />
+          <ArrowRight size={14} className="md:w-4 md:h-4" />
         </motion.div>
       </div>
     </div>
@@ -130,7 +130,7 @@ export default PhotoGallery;
 
 const ImageFan: React.FC = () => {
   return (
-    <div className="relative h-[450px] md:h-[550px] w-full flex items-center justify-center md:justify-start overflow-visible">
+    <div className="relative h-[350px] md:h-[450px] lg:h-[550px] w-full flex items-center justify-center lg:justify-start overflow-visible">
       <div className="relative w-full max-w-md flex justify-center items-center h-full z-10 perspective-2000">
         {IMAGES.map((item, i) => (
           <motion.div
@@ -140,7 +140,7 @@ const ImageFan: React.FC = () => {
             initial="initial"
             animate="animate"
             whileHover="hover"
-            className="absolute w-44 h-60 md:w-60 md:h-80 rounded-sm overflow-visible border-8 border-card bg-card group cursor-pointer"
+            className="absolute w-36 h-48 md:w-44 md:h-60 lg:w-60 lg:h-80 rounded-sm overflow-visible border-4 md:border-8 border-card bg-card group cursor-pointer"
             style={{
               transformOrigin: "bottom center",
               boxShadow:

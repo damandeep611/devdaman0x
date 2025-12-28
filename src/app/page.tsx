@@ -1,6 +1,7 @@
 import ExploreSection from "@/components/ui/ExploreSection";
 import HeroSection from "@/components/ui/HeroSection";
 import MyContentSection from "@/components/ui/MyContentSection";
+import PhotoGallery from "@/components/ui/PhotoGallery";
 import SkillsSection from "@/components/ui/SkillsSection";
 import { allPosts } from "content-collections";
 
@@ -22,8 +23,9 @@ export default function Home() {
     }));
 
   return (
-    <div className="mt-12  flex flex-col items-center w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="mt-12 flex flex-col items-center w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       <HeroSection />
+      <PhotoGallery />
       <SkillsSection />
       <MyContentSection posts={latestPosts} />
       <ExploreSection />

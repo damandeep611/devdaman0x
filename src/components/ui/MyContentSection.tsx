@@ -17,18 +17,18 @@ interface Post {
 
 export default function MyContentSection({ posts }: { posts: Post[] }) {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
         {/* Left Column: Writings */}
-        <div className="lg:col-span-7 space-y-8">
+        <div className="lg:col-span-7 space-y-6 md:space-y-8">
           <div className="flex items-center gap-2">
             <span className="h-px w-8 bg-muted-foreground/50"></span>
-            <span className="text-sm font-mono text-muted-foreground uppercase tracking-widest">
+            <span className="text-xs md:text-sm font-mono text-muted-foreground uppercase tracking-widest">
               Latest Writing
             </span>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {posts.map((post, index) => (
               <motion.div
                 key={index}
@@ -36,9 +36,9 @@ export default function MyContentSection({ posts }: { posts: Post[] }) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group flex flex-col sm:flex-row gap-6 items-start p-4 rounded-3xl hover:bg-muted/50 transition-colors duration-300"
+                className="group flex flex-col sm:flex-row gap-4 sm:gap-6 items-start p-3 md:p-4 rounded-3xl hover:bg-muted/50 transition-colors duration-300"
               >
-                <div className="relative w-full sm:w-32 aspect-4/3 sm:aspect-square rounded-2xl overflow-hidden bg-secondary shrink-0 border border-border">
+                <div className="relative w-full sm:w-32 aspect-video sm:aspect-square rounded-2xl overflow-hidden bg-secondary shrink-0 border border-border">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -47,26 +47,26 @@ export default function MyContentSection({ posts }: { posts: Post[] }) {
                   />
                 </div>
 
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground font-medium">
+                <div className="flex-1 space-y-2 md:space-y-3">
+                  <div className="flex items-center gap-3 text-[10px] md:text-xs text-muted-foreground font-medium">
                     <span>{post.date}</span>
                     <span className="w-1 h-1 rounded-full bg-muted-foreground/50" />
                     <span className="text-foreground">{post.tag}</span>
                   </div>
 
                   <Link href={post.url} className="block">
-                    <h3 className="text-lg font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
+                    <h3 className="text-base md:text-lg font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
                   </Link>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed line-clamp-2">
                     {post.description}
                   </p>
 
                   <Link
                     href={post.url}
-                    className="flex items-center gap-2 text-sm font-semibold text-foreground mt-2 group/btn"
+                    className="flex items-center gap-2 text-xs md:text-sm font-semibold text-foreground mt-2 group/btn"
                   >
                     Read Article
                     <ArrowRight

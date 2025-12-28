@@ -12,7 +12,7 @@ export default function WorkFolder() {
 
   return (
     <div 
-      className="relative w-full max-w-[360px] h-[300px] mx-auto md:mx-0 mt-40 mb-20 group/dossier"
+      className="relative w-full max-w-[300px] md:max-w-[360px] h-[260px] md:h-[300px] mx-auto lg:mx-0 mt-12 lg:mt-40 mb-12 lg:mb-20 group/dossier"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
