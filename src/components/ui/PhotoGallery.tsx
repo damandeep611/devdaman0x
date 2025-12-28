@@ -140,39 +140,37 @@ const ImageFan: React.FC = () => {
             initial="initial"
             animate="animate"
             whileHover="hover"
-            className="absolute w-36 h-48 md:w-44 md:h-60 lg:w-60 lg:h-80 rounded-sm overflow-visible border-4 md:border-8 border-card bg-card group cursor-pointer"
+            className="absolute w-36 h-48 md:w-44 md:h-60 lg:w-60 lg:h-80 rounded-sm overflow-visible border-4 md:border-8 border-card dark:border-border bg-card dark:bg-muted/30 backdrop-blur-md group cursor-pointer transition-all duration-300 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             style={{
               transformOrigin: "bottom center",
-              boxShadow:
-                "0 10px 30px -10px rgba(0,0,0,0.15), 0 2px 5px -2px rgba(0,0,0,0.1)",
             }}
           >
             {/* Washi Tape Effect */}
             {item.tape && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-6 bg-brand-green/20 dark:bg-brand-green/40 border border-brand-green/10 dark:border-brand-green/20 backdrop-blur-sm -rotate-2 z-20 shadow-sm opacity-80" />
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-6 bg-brand-green/20 dark:bg-brand-green/30 border border-brand-green/10 dark:border-brand-green/20 backdrop-blur-md -rotate-2 z-20 shadow-md opacity-90" />
             )}
 
-            <div className="relative w-full h-[82%] overflow-hidden bg-muted">
+            <div className="relative w-full h-[82%] overflow-hidden bg-muted/50">
               <img
                 src={item.src}
                 alt={item.label}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.05)] pointer-events-none" />
+              <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_40px_rgba(255,255,255,0.05)] pointer-events-none" />
             </div>
 
             {/* Polaroid Bottom Label Area */}
             <div className="h-[18%] flex items-center justify-center px-2">
-              <span className="font-handwriting text-muted-foreground text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+              <span className="font-handwriting text-muted-foreground dark:text-foreground/70 text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
                 {item.label}
               </span>
-              <span className="font-handwriting text-muted-foreground/30 text-xs md:text-sm absolute group-hover:opacity-0 transition-opacity">
+              <span className="font-handwriting text-muted-foreground/30 dark:text-foreground/20 text-xs md:text-sm absolute group-hover:opacity-0 transition-opacity">
                 #{i + 1}
               </span>
             </div>
 
             {/* Card Lift Shadow */}
-            <div className="absolute -inset-1 bg-foreground/5 blur-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute -inset-1 bg-brand-green/10 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
           </motion.div>
         ))}
       </div>

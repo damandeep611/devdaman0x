@@ -2,106 +2,114 @@
 
 import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
+
 export default function WorkFolder() {
     const [isHovered, setIsHovered] = useState(false);
-  const projects = [
-    { title: "ReuseMotion", color: "bg-project-1", rotation: -12, x: -90, y: -160, id: 'p1' },
-    { title: "AI Library", color: "bg-project-2", rotation: 2, x: 40, y: -200, id: 'p2' },
-    { title: "BuildxSkill", color: "bg-project-3", rotation: -4, x: -10, y: -240, id: 'p3' }
-  ];
+    
+    // Document cards data
+    const projects = [
+      { title: "ReuseMotion", type: "CASE_STUDY", id: 'p1', rotate: -2, y: -90, x: -10, color: "bg-blue-50" },
+      { title: "AI Library", type: "RESOURCE", id: 'p2', rotate: 1, y: -60, x: 5, color: "bg-emerald-50" },
+      { title: "BuildxSkill", type: "PLATFORM", id: 'p3', rotate: -1, y: -30, x: 0, color: "bg-indigo-50" }
+    ];
 
   return (
     <div 
-      className="relative w-full max-w-[300px] md:max-w-[360px] h-[260px] md:h-[300px] mx-auto lg:mx-0 mt-12 lg:mt-40 mb-12 lg:mb-20 group/dossier"
+      className="relative w-full max-w-[320px] md:max-w-[360px] h-[260px] md:h-[300px] mx-auto lg:mx-0 mt-16 mb-12 group/folder perspective-1000"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Emerging Project Plates */}
-      <AnimatePresence>
-        {projects.map((proj, idx) => (
-          <motion.div
-            key={proj.id}
-            initial={{ y: 0, opacity: 0, scale: 0.9 }}
-            animate={isHovered ? { 
-              y: proj.y, 
-              x: proj.x, 
-              rotate: proj.rotation, 
-              opacity: 1, 
-              scale: 1,
-              zIndex: 10 + idx 
-            } : { 
-              y: 0, x: 0, rotate: 0, opacity: 0, scale: 0.9, zIndex: 0 
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 25, delay: idx * 0.05 }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-          >
-            <div className="w-56 h-40 bg-card rounded-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-none border border-border p-6 flex flex-col justify-between ring-1 ring-black/5">
-               <div className="flex justify-between items-start">
-                  <div className={`w-8 h-1 ${proj.color} rounded-full`} />
-                  <span className="text-[9px] font-mono text-muted-foreground/50">00{idx+1}</span>
-               </div>
-               <div className="space-y-1">
-                  <h4 className="text-sm font-bold  leading-tight">{proj.title}</h4>
-                  <div className="flex gap-1">
-                     {[...Array(3)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-card-foreground" />)}
-                  </div>
-               </div>
-               <div className="w-full h-12 border border-border bg-muted/30 rounded-lg overflow-hidden">
-                  <div className={`w-full h-full opacity-20 ${proj.color} mix-blend-multiply`} />
-               </div>
-            </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
+      {/* 
+         Unified Folder Color Palette (Kraft / Manila) 
+         Consistent across Light/Dark modes for physical realism.
+         Face: #EBE5CE (Manila)
+         Back: #DFD8BF (Darker Manila)
+      */}
 
-      {/* The Dossier Box */}
-      <div className="relative z-20 w-full h-full cursor-pointer perspective-1000">
-        
-        {/* Rear Panel */}
-        <div className="absolute inset-0 bg-folder-back rounded-3xl -translate-z-12 shadow-inner border border-folder-border/50" />
-        
-        {/* Main Body Container */}
-        <motion.div 
-          animate={isHovered ? { rotateX: -15, y: 10, scale: 0.98 } : { rotateX: 0, y: 0, scale: 1 }}
-          className="absolute inset-0 bg-folder-face border border-folder-border rounded-3xl shadow-2xl flex flex-col p-10 overflow-hidden transform-gpu"
-        >
-          {/* Top Metallic Tension Clip */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-linear-to-b from-folder-clip to-folder-clip-accent rounded-b-xl shadow-md z-30 ring-1 ring-white/20" />
-          
-          {/* Perforated Binder Side */}
-          <div className="absolute left-6 inset-y-0 flex flex-col justify-between py-10">
-             {[...Array(6)].map((_, i) => (
-               <div key={i} className="w-4 h-4 rounded-full bg-folder-back shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] border border-folder-border" />
-             ))}
-          </div>
-
-          {/* Central Label Strip */}
-          <div className="mt-8 ml-10 space-y-6">
-             <div className="px-6 py-3 bg-card border-2 border-dashed border-folder-border rounded shadow-sm -rotate-1">
-                <span className="font-handwriting text-brand-green text-3xl select-none">Case Studies</span>
-             </div>
-             <div className="space-y-2 opacity-40">
-                <div className="h-1.5 w-32 bg-foreground/10 rounded-full" />
-                <div className="h-1.5 w-24 bg-foreground/10 rounded-full" />
-             </div>
-          </div>
-
-          {/* Masking Tape Tag */}
-          <div className="absolute bottom-8 right-8 px-4 py-1.5 bg-brand-green/10 border border-brand-green/20 rounded-sm text-[10px] font-bold text-brand-green tracking-widest uppercase rotate-2 shadow-sm">
-            SEC_LOG_84
-          </div>
-        </motion.div>
+      {/* Back Panel (Interior) */}
+      <div className="absolute bottom-0 w-full h-[85%] bg-[#DFD8BF] rounded-t-lg rounded-b-xl border border-[#D1C9AC] shadow-sm flex items-end justify-center transform-gpu">
+         {/* Tab */}
+         <div className="absolute -top-7 left-0 w-[40%] h-8 bg-[#DFD8BF] rounded-t-lg border-t border-l border-r border-[#D1C9AC]" />
       </div>
 
-      {/* Side Label Indicator */}
+      {/* Emerging Papers / Cards */}
+      <div className="absolute inset-x-6 bottom-4 h-[85%] z-10 flex items-end justify-center pointer-events-none">
+        <AnimatePresence>
+          {projects.map((proj, idx) => (
+            <motion.div
+              key={proj.id}
+              initial={{ y: 0 }}
+              animate={isHovered ? { 
+                y: proj.y, 
+                rotate: proj.rotate,
+                scale: 1,
+                zIndex: idx
+              } : { 
+                y: -10 - (idx * 5), // Subtle peek
+                rotate: idx % 2 === 0 ? -1 : 1,
+                scale: 0.95 + (idx * 0.01),
+                zIndex: idx
+              }}
+              transition={{ type: "spring", stiffness: 180, damping: 20 }}
+              className={`absolute bottom-0 w-full h-[85%] bg-white ${proj.color} rounded-t-md rounded-b-sm border border-neutral-200/80 shadow-sm flex flex-col p-5 origin-bottom`}
+            >
+                {/* Document Header */}
+                <div className="flex justify-between items-start mb-4 opacity-70">
+                    <span className="text-[9px] font-mono font-bold text-neutral-500 tracking-widest uppercase border-b border-neutral-200 pb-1">{proj.type}</span>
+                    <span className="text-[9px] font-mono text-neutral-400">0{idx+1}</span>
+                </div>
+                
+                {/* Content */}
+                <h4 className="text-lg font-bold text-neutral-800 leading-tight mb-2">{proj.title}</h4>
+                
+                {/* Mock Text Lines */}
+                <div className="space-y-2 mt-2 opacity-40">
+                    <div className="h-1 w-full bg-neutral-800 rounded-full" />
+                    <div className="h-1 w-5/6 bg-neutral-800 rounded-full" />
+                    <div className="h-1 w-4/6 bg-neutral-800 rounded-full" />
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="mt-auto pt-4 border-t border-dashed border-neutral-300 flex items-center gap-2">
+                   <div className="w-2 h-2 rounded-full bg-neutral-300" />
+                   <div className="text-[8px] text-neutral-400 font-mono">CONFIDENTIAL</div>
+                </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Front Panel (Cover) */}
       <motion.div 
-        animate={isHovered ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-        className="absolute -right-24 top-1/2 -translate-y-1/2 hidden lg:block"
+        className="absolute bottom-0 w-full h-[75%] bg-[#EBE5CE] rounded-xl border-t border-x border-[#DFD8BF] border-b border-[#D1C9AC] shadow-[0_5px_20px_-5px_rgba(0,0,0,0.15)] z-20 flex flex-col items-center justify-center transform-gpu origin-bottom overflow-hidden"
+        animate={isHovered ? { rotateX: 12, y: 5 } : { rotateX: 0, y: 0 }}
+        transition={{ type: "spring", stiffness: 220, damping: 24 }}
       >
-        <div className="vertical-text text-[10px] font-bold tracking-[0.6em] uppercase text-muted-foreground/50">
-           DISCOVER_LOGS
+        {/* Paper Texture Overlay */}
+        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cardboard.png')] mix-blend-multiply pointer-events-none" />
+        
+        {/* Label Area */}
+        <div className="relative z-10 w-full px-8">
+            <div className="bg-white/90 backdrop-blur-[2px] p-4 shadow-sm border border-neutral-200/50 rotate-[-1deg] relative">
+                {/* Tape */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-6 bg-white/40 border border-white/60 backdrop-blur-md -rotate-1 shadow-sm opacity-60" />
+
+                <div className="flex flex-col items-center gap-1">
+                    <span className="font-handwriting text-3xl text-neutral-800 leading-none pt-2">Case Studies</span>
+                    <div className="w-full h-px bg-neutral-300" />
+                    <span className="font-mono text-[9px] text-neutral-400 tracking-[0.2em] uppercase">Confidential</span>
+                </div>
+            </div>
+        </div>
+
+        {/* Clip/Fastener Visual */}
+        <div className="absolute top-0 w-full flex justify-center">
+             <div className="w-24 h-4 bg-gradient-to-b from-[#DFD8BF] to-transparent opacity-50" />
         </div>
       </motion.div>
+
+      {/* Subtle Shadow Pool */}
+      <div className="absolute -bottom-4 left-4 right-4 h-4 bg-black/10 blur-xl rounded-[100%] z-[-1]" />
     </div>
   );
 }
