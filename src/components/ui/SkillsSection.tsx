@@ -87,43 +87,40 @@ const staggerContainer: Variants = {
 export default function SkillsSection() {
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6 w-full">
-      <div className="mb-24 md:mb-40 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="mb-24 md:mb-40 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        {/* Left Column: Text Content */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
+          className="space-y-6 md:space-y-8 text-center lg:text-left relative"
         >
-          <div className="mb-8 md:mb-10 text-center lg:text-left">
-            <motion.span
-              variants={fadeIn}
-              className="block text-brand-green font-medium tracking-widest text-xs uppercase mb-3 md:mb-4"
-            >
-              Expertise
-            </motion.span>
+          <div className="space-y-3">
+            <motion.div variants={fadeIn} className="flex items-center justify-center lg:justify-start gap-3">
+                <span className="h-px w-8 bg-brand-green/30" />
+                <span className="text-brand-green font-bold tracking-[0.4em] text-[10px] uppercase">
+                    Archive // 01
+                </span>
+            </motion.div>
             <motion.h2
               variants={fadeIn}
-              className="text-3xl md:text-5xl font-light tracking-tight font-serif italic "
+              className="text-3xl md:text-5xl font-bold tracking-tight font-serif italic leading-[1.1]"
             >
-              Work & Skills
+              Work & <span className="text-muted-foreground">Competence.</span>
             </motion.h2>
           </div>
+
           <motion.p
             variants={fadeIn}
-            className="mb-8 max-w-xl text-base md:text-lg leading-relaxed font-light mx-auto lg:mx-0 text-center lg:text-left"
+            className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium"
           >
-            React ecosystem enjoyer-
-            <span className=" font-medium">
-              Next js, Exploring Tanstack rn.
-            </span>{" "}
-            Backend flexible Specialize in —postgres, worked on projects with
-            Convex, Supabase. Check out my -
-            <span className=" font-medium">
-              backend fundamentals and Golang related Content
-            </span>{" "}
-            goes deeper than surface-level integrations.
+            React ecosystem enjoyer — focusing on <span className="text-foreground">Next.js & Tanstack</span>. 
+            Backend flexible, specializing in PostgreSQL and distributed systems with <span className="text-foreground">Golang</span>. 
+            My content goes deeper than surface-level integrations, focusing on <span className="text-brand-green">core fundamentals</span>.
           </motion.p>
-          <div className="flex flex-wrap gap-4 md:gap-6 items-center justify-center lg:justify-start">
+
+          <div className="flex flex-wrap gap-5 md:gap-7 items-center justify-center lg:justify-start pt-4">
             {techStack.map((tech) => (
               <motion.div
                 key={tech.name}
@@ -131,11 +128,11 @@ export default function SkillsSection() {
                 className="group relative cursor-pointer"
               >
                 <tech.icon
-                  className={`w-6 h-6 md:w-5 md:h-5 transition-all duration-500  group-hover:scale-110 ${tech.iconColor}`}
+                  className={`w-6 h-6 transition-all duration-500 text-muted-foreground/40 group-hover:scale-125 ${tech.iconColor}`}
                 />
                 {/* Tooltip */}
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20">
-                  <div className="relative bg-popover text-popover-foreground text-[10px] tracking-wider font-medium px-3 py-1.5 rounded-full border border-border shadow-2xl whitespace-nowrap">
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none z-20">
+                  <div className="bg-card text-foreground text-[9px] font-bold tracking-widest uppercase px-3 py-1 rounded border border-border shadow-xl whitespace-nowrap">
                     {tech.name}
                   </div>
                 </div>
@@ -143,14 +140,18 @@ export default function SkillsSection() {
             ))}
           </div>
         </motion.div>
+
+        {/* Right Column: Media (WorkFolder) */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="flex justify-center lg:justify-end perspective-1000 mt-8 lg:mt-0"
+          className="flex justify-center lg:justify-end perspective-1000 relative mt-8 lg:mt-0"
         >
           <WorkFolder />
+          {/* Manila Glow Accent */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#EBE5CE]/10 rounded-full blur-3xl -z-10 opacity-50" />
         </motion.div>
       </div>
     </div>
