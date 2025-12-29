@@ -23,7 +23,7 @@ export default function Home() {
     }));
 
   return (
-    <div className="mt-12 flex flex-col items-center w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+    <div className="mt-4 sm:mt-12 flex flex-col items-center w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       <HeroSection />
       <PhotoGallery />
       <SkillsSection />

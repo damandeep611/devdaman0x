@@ -36,7 +36,7 @@ export default function BlogPage() {
   );
 
   return (
-    <section className="w-full mx-auto min-h-screen pt-32 pb-20">
+    <section className="w-full mx-auto min-h-screen pt-12 sm:pt-32 pb-20">
       <div className="max-w-3xl mx-auto w-full px-6">
         <motion.div
           variants={containerVariants}

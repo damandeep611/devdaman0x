@@ -171,7 +171,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
 
 export default function WorkPage() {
   return (
-    <div className="mt-32 md:mt-48 max-w-7xl mx-auto px-6">
+    <div className="mt-12 sm:mt-32 md:mt-48 max-w-7xl mx-auto px-6">
       {/* Header Section */}
       <div className="mb-32 border-b border-border pb-8 flex flex-col md:flex-row justify-between items-end gap-8">
         <div className="space-y-4">

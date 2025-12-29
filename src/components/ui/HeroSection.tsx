@@ -5,7 +5,7 @@ import { Mail, Github, Twitter, Youtube } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto flex flex-col pt-12 md:pt-24 pb-6 md:pb-10 px-4">
+    <section className="w-full mx-auto flex flex-col pt-8 md:pt-24 pb-6 md:pb-10 px-4">
       {/* Profile Card Container */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}

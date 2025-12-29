@@ -115,11 +115,14 @@ export default function ExploreSection() {
               whileHover={{ rotate: -8, scale: 1.1, y: -10 }}
               className="absolute -top-6 -left-4 md:-top-10 md:-left-12 z-30 pointer-events-auto"
             >
-              <div className="relative bg-[#fff9c4] dark:bg-[#fff176] p-4 md:p-8 shadow-[10px_10px_30px_rgba(0,0,0,0.15)] rounded-sm border border-amber-200/50 max-w-[140px] md:max-w-[200px]">
+              <div className="font-(family-name:--font-geist-caveat) relative bg-[#fff9c4] dark:bg-[#fff176] p-4 md:p-8 shadow-[10px_10px_30px_rgba(0,0,0,0.15)] rounded-sm border border-amber-200/50 max-w-[140px] md:max-w-[200px]">
                 {/* Translucent Washi Tape */}
                 <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2 w-10 h-6 md:w-16 md:h-8 bg-brand-green/30 backdrop-blur-md border border-white/20 -rotate-2 z-10" />
 
-                <p className="font-handwriting text-amber-900 text-lg md:text-2xl leading-tight">
+                <p
+                  className="
+                 text-amber-900 text-lg md:text-2xl leading-tight"
+                >
                   Don&apos;t skip <br /> the messy <br /> parts.
                 </p>
                 <div className="mt-2 md:mt-4 flex gap-1">
