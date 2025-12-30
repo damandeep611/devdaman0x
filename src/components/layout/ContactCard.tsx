@@ -57,12 +57,12 @@ export default function ContactCard({ onClose }: ContactCardProps) {
       exit={{ opacity: 0, scale: 0.95, y: 10, filter: "blur(4px)" }}
       transition={{ type: "spring", stiffness: 350, damping: 25 }}
       className={cn(
-        "bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/8 rounded-4xl shadow-2xl shadow-black/80 overflow-hidden relative z-50",
+        "bg-popover/95 backdrop-blur-xl border border-border rounded-4xl shadow-2xl shadow-black/20 dark:shadow-black/50 overflow-hidden relative z-50",
         cardWidth
       )}
     >
-      {/* Subtle top light leak */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-white/2 blur-3xl rounded-full pointer-events-none" />
+      {/* Subtle top light leak - Theme aware */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-primary/5 blur-3xl rounded-full pointer-events-none" />
 
       {/* Header */}
       <div className="relative flex items-center justify-between px-6 pt-6 pb-2 shrink-0 z-10">
@@ -74,7 +74,7 @@ export default function ContactCard({ onClose }: ContactCardProps) {
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: -10, scale: 0.8 }}
                 onClick={() => setView("selection")}
-                className="p-2 -ml-2 rounded-full hover:bg-white/5 text-neutral-400 hover:text-white transition-colors"
+                className="p-2 -ml-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft size={18} />
               </motion.button>
@@ -82,10 +82,10 @@ export default function ContactCard({ onClose }: ContactCardProps) {
           </AnimatePresence>
           <motion.h3
             layoutId="title"
-            className="text-white tracking-wide flex items-center gap-2"
+            className="text-foreground font-semibold tracking-tight flex items-center gap-2"
           >
             {view === "selection" && (
-              <span className=" text-sm flex items-center gap-2">
+              <span className="text-sm font-medium text-foreground/90">
                 Choose how to proceed
               </span>
             )}
@@ -96,7 +96,7 @@ export default function ContactCard({ onClose }: ContactCardProps) {
         </div>
         <button
           onClick={onClose}
-          className="group p-2 rounded-full bg-transparent hover:bg-white/5 text-neutral-500 hover:text-white transition-all"
+          className="group p-2 rounded-full bg-transparent hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
         >
           <X
             size={18}
@@ -118,23 +118,23 @@ export default function ContactCard({ onClose }: ContactCardProps) {
               {/* Message Option */}
               <button
                 onClick={() => setView("message")}
-                className="group relative w-full overflow-hidden rounded-3xl bg-white/3 border border-white/5 p-1 transition-all hover:bg-white/5 hover:border-white/10"
+                className="group relative w-full overflow-hidden rounded-3xl bg-card border border-border/50 p-1 transition-all hover:bg-accent/50 hover:border-border"
               >
-                <div className="relative flex items-center gap-5 p-4 rounded-[20px] transition-all bg-neutral-900/50 group-hover:bg-neutral-900/0">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400 ring-1 ring-blue-500/20 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-300">
+                <div className="relative flex items-center gap-5 p-4 rounded-[20px] transition-all bg-muted/30 group-hover:bg-transparent">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/20 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-300">
                     <Mail size={22} strokeWidth={2} />
                   </div>
                   <div className="flex-1 text-left">
-                    <div className="text-[15px] font-medium text-white group-hover:text-blue-100 transition-colors">
+                    <div className="text-[15px] font-medium text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
                       Quick Query
                     </div>
-                    <div className="text-xs text-neutral-500 mt-1 leading-relaxed pr-4 group-hover:text-neutral-400 transition-colors">
+                    <div className="text-xs text-muted-foreground mt-1 leading-relaxed pr-4 group-hover:text-foreground/80 transition-colors">
                       Got a quick question? Drop it here.
                     </div>
                   </div>
                   <ChevronRight
                     size={18}
-                    className="text-neutral-600 group-hover:text-white group-hover:translate-x-1 transition-all"
+                    className="text-muted-foreground/50 group-hover:text-foreground group-hover:translate-x-1 transition-all"
                   />
                 </div>
               </button>
@@ -142,23 +142,23 @@ export default function ContactCard({ onClose }: ContactCardProps) {
               {/* Calendar Option */}
               <button
                 onClick={() => setView("calendar")}
-                className="group relative w-full overflow-hidden rounded-3xl bg-white/3 border border-white/5 p-1 transition-all hover:bg-white/5 hover:border-white/10"
+                className="group relative w-full overflow-hidden rounded-3xl bg-card border border-border/50 p-1 transition-all hover:bg-accent/50 hover:border-border"
               >
-                <div className="relative flex items-center gap-5 p-4 rounded-[20px] transition-all bg-neutral-900/50 group-hover:bg-neutral-900/0">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-400 ring-1 ring-purple-500/20 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-300">
+                <div className="relative flex items-center gap-5 p-4 rounded-[20px] transition-all bg-muted/30 group-hover:bg-transparent">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 ring-1 ring-purple-500/20 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-300">
                     <Calendar size={22} strokeWidth={2} />
                   </div>
                   <div className="flex-1 text-left">
-                    <div className="text-[15px] font-medium text-white group-hover:text-purple-100 transition-colors">
+                    <div className="text-[15px] font-medium text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
                       Book Call
                     </div>
-                    <div className="text-xs text-neutral-500 mt-1 leading-relaxed pr-4 group-hover:text-neutral-400 transition-colors">
+                    <div className="text-xs text-muted-foreground mt-1 leading-relaxed pr-4 group-hover:text-foreground/80 transition-colors">
                       Schedule call to discuss project.
                     </div>
                   </div>
                   <ChevronRight
                     size={18}
-                    className="text-neutral-600 group-hover:text-white group-hover:translate-x-1 transition-all"
+                    className="text-muted-foreground/50 group-hover:text-foreground group-hover:translate-x-1 transition-all"
                   />
                 </div>
               </button>
@@ -177,7 +177,7 @@ export default function ContactCard({ onClose }: ContactCardProps) {
             >
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-medium text-neutral-500 ml-1 uppercase tracking-wider">
+                  <label className="text-[11px] font-medium text-muted-foreground ml-1 uppercase tracking-wider">
                     Email
                   </label>
                   <input
@@ -186,11 +186,11 @@ export default function ContactCard({ onClose }: ContactCardProps) {
                     placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-white/3 border border-white/8 rounded-2xl px-4 py-3.5 text-[14px] text-white focus:outline-none focus:bg-white/6 focus:border-blue-500/30 transition-all placeholder:text-neutral-600"
+                    className="w-full bg-muted/30 border border-border/50 rounded-2xl px-4 py-3.5 text-[14px] text-foreground focus:outline-none focus:bg-background focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-muted-foreground/70"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-medium text-neutral-500 ml-1 uppercase tracking-wider">
+                  <label className="text-[11px] font-medium text-muted-foreground ml-1 uppercase tracking-wider">
                     Message
                   </label>
                   <textarea
@@ -199,18 +199,18 @@ export default function ContactCard({ onClose }: ContactCardProps) {
                     placeholder="What kind of project? What's your timeline?."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-white/3 border border-white/8 rounded-2xl px-4 py-3.5 text-[14px] text-white focus:outline-none focus:bg-white/6 focus:border-blue-500/30 transition-all placeholder:text-neutral-600 resize-none"
+                    className="w-full bg-muted/30 border border-border/50 rounded-2xl px-4 py-3.5 text-[14px] text-foreground focus:outline-none focus:bg-background focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-muted-foreground/70 resize-none"
                   />
                 </div>
               </div>
               <button
                 disabled={isSending}
-                className="w-full bg-white text-black font-semibold rounded-2xl py-4 text-[14px] hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 mt-2 shadow-lg shadow-white/5 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-primary-foreground font-semibold rounded-2xl py-4 text-[14px] hover:opacity-90 transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-primary/10 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSending ? (
                   <Loader2
                     size={18}
-                    className="animate-spin text-neutral-600"
+                    className="animate-spin text-primary-foreground"
                   />
                 ) : (
                   <>
@@ -228,7 +228,7 @@ export default function ContactCard({ onClose }: ContactCardProps) {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
-              className="h-[500px] bg-neutral-900 rounded-3xl overflow-hidden border border-white/8 relative"
+              className="h-[500px] bg-background rounded-3xl overflow-hidden border border-border relative"
             >
               <iframe
                 src="https://cal.com/daman-deep-lbx8oq"
@@ -248,10 +248,10 @@ export default function ContactCard({ onClose }: ContactCardProps) {
               <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-500 ring-1 ring-emerald-500/20 mb-6 shadow-2xl shadow-emerald-500/20">
                 <Check size={40} strokeWidth={3} />
               </div>
-              <h4 className="text-xl font-semibold text-white tracking-tight">
+              <h4 className="text-xl font-semibold text-foreground tracking-tight">
                 Message Received
               </h4>
-              <p className="text-neutral-500 text-[13px] mt-2 max-w-60 leading-relaxed">
+              <p className="text-muted-foreground text-[13px] mt-2 max-w-60 leading-relaxed">
                 Thank you for reaching out. I&apos;ll get back to you within a
                 few hours.
               </p>
