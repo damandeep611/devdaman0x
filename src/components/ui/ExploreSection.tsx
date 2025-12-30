@@ -100,9 +100,6 @@ export default function ExploreSection() {
                   <div className="w-12 h-4 rounded-full bg-zinc-900 border border-zinc-700" />
                 </div>
                 <div className="flex items-center gap-6">
-                  <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-tighter">
-                    Signal: 100%
-                  </div>
                   <div className="w-2 h-2 rounded-full bg-green-500/50" />
                 </div>
               </div>
