@@ -76,18 +76,12 @@ const CaseStudy: React.FC = () => {
   return (
     <div className="flex pt-8 flex-col gap-12 text-foreground">
       {/* Header with signature typography style */}
-      <div className="flex flex-col gap-3 max-w-3xl">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif-italic leading-tight text-foreground">
-          Hello, we should design <br className="hidden md:block" />
-          <span className="inline-block px-2.5 py-0.5 mx-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-sans text-[0.8em] font-medium rounded-md -rotate-1 translate-y-0.5">
-            software paradigms
-          </span> 
-          {" "}that embody <br className="hidden md:block" />
-          wisdom <Sun size={24} className="inline-block mx-1 text-foreground" strokeWidth={1.5} /> and feel 
-          {" "}<span className="italic">natural</span> <Flower size={24} className="inline-block mx-1 text-foreground" strokeWidth={1.5} />
+      <div className="flex flex-col gap-4 max-w-5xl">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif-italic leading-[1.2] text-foreground tracking-tight">
+          I design and build <span className="inline-block px-3 py-1 mx-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-sans text-[0.7em] font-medium rounded-lg -rotate-1 translate-y-1">refined digital products</span> where technical logic <Sun size={32} className="inline-block mx-1 align-middle text-foreground" strokeWidth={1.5} /> meets creative <span className="italic">intuition</span> <Flower size={32} className="inline-block mx-1 align-middle text-foreground" strokeWidth={1.5} />
         </h2>
         
-        <p className="text-[11px] md:text-xs font-light text-muted-foreground tracking-tight max-w-lg mb-1">
+        <p className="text-xs md:text-sm font-light text-muted-foreground tracking-tight max-w-2xl">
           React ecosystem enjoyer — focusing on Next.js & Tanstack. Backend flexible, specializing in PostgreSQL and distributed systems with Golang. My content goes deeper than surface-level integrations, focusing on core fundamentals.
         </p>
 
