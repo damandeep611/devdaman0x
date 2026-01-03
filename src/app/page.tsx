@@ -28,7 +28,7 @@ export default function Home() {
       <HeroSection />
       <GallerySearch />
       <CaseStudy />
-      <SkillsSection />
+
       <MyContentSection posts={latestPosts} />
       <ExploreSection />
     </div>
