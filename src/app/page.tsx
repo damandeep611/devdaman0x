@@ -1,3 +1,4 @@
+import CaseStudy from "@/components/ui/CaseStudy";
 import ExploreSection from "@/components/ui/ExploreSection";
 import GallerySearch from "@/components/ui/GallerySearch";
 import HeroSection from "@/components/ui/HeroSection";
@@ -26,6 +27,7 @@ export default function Home() {
     <div className="mt-4 sm:mt-12 flex flex-col items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       <HeroSection />
       <GallerySearch />
+      <CaseStudy />
       <SkillsSection />
       <MyContentSection posts={latestPosts} />
       <ExploreSection />

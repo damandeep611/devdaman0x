@@ -85,7 +85,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-10 bg-yellow-100/20 dark:bg-white/5 border-l-2 border-r-2 border-white/10 backdrop-blur-[2px] -rotate-1 shadow-sm z-30 opacity-80" />
 
           {/* Image Frame */}
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/5">
+          <div className="relative aspect-4/3 w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/5">
             <img
               src={image}
               alt={title}
@@ -98,7 +98,7 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
           {/* Polaroid Handwritten Caption */}
           <div className="absolute bottom-4 left-6 right-6 flex justify-between items-end">
             <div className="flex flex-col">
-              <span className="font-handwriting text-2xl md:text-4xl text-neutral-800 dark:text-neutral-200 opacity-90 rotate-[-1deg]">
+              <span className="font-handwriting text-2xl md:text-4xl text-neutral-800 dark:text-neutral-200 opacity-90 -rotate-1">
                 {title}
               </span>
             </div>
@@ -183,7 +183,8 @@ export default function WorkPage() {
           </h1>
         </div>
         <p className="max-w-sm text-muted-foreground font-medium leading-relaxed text-sm md:text-base">
-          A collection of experiments, products, and creative engineering. Focusing on detail, interaction, and user empathy.
+          A collection of experiments, products, and creative engineering.
+          Focusing on detail, interaction, and user empathy.
         </p>
       </div>
 
@@ -198,52 +199,62 @@ export default function WorkPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-20">
         <div className="md:col-span-2 p-10 md:p-14 bg-[#1a1a1a] text-[#f0f0f0] rounded-lg shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 transition-all duration-700 group-hover:bg-white/10" />
-          
+
           <div className="relative z-10 flex flex-col justify-between h-full min-h-[300px]">
             <div className="space-y-4">
-               <div className="flex items-center gap-2 text-white/40">
-                  <div className="w-2 h-2 bg-brand-green rounded-full" />
-                  <span className="text-[10px] font-bold tracking-[0.4em] uppercase">Philosophy</span>
-               </div>
-               <h3 className="text-3xl md:text-5xl font-serif italic leading-tight">
-                  "Function is the baseline, <br/> Delight is the goal."
-               </h3>
+              <div className="flex items-center gap-2 text-white/40">
+                <div className="w-2 h-2 bg-brand-green rounded-full" />
+                <span className="text-[10px] font-bold tracking-[0.4em] uppercase">
+                  Philosophy
+                </span>
+              </div>
+              <h3 className="text-3xl md:text-5xl font-serif italic leading-tight">
+                Function is the baseline, <br /> Delight is the goal.
+              </h3>
             </div>
-            
+
             <div className="flex flex-wrap gap-2 mt-8">
-               {["Motion First", "Pixel Perfect", "Human Centric"].map((tag) => (
-                 <span key={tag} className="px-4 py-1.5 border border-white/20 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default">
-                    {tag}
-                 </span>
-               ))}
+              {["Motion First", "Pixel Perfect", "Human Centric"].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-4 py-1.5 border border-white/20 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="p-10 bg-secondary border border-border rounded-lg flex flex-col justify-between relative overflow-hidden">
-           {/* Paper texture overlay could go here */}
-           <div className="space-y-6 relative z-10">
-              <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-muted-foreground">
-                 Capabilities
-              </span>
-              <ul className="space-y-3">
-                 {[
-                   "Product Design",
-                   "Full-stack Dev",
-                   "Design Systems",
-                   "3D Interaction",
-                 ].map((s) => (
-                   <li key={s} className="text-base md:text-lg font-bold flex items-center gap-3">
-                      <div className="w-1 h-1 bg-foreground rounded-full" />
-                      {s}
-                   </li>
-                 ))}
-              </ul>
-           </div>
-           
-           <div className="absolute bottom-6 right-6 rotate-[-12deg] opacity-20">
-              <span className="font-handwriting text-6xl text-brand-green">Expertise</span>
-           </div>
+          {/* Paper texture overlay could go here */}
+          <div className="space-y-6 relative z-10">
+            <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-muted-foreground">
+              Capabilities
+            </span>
+            <ul className="space-y-3">
+              {[
+                "Product Design",
+                "Full-stack Dev",
+                "Design Systems",
+                "3D Interaction",
+              ].map((s) => (
+                <li
+                  key={s}
+                  className="text-base md:text-lg font-bold flex items-center gap-3"
+                >
+                  <div className="w-1 h-1 bg-foreground rounded-full" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="absolute bottom-6 right-6 -rotate-12 opacity-20">
+            <span className="font-handwriting text-6xl text-brand-green">
+              Expertise
+            </span>
+          </div>
         </div>
       </div>
     </div>
