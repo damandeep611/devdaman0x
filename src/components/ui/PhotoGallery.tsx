@@ -1,179 +1,171 @@
 "use client"
 
-import React from "react";
-import { motion, Variants } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-const IMAGES = [
+export interface PortfolioCard {
+  id: number;
+  title: string;
+  image: string;
+  rotation: number;
+  translateX: number;
+  translateY: number;
+  zIndex: number;
+}
+
+const CARDS_DATA: Omit<PortfolioCard, "translateX" | "translateY">[] = [
   {
-    src: "https://picsum.photos/400/500?random=11",
-    label: "Studio Vibes",
-    tape: true,
+    id: 1,
+    title: "software made with care",
+    image: "https://picsum.photos/id/1/400/500",
+    rotation: -15,
+    zIndex: 10,
   },
   {
-    src: "https://picsum.photos/400/500?random=22",
-    label: "Late Nights",
-    tape: false,
+    id: 2,
+    title: "designing for some",
+    image: "https://picsum.photos/id/10/400/500",
+    rotation: -8,
+    zIndex: 20,
   },
   {
-    src: "https://picsum.photos/400/500?random=33",
-    label: "Architecture",
-    tape: true,
+    id: 3,
+    title: "puns made visual",
+    image: "https://picsum.photos/id/20/400/500",
+    rotation: -20,
+    zIndex: 30,
   },
   {
-    src: "https://picsum.photos/400/500?random=44",
-    label: "Minimalism",
-    tape: false,
+    id: 4,
+    title: "cyanotypes",
+    image: "https://picsum.photos/id/40/400/500",
+    rotation: 5,
+    zIndex: 40,
   },
   {
-    src: "https://picsum.photos/400/500?random=55",
-    label: "Pure Focus",
-    tape: true,
+    id: 5,
+    title: "the journal that reflects with you",
+    image: "https://picsum.photos/id/60/400/500",
+    rotation: 0,
+    zIndex: 50,
+  },
+  {
+    id: 6,
+    title: "mother's hometown",
+    image: "https://picsum.photos/id/80/400/500",
+    rotation: 12,
+    zIndex: 45,
+  },
+  {
+    id: 7,
+    title: "another story",
+    image: "https://picsum.photos/id/90/400/500",
+    rotation: 20,
+    zIndex: 35,
   },
 ];
 
-const cardVariants: Variants = {
-  initial: (i: number) => ({
-    y: 80,
-    opacity: 0,
-    rotate: i % 2 === 0 ? -15 : 15,
-    x: -30,
-    scale: 0.9,
-  }),
-  animate: (i: number) => {
-    const center = 2;
-    const offset = i - center;
-    const rotate = offset * 7 + (i % 2 === 0 ? 2 : -2);
-    const x = offset * 48;
-    const y = Math.abs(offset) * 15 + (i % 2 === 0 ? 5 : 0);
+const BASE_X = [-480, -320, -160, 0, 160, 320, 480];
+const BASE_Y = [60, 10, 50, -20, 30, 70, -10];
 
-    return {
-      y,
-      opacity: 1,
-      rotate,
-      x,
-      scale: 1,
-      zIndex: 10 - Math.abs(offset),
-      transition: {
-        delay: 0.2 + i * 0.12,
-        duration: 1.2,
-        type: "spring",
-        stiffness: 90,
-        damping: 15,
-      },
-    };
-  },
-  hover: {
-    y: -40,
-    rotate: 0,
-    scale: 1.12,
-    zIndex: 50,
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 25,
-    },
-  },
+interface CardStackProps {
+  isSearchFocused: boolean;
+}
+
+const CardStack: React.FC<CardStackProps> = ({ isSearchFocused }) => {
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const spreadFactor = windowWidth < 768 ? 0.35 : windowWidth < 1024 ? 0.7 : 1;
+
+  return (
+    <div className="relative w-full h-[550px]  mb-32 flex justify-center items-center pointer-events-none">
+      {CARDS_DATA.map((card, index) => (
+        <CardItem
+          key={card.id}
+          card={card}
+          translateX={BASE_X[index] * spreadFactor}
+          translateY={BASE_Y[index] * spreadFactor}
+          isForcedColor={isSearchFocused}
+        />
+      ))}
+    </div>
+  );
 };
 
-const PhotoGallery: React.FC = () => {
-  return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 md:mb-20 overflow-hidden lg:overflow-visible relative px-4">
-      <div className="w-full order-2 lg:order-1 relative">
-        <ImageFan />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-green/5 rounded-full blur-3xl -z-10 opacity-60" />
-      </div>
+interface CardItemProps {
+  card: Omit<PortfolioCard, "translateX" | "translateY">;
+  translateX: number;
+  translateY: number;
+  isForcedColor: boolean;
+}
 
-      <div className="text-center lg:text-left order-1 lg:order-2 space-y-4 md:space-y-6 relative">
-        <div className="hidden lg:block absolute -left-20 top-0 text-brand-green/40">
-          <svg
-            width="60"
-            height="60"
-            viewBox="0 0 100 100"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          >
-            <path d="M 80 20 Q 50 20 20 80" />
-            <path d="M 15 70 L 20 80 L 30 75" />
-          </svg>
-        </div>
-        <div className="space-y-2">
-          <h2 className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-brand-green/60">
-            Gen AI Library
-          </h2>
-          <h3 className="text-3xl md:text-5xl font-bold font-serif italic leading-[1.1]">
-            Workflows | Prompts <br />
-            <span className="text-muted-foreground">&</span> Exploration.
-          </h3>
-        </div>
-        <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-sm mx-auto lg:mx-0 font-medium">
-          Contains Generative AI workflows, Prompts, Images and references to
-          the tools used. Comprehensive guides also for local setups.
+const CardItem: React.FC<CardItemProps> = ({
+  card,
+  translateX,
+  translateY,
+  isForcedColor,
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 100, rotate: card.rotation }}
+      animate={{
+        opacity: 1,
+        y: translateY,
+        x: translateX,
+        rotate: card.rotation,
+      }}
+      whileHover={{
+        scale: 1.08,
+        zIndex: 100,
+        rotate: 0,
+        y: translateY - 40,
+        transition: { type: "spring", stiffness: 400, damping: 25 },
+      }}
+      transition={{
+        delay: 0.05 * card.id,
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="absolute bg-white p-2 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-gray-100 pointer-events-auto cursor-pointer"
+      style={{
+        width: "min(260px, 45vw)",
+        zIndex: card.zIndex,
+      }}
+    >
+      <div className="relative aspect-4/5 overflow-hidden rounded-xl mb-4 bg-gray-50">
+        <img
+          src={card.image}
+          alt={card.title}
+          className={`w-full h-full object-cover transition-all duration-700 ease-in-out ${
+            isForcedColor ? "grayscale-0" : "grayscale hover:grayscale-0"
+          }`}
+        />
+        {card.id === 5 && (
+          <div className="absolute inset-0 p-4 flex flex-col justify-between bg-linear-to-b from-black/5 to-transparent pointer-events-none">
+            <div className="flex gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-white/90 shadow-sm" />
+              <div className="w-2 h-2 rounded-full bg-white/40 shadow-sm" />
+            </div>
+            <div className="h-10 w-full bg-white/20 backdrop-blur-md rounded-lg border border-white/30" />
+          </div>
+        )}
+      </div>
+      <div className="px-2 pb-2">
+        <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-[0.15em] leading-tight truncate">
+          {card.title}
         </p>
-        <motion.div
-          whileHover={{ x: 10 }}
-          className="pt-4 md:pt-6 inline-flex items-center gap-3 text-brand-green font-bold cursor-pointer group"
-        >
-          <span className="text-xs md:text-sm uppercase tracking-widest border-b-2 border-brand-green/20 group-hover:border-brand-green transition-colors pb-1">
-            Browse
-          </span>
-          <ArrowRight size={14} className="md:w-4 md:h-4" />
-        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-export default PhotoGallery;
+export default CardStack;
 
-const ImageFan: React.FC = () => {
-  return (
-    <div className="relative h-[350px] md:h-[450px] lg:h-[550px] w-full flex items-center justify-center lg:justify-start overflow-visible">
-      <div className="relative w-full max-w-md flex justify-center items-center h-full z-10 perspective-2000">
-        {IMAGES.map((item, i) => (
-          <motion.div
-            key={i}
-            custom={i}
-            variants={cardVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-            className="absolute w-36 h-48 md:w-44 md:h-60 lg:w-60 lg:h-80 rounded-sm overflow-visible border-4 md:border-8 border-card dark:border-border bg-card dark:bg-muted/30 backdrop-blur-md group cursor-pointer transition-all duration-300 shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-            style={{
-              transformOrigin: "bottom center",
-            }}
-          >
-            {/* Washi Tape Effect */}
-            {item.tape && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-6 bg-brand-green/20 dark:bg-brand-green/30 border border-brand-green/10 dark:border-brand-green/20 backdrop-blur-md -rotate-2 z-20 shadow-md opacity-90" />
-            )}
-
-            <div className="relative w-full h-[82%] overflow-hidden bg-muted/50">
-              <img
-                src={item.src}
-                alt={item.label}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_40px_rgba(255,255,255,0.05)] pointer-events-none" />
-            </div>
-
-            {/* Polaroid Bottom Label Area */}
-            <div className="h-[18%] flex items-center justify-center px-2">
-              <span className="font-handwriting text-muted-foreground dark:text-foreground/70 text-sm md:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-                {item.label}
-              </span>
-              <span className="font-handwriting text-muted-foreground/30 dark:text-foreground/20 text-xs md:text-sm absolute group-hover:opacity-0 transition-opacity">
-                #{i + 1}
-              </span>
-            </div>
-
-            {/* Card Lift Shadow */}
-            <div className="absolute -inset-1 bg-brand-green/10 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};

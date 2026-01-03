@@ -5,13 +5,13 @@ import { Mail, Github, Twitter, Youtube } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto flex flex-col pt-8 md:pt-24 pb-6 md:pb-10 px-4">
+    <section className="w-full mx-auto flex flex-col pt-8 md:pt-24  px-4">
       {/* Profile Card Container */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-3xl mx-auto mb-16 md:mb-24"
+        className="w-full max-w-3xl mx-auto mb-6"
       >
         {/* Header: Avatar & Info */}
         <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-8">
