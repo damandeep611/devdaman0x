@@ -15,6 +15,7 @@
   --card-foreground: #1a1a1a;
   --popover: #ffffff;
   --popover-foreground: #1a1a1a;
+  --nav-bg: #fdfdfd; /* Matches background for light mode */
 
   /* Primary Action */
   --primary: #2e2e2e; /* Bauhaus Charcoal */
@@ -89,6 +90,7 @@
   --card-foreground: #fafafa;
   --popover: #0a0a0a;
   --popover-foreground: #fafafa;
+  --nav-bg: #202020;     /* Specific dark mode nav color */
 
   /* Primary Action */
   --primary: #fafafa;
@@ -164,6 +166,8 @@
 
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  
+  --color-nav-bg: var(--nav-bg);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);

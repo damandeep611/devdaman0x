@@ -42,14 +42,13 @@ export default function NavPill() {
     <div className="fixed z-50 left-0 right-0 flex items-center justify-center pointer-events-none bottom-6 sm:bottom-auto sm:top-6 flex-col-reverse sm:flex-col gap-4">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        className="pointer-events-auto flex items-center gap-1 sm:gap-2 p-1.5 rounded-full border border-border/40 bg-background/80 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/20"
-      >
-        {/* Profile / Brand */}
-        <Link 
-          href="/" 
-          className="flex items-center gap-2 pl-3 pr-2 py-1.5 hover:opacity-80 transition-opacity"
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="pointer-events-auto flex items-center gap-1 sm:gap-2 p-1.5 rounded-full border border-border/40 bg-nav-bg/80 backdrop-blur-xl shadow-lg shadow-black/5 dark:shadow-black/20"
+              >
+                {/* Profile / Brand */}
+                <Link 
+                  href="/"          className="flex items-center gap-2 pl-3 pr-2 py-1.5 hover:opacity-80 transition-opacity"
         >
           <div className="relative w-5 h-5 flex items-center justify-center bg-brand-green/10 rounded-md text-brand-green">
             <Sparkles size={12} fill="currentColor" />
@@ -71,7 +70,9 @@ export default function NavPill() {
                 href={item.href}
                 className={cn(
                   "relative px-3 sm:px-4 py-1.5 text-[13px] sm:text-sm font-medium transition-colors duration-200",
-                  isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  isActive
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
                 style={{
                   WebkitTapHighlightColor: "transparent",
@@ -110,7 +111,7 @@ export default function NavPill() {
             {!isContactOpen && (
               <>
                 <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-brand-green rounded-full ring-2 ring-background" />
-                
+
                 {/* Architectural Annotation Hint */}
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
@@ -119,7 +120,7 @@ export default function NavPill() {
                   className="absolute top-8 -left-20 pointer-events-none hidden md:block w-24"
                 >
                   <div className="relative flex items-center justify-end gap-1">
-                    <span className="font-(family-name:--font-geist-caveat) text-brand-green/80 text-xl rotate-[-6deg] pt-1">
+                    <span className="font-(family-name:--font-geist-caveat) text-brand-green/80 text-xl -rotate-6 pt-1">
                       contact
                     </span>
                     <svg

@@ -3,7 +3,6 @@ import ExploreSection from "@/components/ui/ExploreSection";
 import GallerySearch from "@/components/ui/GallerySearch";
 import HeroSection from "@/components/ui/HeroSection";
 import MyContentSection from "@/components/ui/MyContentSection";
-import SkillsSection from "@/components/ui/SkillsSection";
 import { allPosts } from "content-collections";
 
 export default function Home() {
