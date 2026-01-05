@@ -49,7 +49,7 @@ export default function NavPill() {
             animate={{ 
               y: 0, 
               opacity: 1,
-              width: isOpen ? 380 : "fit-content",
+              width: isOpen ? 440 : "fit-content",
               borderRadius: isOpen ? 24 : 50,
             }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
@@ -138,10 +138,10 @@ export default function NavPill() {
             <AnimatePresence mode="popLayout">
               {isOpen && (
                 <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25, delay: 0.1 }}
                   className="w-full border-t border-zinc-200/50 dark:border-zinc-800/50"
                 >
                   <div className="p-3 flex flex-col gap-2">

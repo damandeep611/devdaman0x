@@ -1,60 +1,81 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
+import { Send } from "lucide-react";
+import { XformerlyTwitter, GitHub, LinkedIn } from "../ui/icons/Icons";
+import { cn } from "@/lib/utils";
 
 export default function Footer() {
   return (
-    <footer className="w-full py-20 border-t border-border mt-20">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-          <div className="space-y-6">
-            <div className="text-3xl font-bold tracking-tighter text-foreground">
-              Daman<span className="text-brand-green">.</span>
-            </div>
-            <div className="flex gap-10">
-              <div className="space-y-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
-                  Contact
-                </p>
-                <a
-                  href="mailto:hello@daman.io"
-                  className="text-sm font-semibold text-muted-foreground hover:text-brand-green transition-colors"
+    <footer className="w-full pb-10 pt-20">
+      <div className="flex justify-center w-full px-4 sm:px-6">
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 bg-white/70 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 p-4 px-10 rounded-[40px] w-full max-w-7xl shadow-2xl shadow-black/5"
+        >
+            {/* Left Side: Brand & Email */}
+            <div className="flex items-center gap-6">
+                <a 
+                    href="mailto:hello@devdaman.com" 
+                    className="flex items-center gap-4 group transition-all"
                 >
-                  hello@daman.io
+                    <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-zinc-200/50 dark:border-zinc-700/50 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">
+                        <Send size={20} className="text-zinc-600 dark:text-zinc-300 -ml-0.5 mt-0.5" />
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 font-bold leading-tight mb-0.5">Get in touch</span>
+                        <span className="text-base font-semibold text-zinc-900 dark:text-zinc-100 transition-colors">
+                            hello@devdaman.com
+                        </span>
+                    </div>
                 </a>
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
-                  Social
-                </p>
-                <div className="flex gap-4">
-                  {["X", "GitHub", "LinkedIn"].map((s) => (
-                    <a
-                      key={s}
-                      href="#"
-                      className="text-sm font-semibold text-muted-foreground hover:text-brand-green transition-colors"
-                    >
-                      {s}
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
-          </div>
 
-          <div className="flex flex-col items-start md:items-end gap-3">
-            <div className="flex items-center gap-2 px-3 py-1 bg-brand-green/10 border border-brand-green/20 rounded-full">
-              <div className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-green">
-                Available for Freelance
-              </span>
+            {/* Right Side: Social Dock */}
+            <div className="flex items-center gap-4">
+                <SocialLink 
+                    href="https://twitter.com/devdaman" 
+                    icon={<XformerlyTwitter className="w-5 h-5" />} 
+                    label="X / Twitter"
+                    className="bg-black text-white dark:bg-zinc-950 dark:text-white"
+                />
+                <SocialLink 
+                    href="https://github.com/devdaman" 
+                    icon={<GitHub className="w-6 h-6 text-white" />} 
+                    label="GitHub"
+                    className="bg-[#181717] dark:bg-zinc-800"
+                />
+                <SocialLink 
+                    href="https://linkedin.com/in/devdaman" 
+                    icon={<LinkedIn className="w-10 h-10" />} 
+                    label="LinkedIn"
+                    className="bg-white dark:bg-white p-0 border-zinc-200"
+                />
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground">
-              &copy; {new Date().getFullYear()} Handcrafted with care
-            </p>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
+}
+
+function SocialLink({ href, icon, label, className }: { href: string; icon: React.ReactNode; label: string; className?: string }) {
+    return (
+        <motion.a 
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            whileHover={{ y: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={cn(
+                "flex items-center justify-center w-12 h-12 rounded-2xl shadow-lg shadow-black/5 transition-all overflow-hidden border border-transparent hover:border-zinc-200/50 dark:hover:border-zinc-700/50",
+                className
+            )}
+        >
+            {icon}
+        </motion.a>
+    )
 }
