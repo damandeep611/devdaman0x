@@ -2,80 +2,103 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { XformerlyTwitter, GitHub, LinkedIn } from "../ui/icons/Icons";
-import { cn } from "@/lib/utils";
 
-export default function Footer() {
+const Footer = () => {
+  const socialLinks = [
+    {
+      name: "GitHub",
+      href: "https://github.com/devdaman",
+      icon: <GitHub className="w-5 h-5" />,
+    },
+    {
+      name: "Twitter / X",
+      href: "https://twitter.com/devdaman",
+      icon: <XformerlyTwitter className="w-4 h-4" />,
+    },
+    {
+      name: "LinkedIn",
+      href: "https://linkedin.com/in/devdaman",
+      icon: <LinkedIn className="w-5 h-5" />,
+    },
+  ];
+
   return (
-    <footer className="w-full pb-10 pt-20">
-      <div className="flex justify-center w-full px-4 sm:px-6">
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 bg-white/70 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 p-4 px-10 rounded-[40px] w-full max-w-7xl shadow-2xl shadow-black/5"
-        >
-            {/* Left Side: Brand & Email */}
-            <div className="flex items-center gap-6">
-                <a 
-                    href="mailto:hello@devdaman.com" 
-                    className="flex items-center gap-4 group transition-all"
-                >
-                    <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-800 rounded-2xl shadow-sm border border-zinc-200/50 dark:border-zinc-700/50 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">
-                        <Send size={20} className="text-zinc-600 dark:text-zinc-300 -ml-0.5 mt-0.5" />
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 font-bold leading-tight mb-0.5">Get in touch</span>
-                        <span className="text-base font-semibold text-zinc-900 dark:text-zinc-100 transition-colors">
-                            hello@devdaman.com
-                        </span>
-                    </div>
-                </a>
+    <footer className="w-full bg-background pt-16 pb-12 overflow-hidden relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
+          {/* Left Side: Brand/CTA */}
+          <div className="flex flex-col gap-4 max-w-md">
+            <div className="flex flex-col">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-1">
+                System Core
+              </span>
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-black tracking-tighter leading-none text-foreground"
+              >
+                NEURAL CODEX
+              </motion.h2>
             </div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-sm text-muted-foreground font-medium"
+            >
+              Building digital artifacts through clean design and technical
+              precision.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <a
+                href="mailto:hello@devdaman.com"
+                className="inline-flex items-center gap-1.5 text-sm font-bold border-b border-foreground pb-0.5 hover:text-blue-500 hover:border-blue-500 transition-colors group"
+              >
+                hello@devdaman.com
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </motion.div>
+          </div>
 
-            {/* Right Side: Social Dock */}
-            <div className="flex items-center gap-4">
-                <SocialLink 
-                    href="https://twitter.com/devdaman" 
-                    icon={<XformerlyTwitter className="w-5 h-5" />} 
-                    label="X / Twitter"
-                    className="bg-black text-white dark:bg-zinc-950 dark:text-white"
-                />
-                <SocialLink 
-                    href="https://github.com/devdaman" 
-                    icon={<GitHub className="w-6 h-6 text-white" />} 
-                    label="GitHub"
-                    className="bg-[#181717] dark:bg-zinc-800"
-                />
-                <SocialLink 
-                    href="https://linkedin.com/in/devdaman" 
-                    icon={<LinkedIn className="w-10 h-10" />} 
-                    label="LinkedIn"
-                    className="bg-white dark:bg-white p-0 border-zinc-200"
-                />
-            </div>
-        </motion.div>
+          {/* Right Side: Social Icons (Icon Only) */}
+          <div className="flex items-center gap-3">
+            {socialLinks.map((link, idx) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 + idx * 0.1 }}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 border border-transparent text-foreground hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-500 transition-all duration-300"
+              >
+                {link.icon}
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Background Text - Cut off at bottom */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none select-none opacity-[0.03] dark:opacity-[0.05] z-0">
+        <span className="text-[13vw] font-black leading-none whitespace-nowrap text-foreground tracking-tighter block translate-y-[35%]">
+          DEVDAMAN DEVDAMAN
+        </span>
       </div>
     </footer>
   );
-}
+};
 
-function SocialLink({ href, icon, label, className }: { href: string; icon: React.ReactNode; label: string; className?: string }) {
-    return (
-        <motion.a 
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            whileHover={{ y: -8, scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={cn(
-                "flex items-center justify-center w-12 h-12 rounded-2xl shadow-lg shadow-black/5 transition-all overflow-hidden border border-transparent hover:border-zinc-200/50 dark:hover:border-zinc-700/50",
-                className
-            )}
-        >
-            {icon}
-        </motion.a>
-    )
-}
+export default Footer;

@@ -2,6 +2,71 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  SiTypescript,
+  SiReact,
+  SiPostgresql,
+  SiBun,
+  SiNodedotjs,
+  SiGo,
+  SiDrizzle,
+  SiJavascript,
+  SiDocker,
+  SiGraphql,
+} from "react-icons/si";
+
+const techStack = [
+  {
+    name: "Node.js",
+    icon: SiNodedotjs,
+    iconColor: "text-[#339933]",
+  },
+  {
+    name: "Bun",
+    icon: SiBun,
+    iconColor: "text-[#fbf0df]",
+  },
+  {
+    name: "React",
+    icon: SiReact,
+    iconColor: "text-[#61dafb]",
+  },
+  {
+    name: "PostgreSQL",
+    icon: SiPostgresql,
+    iconColor: "text-[#4169e1]",
+  },
+  {
+    name: "Golang",
+    icon: SiGo,
+    iconColor: "text-[#00add8]",
+  },
+  {
+    name: "Drizzle",
+    icon: SiDrizzle,
+    iconColor: "text-[#C5F74F]",
+  },
+  {
+    name: "JavaScript",
+    icon: SiJavascript,
+    iconColor: "text-[#F7DF1E]",
+  },
+  {
+    name: "TypeScript",
+    icon: SiTypescript,
+    iconColor: "text-[#3178c6]",
+  },
+  {
+    name: "Docker",
+    icon: SiDocker,
+    iconColor: "text-[#2496ED]",
+  },
+  {
+    name: "GraphQL",
+    icon: SiGraphql,
+    iconColor: "text-[#E10098]",
+  },
+];
 
 interface ProjectData {
   title: string;
@@ -171,21 +236,46 @@ const ProjectSection: React.FC<ProjectSectionProps> = ({
 
 export default function WorkPage() {
   return (
-    <div className="mt-12 sm:mt-32 md:mt-48 max-w-7xl mx-auto px-6">
-      {/* Header Section */}
-      <div className="mb-32 border-b border-border pb-8 flex flex-col md:flex-row justify-between items-end gap-8">
-        <div className="space-y-4">
-          <span className="text-[10px] font-bold tracking-[0.6em] uppercase text-brand-green pl-1">
-            Index_Ref: 2023-24
+    <div className="mt-12 sm:mt-24 md:mt-32 max-w-7xl mx-auto px-6">
+      {/* New Header Style: MY LATEST WORK + Moved Intro */}
+      <div className="mb-32 flex flex-col gap-16">
+        {/* Title Group */}
+        <div className="flex flex-col items-start justify-start text-center">
+          <span className="font-(family-name:--font-geist-caveat) text-xl md:text-3xl text-muted-foreground relative self-end md:self-start md:ml-72  md:-mb-2 -rotate-6 z-10">
+            from 2020 &apos;til today
           </span>
-          <h1 className="text-5xl md:text-8xl font-bold tracking-tighter font-serif italic">
-            Work <br className="hidden md:block" /> Archive.
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-[0.85] text-foreground">
+            Selected
+            <br className="md:hidden" /> WORK
           </h1>
         </div>
-        <p className="max-w-sm text-muted-foreground font-medium leading-relaxed text-sm md:text-base">
-          A collection of experiments, products, and creative engineering.
-          Focusing on detail, interaction, and user empathy.
-        </p>
+
+        {/* Moved "Signature" Intro Section */}
+        <div className="flex flex-col items-start gap-5 max-w-4xl mx-auto border-t border-dashed border-border/50 ">
+          <div className="flex flex-col md:flex-row md:items-start gap-6 justify-between mt-4">
+            <p className="text-sm md:text-base font-light text-muted-foreground tracking-tight max-w-xl leading-relaxed text-center md:text-left">
+              React ecosystem enjoyer — focusing on Next.js & Tanstack. Backend
+              flexible, specializing in PostgreSQL and distributed systems with
+              Golang. My content focuses on core fundamentals.
+            </p>
+          </div>
+          {/* Tech Stack Icons - Compact Row */}
+          <div className="flex flex-wrap justify-center md:justify-end gap-2.5 items-center">
+            {techStack.map((tech) => (
+              <div key={tech.name} className="group relative cursor-pointer">
+                <div className="p-2  hover:bg-secondary hover:scale-110 transition-all duration-300">
+                  <tech.icon className={`size-5 ${tech.iconColor}`} />
+                </div>
+                {/* Tooltip */}
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none z-20 transform translate-y-1 group-hover:translate-y-0">
+                  <div className="bg-popover text-popover-foreground text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full border border-border shadow-md whitespace-nowrap">
+                    {tech.name}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Project Gallery */}
@@ -251,7 +341,7 @@ export default function WorkPage() {
           </div>
 
           <div className="absolute bottom-6 right-6 -rotate-12 opacity-20">
-            <span className="font-handwriting text-6xl text-brand-green">
+            <span className="font-(family-name:--font-geist-caveat) text-6xl text-brand-green">
               Expertise
             </span>
           </div>
