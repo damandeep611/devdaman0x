@@ -2,11 +2,10 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Globe } from "lucide-react";
 
-// Project Data
+// Project Data - Reordered to mix Web Apps (formerly 20-24) starting from index 5
 const projects = [
-  // --- DESIGN & MOBILE APPS (The 19 Media Items) ---
   {
     id: 1,
     title: "AI Chat",
@@ -52,6 +51,16 @@ const projects = [
     label: "Manual backup → Wallet",
     aspect: "aspect-[3/4.5]",
   },
+  // --- WEB APP INSERTION 1 ---
+  {
+    id: 20,
+    title: "DotOS",
+    category: ["Web Apps"],
+    type: "image",
+    src: "https://cdn.dribbble.com/userupload/46252782/file/089321701bd13a3a6f55138512a4639d.png?resize=1600x1200&vertical=center",
+    label: "Branding, System Design, Illustration",
+    aspect: "aspect-[4/3]",
+  },
   {
     id: 6,
     title: "Widget",
@@ -69,6 +78,16 @@ const projects = [
     src: "https://framerusercontent.com/images/Dh6sJGJ7IpZQVMaHwl7arvMo4.png?scale-down-to=2048&lossless=1&width=1226&height=2070",
     label: "Mobile UI Design",
     aspect: "aspect-[3/4.5]",
+  },
+  // --- WEB APP INSERTION 2 ---
+  {
+    id: 21,
+    title: "Aura",
+    category: ["Web Apps"],
+    type: "image",
+    src: "https://cdn.dribbble.com/userupload/46262439/file/814dcf2b3391cee997a9b0dc40502c89.jpg?resize=1600x1200&vertical=center",
+    label: "Audio Engine, Visual Identity",
+    aspect: "aspect-[4/3]",
   },
   {
     id: 8,
@@ -97,6 +116,16 @@ const projects = [
     label: "Admin Panel",
     aspect: "aspect-[3/4.5]",
   },
+  // --- WEB APP INSERTION 3 ---
+  {
+    id: 22,
+    title: "Flux",
+    category: ["Web Apps"],
+    type: "image",
+    src: "https://cdn.dribbble.com/userupload/46267415/file/ec02ef77daa4c3d2b3baf6079dcd997e.png?resize=1600x1200&vertical=center",
+    label: "SaaS, Dashboard, Dark Mode",
+    aspect: "aspect-[4/3]",
+  },
   {
     id: 11,
     title: "Animation",
@@ -124,6 +153,16 @@ const projects = [
     label: "Player Interface",
     aspect: "aspect-[3/4.5]",
   },
+  // --- WEB APP INSERTION 4 ---
+  {
+    id: 23,
+    title: "Pearl",
+    category: ["Web Apps"],
+    type: "image",
+    src: "https://cdn.dribbble.com/userupload/46102893/file/27913b25589d3392059aa283f33fe21b.png?resize=1600x1200&vertical=center",
+    label: "Wellness, Mobile, Pastel",
+    aspect: "aspect-[4/3]",
+  },
   {
     id: 14,
     title: "Profile",
@@ -149,6 +188,16 @@ const projects = [
     type: "video",
     src: "https://framerusercontent.com/assets/xjGFNEXBtm5D8GToyCzJW1eko.mp4",
     label: "Token Analytics",
+    aspect: "aspect-[4/3]",
+  },
+  // --- WEB APP INSERTION 5 ---
+  {
+    id: 24,
+    title: "PromptMatrix",
+    category: ["Web Apps"],
+    type: "image",
+    src: "https://cdn.dribbble.com/userupload/41507805/file/original-d5d06c2d76fd1d6c15e8111dfd653769.png?resize=1600x1157&vertical=center",
+    label: "AI Image Gallery Prompts",
     aspect: "aspect-[4/3]",
   },
   {
@@ -178,56 +227,11 @@ const projects = [
     label: "Data Visualization",
     aspect: "aspect-[4/3]",
   },
-
-  // --- WEB APPS (High-Quality Placeholders) ---
-  {
-    id: 20,
-    title: "DotOS",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46252782/file/089321701bd13a3a6f55138512a4639d.png?resize=1600x1200&vertical=center",
-    label: "Branding, System Design, Illustration",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    id: 21,
-    title: "Aura",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46262439/file/814dcf2b3391cee997a9b0dc40502c89.jpg?resize=1600x1200&vertical=center",
-    label: "Audio Engine, Visual Identity",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    id: 22,
-    title: "Flux",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46267415/file/ec02ef77daa4c3d2b3baf6079dcd997e.png?resize=1600x1200&vertical=center",
-    label: "SaaS, Dashboard, Dark Mode",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    id: 23,
-    title: "Pearl",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46102893/file/27913b25589d3392059aa283f33fe21b.png?resize=1600x1200&vertical=center",
-    label: "Wellness, Mobile, Pastel",
-    aspect: "aspect-[4/3]",
-  },
-    {
-    id: 24,
-    title: "PromptMatrix",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/41507805/file/original-d5d06c2d76fd1d6c15e8111dfd653769.png?resize=1600x1157&vertical=center",
-    label: "AI Image Gallery Prompts",
-    aspect: "aspect-[4/3]",
-  },
 ];
 
 const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
+  const isWebApp = project.category.includes("Web Apps");
+
   return (
     <motion.div
       layout
@@ -238,12 +242,27 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
       className="flex flex-col gap-3 group mb-8 break-inside-avoid"
     >
       <div
-        className={`relative ${project.aspect} bg-zinc-100 dark:bg-zinc-900 rounded-[2rem] overflow-hidden flex flex-col justify-between border border-border shadow-sm group-hover:shadow-2xl transition-all duration-500`}
+        className={`relative ${project.aspect} bg-zinc-100 dark:bg-zinc-900 rounded-[2rem] overflow-hidden flex flex-col justify-between shadow-sm group-hover:shadow-2xl transition-all duration-500
+        ${
+          isWebApp
+            ? "border-[3px] border-zinc-200 dark:border-zinc-700"
+            : "border border-border"
+        }`}
       >
         <div className="flex justify-between items-start p-5 relative z-10 pointer-events-none">
-          <span className="px-3 py-1 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md text-black dark:text-white text-[10px] font-bold uppercase tracking-wider rounded-full border border-border shadow-sm">
+          {/* Badge: Different style for Web Apps to make them distinct */}
+          <span
+            className={`px-3 py-1 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm flex items-center gap-1.5 transition-colors
+            ${
+              isWebApp
+                ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border border-transparent"
+                : "bg-white/90 dark:bg-zinc-800/90 text-black dark:text-white border border-border"
+            }`}
+          >
+            {isWebApp && <Globe size={10} className="stroke-[3px]" />}
             {project.title}
           </span>
+          
           <button className="w-8 h-8 rounded-full bg-white dark:bg-zinc-800 flex items-center justify-center text-black dark:text-white shadow-lg pointer-events-auto group-hover:scale-110 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300">
             <ArrowRight size={14} />
           </button>
