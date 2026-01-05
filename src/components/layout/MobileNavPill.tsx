@@ -31,7 +31,7 @@ export default function MobileNavPill() {
       <motion.nav
         layout
         className={cn(
-          "relative flex flex-col items-center bg-[#EEEEEE] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 shadow-xl shadow-black/5 dark:shadow-black/20 w-full overflow-hidden transition-all",
+          "relative flex flex-col items-center bg-[#EEEEEE] dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800/80 shadow-xl shadow-black/5 dark:shadow-black/20 w-full overflow-hidden",
           isOpen ? "rounded-3xl p-1.5" : "rounded-full p-1.5"
         )}
       >
@@ -166,9 +166,11 @@ export default function MobileNavPill() {
             <motion.div
             layout
             onClick={() => setIsOpen(!isOpen)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className={cn(
-                "absolute top-0 z-20 flex items-center justify-center w-12 h-12 rounded-full shadow-sm cursor-pointer transition-all",
-                "bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:scale-105 active:scale-95"
+                "absolute top-0 z-20 flex items-center justify-center w-12 h-12 rounded-full shadow-sm cursor-pointer",
+                "bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700"
             )}
             initial={false}
             animate={{
@@ -176,8 +178,8 @@ export default function MobileNavPill() {
             }}
             transition={{
                 type: "spring",
-                stiffness: 250,
-                damping: 25,
+                stiffness: 300,
+                damping: 28,
             }}
             >
              <AnimatePresence mode="wait" initial={false}>
