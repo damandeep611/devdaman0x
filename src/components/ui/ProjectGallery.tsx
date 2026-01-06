@@ -242,7 +242,9 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
       className="flex flex-col gap-3 group mb-8 break-inside-avoid"
     >
       <div
-        className={`relative ${project.aspect} bg-zinc-100 dark:bg-zinc-900 rounded-[2rem] overflow-hidden flex flex-col justify-between shadow-sm group-hover:shadow-2xl transition-all duration-500
+        className={`relative ${
+          project.aspect
+        } bg-zinc-100 dark:bg-zinc-900 rounded-4xl overflow-hidden flex flex-col justify-between shadow-sm group-hover:shadow-2xl transition-all duration-500
         ${
           isWebApp
             ? "border-[3px] border-zinc-200 dark:border-zinc-700"
@@ -262,7 +264,7 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
             {isWebApp && <Globe size={10} className="stroke-[3px]" />}
             {project.title}
           </span>
-          
+
           <button className="w-8 h-8 rounded-full bg-white dark:bg-zinc-800 flex items-center justify-center text-black dark:text-white shadow-lg pointer-events-auto group-hover:scale-110 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300">
             <ArrowRight size={14} />
           </button>
@@ -285,7 +287,7 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
       </div>
       <span className="text-sm font-medium text-muted-foreground/70 text-center group-hover:text-foreground transition-colors">
