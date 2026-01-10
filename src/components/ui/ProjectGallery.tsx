@@ -2,236 +2,112 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Globe } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-// Project Data - Reordered to mix Web Apps (formerly 20-24) starting from index 5
+// Updated Project Data with Godly.website assets
 const projects = [
   {
     id: 1,
-    title: "AI Chat",
-    category: ["Design", "Mobile Apps"],
+    title: "Chronicle",
+    category: ["Mobile Apps", "Design"],
     type: "video",
-    src: "https://framerusercontent.com/assets/oJ0YcElKZRMeMW8nmeGupF7PaMc.mp4",
-    label: "AI character → Chat",
+    src: "https://cdn.godly.website/videos/1280/dd4776f2-72ae-4a59-986c-5886d258da5b.mp4",
+    label: "Calendar & Tasks",
     aspect: "aspect-[3/4.5]",
   },
   {
     id: 2,
-    title: "Wallet",
-    category: ["Design", "Mobile Apps"],
+    title: "Nexus",
+    category: ["Web Apps", "Design"],
     type: "video",
-    src: "https://framerusercontent.com/assets/YVwxqIs5jj53TfqCQhpBS26HAk.mp4",
-    label: "Swap",
-    aspect: "aspect-[3/4.5]",
-  },
-  {
-    id: 3,
-    title: "Gallery",
-    category: ["Design"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/XiP1ClHXk1u0za8jtLnge8r2rq4.mp4",
-    label: "Photo Gallery",
+    src: "https://cdn.godly.website/videos/1440/xanenlqyomi71vuoaidc.mp4",
+    label: "System Architecture",
     aspect: "aspect-[4/3]",
   },
   {
-    id: 4,
-    title: "Chart",
-    category: ["Design"],
+    id: 3,
+    title: "Flux",
+    category: ["Mobile Apps"],
     type: "video",
-    src: "https://framerusercontent.com/assets/XHriT6GGIWnphYQXIBJ53GtUPaA.mp4",
-    label: "Market Chart",
+    src: "https://cdn.godly.website/videos/1280/l3postvpevywyz4w7hoa.mp4",
+    label: "Audio Interface",
+    aspect: "aspect-[3/4.5]",
+  },
+  {
+    id: 4,
+    title: "Vantage",
+    category: ["Design", "Web Apps"],
+    type: "video",
+    src: "https://cdn.godly.website/videos/1280/htlsiutyvjm0yjygym2i.mp4",
+    label: "Analytics Dashboard",
     aspect: "aspect-[4/3]",
   },
   {
     id: 5,
-    title: "Backup",
-    category: ["Design", "Mobile Apps"],
+    title: "Orbit",
+    category: ["Mobile Apps"],
     type: "video",
-    src: "https://framerusercontent.com/assets/1H3SWqw8UVcPfbMPSgWQ2dcUmRM.mp4",
-    label: "Manual backup → Wallet",
+    src: "https://cdn.godly.website/videos/1280/fgsiivhv4akbght57yfl.mp4",
+    label: "Social Graph",
     aspect: "aspect-[3/4.5]",
-  },
-  // --- WEB APP INSERTION 1 ---
-  {
-    id: 20,
-    title: "DotOS",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46252782/file/089321701bd13a3a6f55138512a4639d.png?resize=1600x1200&vertical=center",
-    label: "Branding, System Design, Illustration",
-    aspect: "aspect-[4/3]",
   },
   {
     id: 6,
-    title: "Widget",
+    title: "Zenith",
     category: ["Design"],
     type: "video",
-    src: "https://framerusercontent.com/assets/rvAkPCuZLQmLZl5uQxWmmOF9c4.mp4",
-    label: "Weather widget",
+    src: "https://cdn.godly.website/videos/1280/yxxdn4jnr9ubfclamcgv.mp4",
+    label: "Wellness Tracker",
     aspect: "aspect-[3/4.5]",
   },
   {
     id: 7,
-    title: "Interface",
-    category: ["Design"],
-    type: "image",
-    src: "https://framerusercontent.com/images/Dh6sJGJ7IpZQVMaHwl7arvMo4.png?scale-down-to=2048&lossless=1&width=1226&height=2070",
-    label: "Mobile UI Design",
-    aspect: "aspect-[3/4.5]",
-  },
-  // --- WEB APP INSERTION 2 ---
-  {
-    id: 21,
-    title: "Aura",
+    title: "Cipher",
     category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46262439/file/814dcf2b3391cee997a9b0dc40502c89.jpg?resize=1600x1200&vertical=center",
-    label: "Audio Engine, Visual Identity",
+    type: "video",
+    src: "https://cdn.godly.website/videos/1280/40dd5971-e408-42f3-9fb1-50da0571356d.mp4",
+    label: "Crypto Exchange",
     aspect: "aspect-[4/3]",
   },
   {
     id: 8,
-    title: "Concept",
-    category: ["Design"],
-    type: "image",
-    src: "https://framerusercontent.com/images/1M6Ys2p2TXlpHO7Y8Is7ymiTXCs.png?scale-down-to=2048&lossless=1&width=1226&height=2070",
-    label: "Dark Mode Concept",
+    title: "Echo",
+    category: ["Mobile Apps"],
+    type: "video",
+    src: "https://cdn.godly.website/videos/1280/fl9wocuwlfiykosqybye.mp4",
+    label: "Voice Memos",
     aspect: "aspect-[3/4.5]",
   },
   {
     id: 9,
-    title: "Prototyping",
-    category: ["Design", "Mobile Apps"],
+    title: "Prism",
+    category: ["Web Apps", "Design"],
     type: "video",
-    src: "https://framerusercontent.com/assets/k1gbD1SV9Wfqm8S2CWpMFlh64CU.mp4",
-    label: "Interaction Flow",
-    aspect: "aspect-[3/4.5]",
+    src: "https://cdn.godly.website/videos/1440/frglqedef4x9xjij0hei.mp4",
+    label: "Photo Editor",
+    aspect: "aspect-[4/3]",
   },
   {
     id: 10,
-    title: "Dashboard",
-    category: ["Design"],
+    title: "Horizon",
+    category: ["Mobile Apps"],
     type: "video",
-    src: "https://framerusercontent.com/assets/5yPk6Jw9MpITlFg8Rxewz52HHQ.mp4",
-    label: "Admin Panel",
+    src: "https://cdn.godly.website/videos/1280/xubpht2atogmrgdx1wm3.mp4",
+    label: "Travel Planner",
     aspect: "aspect-[3/4.5]",
-  },
-  // --- WEB APP INSERTION 3 ---
-  {
-    id: 22,
-    title: "Flux",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46267415/file/ec02ef77daa4c3d2b3baf6079dcd997e.png?resize=1600x1200&vertical=center",
-    label: "SaaS, Dashboard, Dark Mode",
-    aspect: "aspect-[4/3]",
   },
   {
     id: 11,
-    title: "Animation",
+    title: "Metric",
     category: ["Design"],
     type: "video",
-    src: "https://framerusercontent.com/assets/lWxH8OsIDXEMU4Xm8Y0uKKnyqE.mp4",
-    label: "Motion Study",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    id: 12,
-    title: "Social",
-    category: ["Design", "Mobile Apps"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/5or8FbuSqpgkaty3i3pMR9wV25s.mp4",
-    label: "Feed Scroll",
+    src: "https://cdn.godly.website/videos/1280/r4gepm6h61qab7rexr31.mp4",
+    label: "Financial Tools",
     aspect: "aspect-[3/4.5]",
-  },
-  {
-    id: 13,
-    title: "Music",
-    category: ["Design", "Mobile Apps"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/LfkzR6XMLBQlsCKgpzEPY5JgGw.mp4",
-    label: "Player Interface",
-    aspect: "aspect-[3/4.5]",
-  },
-  // --- WEB APP INSERTION 4 ---
-  {
-    id: 23,
-    title: "Pearl",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/46102893/file/27913b25589d3392059aa283f33fe21b.png?resize=1600x1200&vertical=center",
-    label: "Wellness, Mobile, Pastel",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    id: 14,
-    title: "Profile",
-    category: ["Design"],
-    type: "image",
-    src: "https://framerusercontent.com/images/M71SgXvMYdDc21hf8stTyFZupQ.png?scale-down-to=2048&width=1226&height=2070",
-    label: "User Profile",
-    aspect: "aspect-[3/4.5]",
-  },
-  {
-    id: 15,
-    title: "Settings",
-    category: ["Design"],
-    type: "image",
-    src: "https://framerusercontent.com/images/5DJf3yNWidIOb1dsRrVaE6o3ZAs.png?scale-down-to=2048&width=1226&height=2070",
-    label: "Preferences",
-    aspect: "aspect-[3/4.5]",
-  },
-  {
-    id: 16,
-    title: "Crypto",
-    category: ["Design"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/xjGFNEXBtm5D8GToyCzJW1eko.mp4",
-    label: "Token Analytics",
-    aspect: "aspect-[4/3]",
-  },
-  // --- WEB APP INSERTION 5 ---
-  {
-    id: 24,
-    title: "PromptMatrix",
-    category: ["Web Apps"],
-    type: "image",
-    src: "https://cdn.dribbble.com/userupload/41507805/file/original-d5d06c2d76fd1d6c15e8111dfd653769.png?resize=1600x1157&vertical=center",
-    label: "AI Image Gallery Prompts",
-    aspect: "aspect-[4/3]",
-  },
-  {
-    id: 17,
-    title: "Onboarding",
-    category: ["Design", "Mobile Apps"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/LovNrwy53vlb5X9bNFTeWuCMTs.mp4",
-    label: "Welcome Flow",
-    aspect: "aspect-[3/4.5]",
-  },
-  {
-    id: 18,
-    title: "Detail",
-    category: ["Design"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/oJ0YcElKZRMeMW8nmeGupF7PaMc.mp4",
-    label: "Micro-interaction",
-    aspect: "aspect-[3/4.5]",
-  },
-  {
-    id: 19,
-    title: "Graph",
-    category: ["Design"],
-    type: "video",
-    src: "https://framerusercontent.com/assets/XHriT6GGIWnphYQXIBJ53GtUPaA.mp4",
-    label: "Data Visualization",
-    aspect: "aspect-[4/3]",
   },
 ];
 
 const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
-  const isWebApp = project.category.includes("Web Apps");
-
   return (
     <motion.div
       layout
@@ -244,55 +120,42 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
       <div
         className={`relative ${
           project.aspect
-        } bg-zinc-100 dark:bg-zinc-900 rounded-4xl overflow-hidden flex flex-col justify-between shadow-sm group-hover:shadow-2xl transition-all duration-500
-        ${
-          isWebApp
-            ? "border-[3px] border-zinc-200 dark:border-zinc-700"
-            : "border border-border"
-        }`}
+        } bg-muted rounded-3xl overflow-hidden shadow-sm group-hover:shadow-md transition-all duration-500 border border-border/50`}
       >
-        <div className="flex justify-between items-start p-5 relative z-10 pointer-events-none">
-          {/* Badge: Different style for Web Apps to make them distinct */}
-          <span
-            className={`px-3 py-1 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm flex items-center gap-1.5 transition-colors
-            ${
-              isWebApp
-                ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border border-transparent"
-                : "bg-white/90 dark:bg-zinc-800/90 text-black dark:text-white border border-border"
-            }`}
-          >
-            {isWebApp && <Globe size={10} className="stroke-[3px]" />}
-            {project.title}
-          </span>
-
-          <button className="w-8 h-8 rounded-full bg-white dark:bg-zinc-800 flex items-center justify-center text-black dark:text-white shadow-lg pointer-events-auto group-hover:scale-110 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300">
-            <ArrowRight size={14} />
-          </button>
+        {/* Overlay Content */}
+        <div className="absolute inset-0 z-10 p-5 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20 backdrop-blur-[2px]">
+            <div className="flex justify-between items-start">
+                 <span className="px-3 py-1 bg-background/90 backdrop-blur-md text-foreground text-[10px] font-bold uppercase tracking-wider rounded-full border border-border/50">
+                    {project.title}
+                 </span>
+                 <div className="w-8 h-8 rounded-full bg-background/90 flex items-center justify-center text-foreground shadow-sm">
+                    <ArrowUpRight size={14} />
+                 </div>
+            </div>
         </div>
 
+        {/* Media */}
         <div className="absolute inset-0 z-0">
-          {project.type === "video" ? (
             <video
               src={project.src}
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
             />
-          ) : (
-            <img
-              src={project.src}
-              alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-          )}
-          <div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </div>
       </div>
-      <span className="text-sm font-medium text-muted-foreground/70 text-center group-hover:text-foreground transition-colors">
-        {project.label}
-      </span>
+      
+      {/* Label below card */}
+      <div className="flex justify-between items-center px-1">
+          <span className="text-sm font-medium text-foreground/80">
+            {project.title}
+          </span>
+          <span className="text-xs text-muted-foreground">
+            {project.label}
+          </span>
+      </div>
     </motion.div>
   );
 };
@@ -314,22 +177,20 @@ const ProjectGallery = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`relative px-6 py-2 rounded-full text-sm font-bold tracking-tight transition-colors z-10 ${
+            className={`relative px-5 py-2 rounded-full text-sm font-medium tracking-tight transition-colors z-10 ${
               activeTab === tab
-                ? "text-white"
+                ? "text-background"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {activeTab === tab && (
               <motion.div
                 layoutId="activeTab"
-                className="absolute inset-0 bg-black dark:bg-white rounded-full -z-10"
+                className="absolute inset-0 bg-foreground rounded-full -z-10"
                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
               />
             )}
-            <span className={activeTab === tab ? "dark:text-black" : ""}>
-              {tab}
-            </span>
+            <span>{tab}</span>
           </button>
         ))}
       </div>

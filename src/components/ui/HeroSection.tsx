@@ -69,28 +69,29 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        <div className="flex flex-col gap-5">
-          <motion.p
+        <div className="flex flex-col gap-6">
+          <motion.div
             variants={itemVariants}
-            className="text-xl font-medium tracking-tight "
+            className="text-xl md:text-2xl font-light leading-snug text-muted-foreground tracking-tight max-w-2xl"
           >
-            hello there! I&apos;m daman.
-          </motion.p>
-
-          <motion.p
-            variants={itemVariants}
-            className="text-lg leading-relaxed font-light tracking-tight "
-          >
-            I&apos;m a designer in pursuit of aesthetics and function. I hope to
-            create a world of seeing, learning, thinking, building, and loving.
-          </motion.p>
-          <motion.p
-            variants={itemVariants}
-            className="text-lg leading-relaxed font-light tracking-tight "
-          >
-            full-stack developer and designer who loves turning abstract ideas
-            into functional, beautiful products.
-          </motion.p>
+            <p>
+              hello there! I&apos;m <span className="text-foreground font-medium">daman</span> 👋.
+            </p>
+            <p className="mt-6">
+              I&apos;m a <span className="text-foreground font-medium">designer</span> in pursuit of{" "}
+              <span className="text-foreground font-medium">aesthetics</span> and{" "}
+              <span className="text-foreground font-medium">function</span>. I hope to create a world of{" "}
+              <span className="text-foreground font-medium">seeing</span>,{" "}
+              <span className="text-foreground font-medium">learning</span>,{" "}
+              <span className="text-foreground font-medium">thinking</span>,{" "}
+              <span className="text-foreground font-medium">building</span>, and{" "}
+              <span className="text-foreground font-medium">loving</span>.
+            </p>
+            <p className="mt-6">
+              Currently a <span className="text-foreground font-medium">full-stack developer</span> and designer who loves turning{" "}
+              <span className="text-foreground font-medium">abstract ideas</span> into functional, beautiful products.
+            </p>
+          </motion.div>
         </div>
 
         {/* Social Media & Resume */}

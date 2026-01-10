@@ -140,7 +140,7 @@ export default function ExploreSection() {
               {/* Tape Effect */}
               <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2 w-10 h-5 md:w-12 md:h-6 bg-brand-green/10 border border-brand-green/5 backdrop-blur-sm -rotate-2 z-10" />
 
-              <p className="font-(family-name:--font-geist-caveat) text-note-text text-lg md:text-xl leading-tight">
+              <p className="font-handwriting text-note-text text-lg md:text-xl leading-tight">
                 I share my learnings <br /> & related stuff here <br /> as well.
               </p>
             </motion.div>

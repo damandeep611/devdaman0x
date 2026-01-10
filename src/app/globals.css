@@ -156,8 +156,6 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-handwriting: var(--font-geist-caveat);
-  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -273,4 +271,8 @@ figure[data-rehype-pretty-code-figure] code {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   white-space: nowrap;
+}
+
+.font-handwriting {
+  font-family: var(--font-geist-caveat), cursive;
 }

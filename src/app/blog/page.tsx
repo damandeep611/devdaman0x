@@ -3,7 +3,7 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { allPosts } from "content-collections";
 
 const containerVariants: Variants = {
@@ -36,64 +36,75 @@ export default function BlogPage() {
   );
 
   return (
-    <section className="w-full mx-auto min-h-screen pt-12 sm:pt-32 pb-20">
-      <div className="max-w-3xl mx-auto w-full px-6">
+    <section className="w-full mx-auto min-h-screen pt-12 sm:pt-32 pb-20 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto w-full">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-12"
+          className="space-y-16"
         >
           {/* Header */}
-          <div className="space-y-4">
+          <div className="max-w-2xl space-y-6">
             <motion.h1
               variants={itemVariants}
-              className="text-3xl md:text-4xl font-medium tracking-tight text-foreground"
+              className="text-5xl md:text-7xl font-serif tracking-tight text-foreground"
             >
-              Writing
+              writing.
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-xl font-serif italic text-muted-foreground"
+              className="text-lg text-muted-foreground leading-relaxed max-w-xl"
             >
-              Thoughts on software, design, and life.
+              I have a blog that doesn&apos;t really adhere to any fixed themes.
+              From software engineering to design philosophy to shower thoughts,
+              it really is the wild west.
             </motion.p>
           </div>
 
-          {/* Posts List */}
-          <div className="space-y-8">
+          {/* Posts Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {sortedPosts.map((post) => (
               <motion.article
                 key={post.slug}
                 variants={itemVariants}
-                className="group relative flex flex-col gap-2 p-4 -mx-4 rounded-2xl hover:bg-secondary/50 transition-colors"
+                className="group relative flex flex-col justify-between p-8 rounded-3xl bg-card border border-border/40 hover:border-border transition-all duration-300 h-full min-h-[320px]"
               >
-                <div className="flex items-center justify-between text-xs text-muted-foreground font-mono mb-1">
-                  <span>
-                    {new Date(post.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
+                {/* Top Row: Category & Icon */}
+                <div className="flex items-start justify-between">
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Writing • {post.tags?.[0] || "Blog"}
                   </span>
-                  <span>{post.tags?.[0] || "Tech"}</span>
+                  <ArrowUpRight
+                    size={20}
+                    className="text-muted-foreground/60 group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+                  />
                 </div>
 
-                <h2 className="text-xl font-medium tracking-tight group-hover:text-primary transition-colors">
-                  <Link
-                    href={post.url}
-                    className="before:absolute before:inset-0"
-                  >
-                    {post.title}
-                  </Link>
-                </h2>
+                {/* Middle: Content */}
+                <div className="mt-8 mb-6">
+                  <h2 className="text-3xl font-serif font-medium tracking-tight text-foreground mb-4 group-hover:opacity-80 transition-opacity">
+                    <Link
+                      href={post.url}
+                      className="before:absolute before:inset-0"
+                    >
+                      {post.title}
+                    </Link>
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed line-clamp-3">
+                    {post.description}
+                  </p>
+                </div>
 
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                  {post.description}
-                </p>
-
-                <div className="flex items-center gap-1 text-xs font-medium text-primary mt-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                  Read article <ArrowRight size={12} />
+                {/* Bottom: Date */}
+                <div className="mt-auto pt-4 border-t border-border/20">
+                  <time className="text-sm text-muted-foreground/80">
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
                 </div>
               </motion.article>
             ))}
