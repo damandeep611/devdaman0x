@@ -27,7 +27,6 @@ export default function Home() {
       <HeroSection />
       <GallerySearch />
       <CaseStudy />
-
       <MyContentSection posts={latestPosts} />
       <ExploreSection />
     </div>

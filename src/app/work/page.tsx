@@ -30,7 +30,7 @@ const techStack = [
 
 export default function WorkPage() {
   return (
-    <div className="mt-12 sm:mt-24 md:mt-32 max-w-7xl mx-auto px-6">
+    <div className="mt-12 sm:mt-24 md:mt-32 max-w-screen-2xl mx-auto px-6">
       {/* Header Section */}
       <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12 border-b border-border pb-12">
         <div className="space-y-4">

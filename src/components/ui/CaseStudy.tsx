@@ -1,7 +1,117 @@
-"use client"
-import React from 'react';
-import { ArrowUpRight, Layers, Activity } from "lucide-react";
-import { motion } from "framer-motion";
+"use client";
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Duplicating project data for "Web Apps" from ProjectGallery.tsx
+const projects = [
+  {
+    id: 2,
+    title: "Nexus",
+    category: ["Web Apps", "Design"],
+    type: "video",
+    src: "https://cdn.godly.website/videos/1440/xanenlqyomi71vuoaidc.mp4",
+    label: "System Architecture",
+    aspect: "aspect-[2/1]",
+    rotation: "rotate-[-1.5deg]",
+    className: "md:col-span-5 md:col-start-2",
+  },
+  {
+    id: 4,
+    title: "Vantage",
+    category: ["Design", "Web Apps"],
+    type: "video",
+    src: "https://cdn.godly.website/videos/1280/htlsiutyvjm0yjygym2i.mp4",
+    label: "Analytics Dashboard",
+    aspect: "aspect-square",
+    rotation: "rotate-[1deg]",
+    className: "md:col-span-4",
+  },
+  {
+    id: 7,
+    title: "Cipher",
+    category: ["Web Apps"],
+    type: "video",
+    src: "https://cdn.godly.website/videos/1280/40dd5971-e408-42f3-9fb1-50da0571356d.mp4",
+    label: "Crypto Exchange",
+    aspect: "aspect-[2/1]",
+    rotation: "rotate-[0.5deg]",
+    className: "md:col-span-4 md:col-start-3 md:translate-y-2",
+  },
+  {
+    id: 9,
+    title: "Prism",
+    category: ["Web Apps", "Design"],
+    type: "video",
+    src: "https://cdn.godly.website/videos/1440/frglqedef4x9xjij0hei.mp4",
+    label: "Photo Editor",
+    aspect: "aspect-[4/3]",
+    rotation: "rotate-[-1deg]",
+    className: "md:col-span-4 md:-translate-y-2",
+  },
+];
+
+const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Ignore errors from interrupted play requests
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+      className={`group rounded-xl border border-border bg-card overflow-hidden shadow-md hover:shadow-2xl hover:border-primary/50 transition-all duration-500 hover:scale-[1.02] hover:rotate-0 hover:z-10 ${project.rotation} ${project.className}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Card Header */}
+      <div className="p-4 flex justify-between items-start gap-4 border-b border-border bg-muted/30 backdrop-blur-sm">
+        <div className="flex flex-col gap-1">
+          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-none">
+            {project.title}
+          </h3>
+          <span className="text-xs font-medium text-muted-foreground/80">
+            {project.label}
+          </span>
+        </div>
+        <div className="p-2 rounded-full text-muted-foreground/70 group-hover:text-primary transition-colors duration-300">
+          <ArrowUpRight
+            size={18}
+            className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          />
+        </div>
+      </div>
+
+      {/* Media */}
+      <div className={`relative w-full ${project.aspect} bg-muted`}>
+        <video
+          ref={videoRef}
+          src={project.src}
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+        />
+      </div>
+    </motion.div>
+  );
+};
 
 const CaseStudy: React.FC = () => {
   return (
@@ -79,313 +189,14 @@ const CaseStudy: React.FC = () => {
         </div>
       </div>
 
-      {/* Bento Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8">
-        {/* Project 1: buildxskill (Kanban) - Large Feature */}
-        <div className="lg:col-span-8 group">
-          <ProjectCard
-            title="buildxskill"
-            description="Enterprise-grade Kanban system optimized for complex workflows."
-            tags={["Next.js 15", "Drizzle", "Real-time"]}
-            rotation="rotate-[-1.5deg]"
-          >
-            {/* Visual: Dark Mode Kanban Board */}
-            <div className="absolute inset-0 bg-zinc-950 flex flex-col p-6 md:p-10 transition-transform duration-700 group-hover:scale-[1.02]">
-              {/* Background Glow */}
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none" />
-
-              {/* App Header */}
-              <div className="w-full h-12 border-b border-white/5 flex items-center justify-between mb-6 px-2">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
-                </div>
-                <div className="h-2 w-24 bg-white/5 rounded-full" />
-              </div>
-
-              {/* Kanban Columns */}
-              <div className="flex gap-4 md:gap-6 w-full h-full opacity-90">
-                {/* Column 1 */}
-                <div className="flex-1 flex flex-col gap-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="h-2 w-16 bg-indigo-400/50 rounded-full" />
-                    <span className="text-[10px] text-zinc-500 font-mono">
-                      3 ITEMS
-                    </span>
-                  </div>
-                  <div className="w-full aspect-4/2 bg-zinc-900 border border-white/5 rounded-lg p-3 shadow-lg hover:border-indigo-500/30 transition-colors">
-                    <div className="h-1.5 w-1/2 bg-zinc-700 rounded-full mb-2" />
-                    <div className="h-1 w-3/4 bg-zinc-800 rounded-full" />
-                  </div>
-                  <div className="w-full aspect-[4/2.5] bg-zinc-900 border border-white/5 rounded-lg p-3 shadow-lg">
-                    <div className="flex justify-between mb-2">
-                      <div className="h-1.5 w-1/3 bg-zinc-700 rounded-full" />
-                      <div className="h-3 w-3 rounded-full bg-orange-500" />
-                    </div>
-                    <div className="h-1 w-full bg-zinc-800 rounded-full" />
-                  </div>
-                </div>
-
-                {/* Column 2 */}
-                <div className="flex-1 flex flex-col gap-3 sm:flex">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="h-2 w-20 bg-emerald-400/50 rounded-full" />
-                    <span className="text-[10px] text-zinc-500 font-mono">
-                      ACTIVE
-                    </span>
-                  </div>
-                  {/* Active Card */}
-                  <div className="w-full aspect-square bg-zinc-800/50 border border-indigo-500/20 rounded-lg p-4 shadow-2xl relative overflow-hidden group-hover:-translate-y-1 transition-transform duration-500">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
-                    <div className="h-2 w-2/3 bg-white/10 rounded-full mb-3" />
-                    <div className="space-y-2">
-                      <div className="h-1 w-full bg-white/5 rounded-full" />
-                      <div className="h-1 w-5/6 bg-white/5 rounded-full" />
-                      <div className="h-1 w-4/6 bg-white/5 rounded-full" />
-                    </div>
-                    <div className="mt-4 flex gap-2">
-                      <div className="h-4 w-4 rounded-full bg-indigo-500/20 border border-indigo-500/50" />
-                      <div className="h-4 w-4 rounded-full bg-zinc-700" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Column 3 (Fade out) */}
-                <div className="flex-1 flex flex-col gap-3 opacity-30">
-                  <div className="h-2 w-12 bg-zinc-700 rounded-full mb-2" />
-                  <div className="w-full h-32 bg-zinc-900 border border-white/5 rounded-lg" />
-                  <div className="w-full h-24 bg-zinc-900 border border-white/5 rounded-lg" />
-                </div>
-              </div>
-            </div>
-          </ProjectCard>
-        </div>
-
-        {/* Project 2: Aether (AI) - Square Feature */}
-        <div className="lg:col-span-4 group">
-          <ProjectCard
-            title="Aether"
-            description="High-throughput generative AI pipeline."
-            tags={["Redis", "Python", "Vector DB"]}
-            rotation="rotate-[1.2deg]"
-          >
-            <div className="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden">
-              {/* Orbital System */}
-              <div className="relative w-48 h-48 flex items-center justify-center">
-                {/* Center Core */}
-                <div className="absolute w-12 h-12 bg-cyan-500/20 rounded-full blur-md z-10 group-hover:scale-150 transition-transform duration-1000" />
-                <div className="absolute w-8 h-8 bg-white rounded-full shadow-[0_0_40px_rgba(34,211,238,0.8)] z-20" />
-
-                {/* Rings */}
-                <div className="absolute inset-0 border border-white/5 rounded-full animate-[spin_10s_linear_infinite]" />
-                <div className="absolute inset-4 border border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-                <div className="absolute -inset-5 border border-dashed border-cyan-500/20 rounded-full animate-[spin_20s_linear_infinite]" />
-
-                {/* Particles */}
-                <div className="absolute top-0 left-1/2 w-1 h-1 bg-cyan-400 rounded-full shadow-[0_0_10px_cyan]" />
-                <div className="absolute bottom-10 right-10 w-1.5 h-1.5 bg-indigo-400 rounded-full shadow-[0_0_10px_indigo]" />
-              </div>
-
-              {/* Tech Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                <span className="font-mono text-[9px] text-zinc-600 uppercase">
-                  Latency: 12ms
-                </span>
-                <Activity size={12} className="text-cyan-500 animate-pulse" />
-              </div>
-            </div>
-          </ProjectCard>
-        </div>
-
-        {/* Project 3: synap.directory - Tall/Grid */}
-        <div className="lg:col-span-5 group">
-          <ProjectCard
-            title="synap.directory"
-            description="Curated tool directory with automated scraping analytics."
-            tags={["Web Scraping", "Analytics", "SEO"]}
-            rotation="rotate-[0.8deg]"
-          >
-            <div className="absolute inset-0 bg-zinc-50 dark:bg-[#0A0A0A] p-6 flex flex-col overflow-hidden">
-              {/* Grid Background */}
-              <div
-                className="absolute inset-0 opacity-[0.03]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
-                  backgroundSize: "20px 20px",
-                }}
-              />
-
-              {/* Search Bar */}
-              <div className="w-full h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full shadow-sm flex items-center px-4 gap-2 mb-6 transform group-hover:-translate-y-1 transition-transform">
-                <div className="w-3 h-3 rounded-full border border-zinc-400" />
-                <div className="h-1.5 w-24 bg-zinc-100 dark:bg-zinc-800 rounded-full" />
-              </div>
-
-              {/* Grid Items */}
-              <div className="grid grid-cols-2 gap-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="aspect-square bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 flex flex-col justify-between hover:border-orange-500/50 transition-colors group/item"
-                  >
-                    <div
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                        i === 1
-                          ? "bg-orange-500 text-white"
-                          : "bg-zinc-100 dark:bg-zinc-800"
-                      }`}
-                    >
-                      {i === 1 ? (
-                        <Layers size={14} />
-                      ) : (
-                        <div className="w-4 h-4 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-                      )}
-                    </div>
-                    <div className="space-y-1">
-                      <div className="h-1.5 w-16 bg-zinc-100 dark:bg-zinc-800 rounded-full" />
-                      <div className="h-1 w-8 bg-zinc-100 dark:bg-zinc-800 rounded-full" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ProjectCard>
-        </div>
-
-        {/* Project 4: reuseMotion - Wide/Technical */}
-        <div className="lg:col-span-7 group">
-          <ProjectCard
-            title="reuseMotion"
-            description="Motion primitive library for React applications."
-            tags={["Framer Motion", "npm package", "DX"]}
-            rotation="rotate-[-0.5deg]"
-          >
-            <div className="absolute inset-0 bg-[#121214] flex items-center justify-center overflow-hidden">
-              {/* Waveform/Graph Visualization */}
-              <div className="relative w-full max-w-sm h-32">
-                <div className="absolute inset-0 flex items-end justify-between px-1 gap-1">
-                  {[
-                    40, 60, 30, 80, 50, 90, 20, 40, 70, 50, 30, 60, 80, 40, 20,
-                  ].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      className="w-full bg-zinc-800 rounded-t-sm"
-                      initial={{ height: "20%" }}
-                      whileInView={{ height: `${h}%` }}
-                      transition={{
-                        duration: 1,
-                        delay: i * 0.05,
-                        ease: "circOut",
-                      }}
-                    />
-                  ))}
-                </div>
-
-                {/* The Curve Line */}
-                <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
-                  <path
-                    d="M0 100 Q 50 100 100 50 T 200 80 T 300 20 T 400 60"
-                    fill="none"
-                    stroke="url(#gradient-line)"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    className="drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="gradient-line"
-                      x1="0"
-                      y1="0"
-                      x2="100%"
-                      y2="0"
-                    >
-                      <stop offset="0%" stopColor="#ec4899" />
-                      <stop offset="100%" stopColor="#8b5cf6" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                {/* Floating Label */}
-                <motion.div
-                  className="absolute -top-8 right-10 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-md shadow-xl flex items-center gap-2"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse" />
-                  <span className="font-mono text-[10px] text-zinc-300">
-                    spring(stiffness: 400)
-                  </span>
-                </motion.div>
-              </div>
-            </div>
-          </ProjectCard>
-        </div>
+      {/* Grid Layout for Web Apps */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 w-full max-w-6xl mx-auto p-4">
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
       </div>
     </section>
   );
 };
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  tags: string[];
-  children: React.ReactNode;
-  href?: string;
-  className?: string;
-  rotation?: string;
-}
-
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  title,
-  description,
-  tags,
-  children,
-
-  className,
-  rotation = "rotate-0",
-}) => (
-  <div className={`flex flex-col gap-4 h-full ${className}`}>
-    {/* Visual Container */}
-    <div
-      className={`w-full relative aspect-4/3 md:aspect-auto md:h-[400px] overflow-hidden rounded-2xl bg-card border border-border/50 shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-orange-500/10 group-hover:border-orange-500/20 group-hover:rotate-0 ${rotation}`}
-    >
-      {children}
-
-      {/* Overlay Gradient on Hover */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-      {/* Floating Action Button */}
-      <div className="absolute bottom-4 right-4 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100 z-20">
-        <div className="w-10 h-10 bg-white dark:bg-zinc-950 rounded-full flex items-center justify-center shadow-lg border border-white/10 text-foreground">
-          <ArrowUpRight size={18} />
-        </div>
-      </div>
-    </div>
-
-    {/* Content */}
-    <div className="flex flex-col gap-2 px-1">
-      <div className="flex justify-between items-start">
-        <h3 className="text-xl font-semibold tracking-tight text-foreground group-hover:text-orange-500 transition-colors">
-          {title}
-        </h3>
-        {/* Tag Pilla */}
-        <div className="flex gap-2 flex-wrap justify-end">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] uppercase tracking-wider font-medium px-2 py-1 rounded-full bg-secondary text-secondary-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-      <p className="text-sm text-muted-foreground line-clamp-2">
-        {description}
-      </p>
-    </div>
-  </div>
-);
 
 export default CaseStudy;

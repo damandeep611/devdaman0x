@@ -13,7 +13,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/dd4776f2-72ae-4a59-986c-5886d258da5b.mp4",
     label: "Calendar & Tasks",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-square",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1440/xanenlqyomi71vuoaidc.mp4",
     label: "System Architecture",
-    aspect: "aspect-[4/3]",
+    aspect: "aspect-[16/10]",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/l3postvpevywyz4w7hoa.mp4",
     label: "Audio Interface",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-square",
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/htlsiutyvjm0yjygym2i.mp4",
     label: "Analytics Dashboard",
-    aspect: "aspect-[4/3]",
+    aspect: "aspect-[16/10]",
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/fgsiivhv4akbght57yfl.mp4",
     label: "Social Graph",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-square",
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/yxxdn4jnr9ubfclamcgv.mp4",
     label: "Wellness Tracker",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-[4/5]",
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/40dd5971-e408-42f3-9fb1-50da0571356d.mp4",
     label: "Crypto Exchange",
-    aspect: "aspect-[4/3]",
+    aspect: "aspect-[16/10]",
   },
   {
     id: 8,
@@ -76,7 +76,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/fl9wocuwlfiykosqybye.mp4",
     label: "Voice Memos",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-square",
   },
   {
     id: 9,
@@ -85,7 +85,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1440/frglqedef4x9xjij0hei.mp4",
     label: "Photo Editor",
-    aspect: "aspect-[4/3]",
+    aspect: "aspect-[16/10]",
   },
   {
     id: 10,
@@ -94,7 +94,7 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/xubpht2atogmrgdx1wm3.mp4",
     label: "Travel Planner",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-square",
   },
   {
     id: 11,
@@ -103,11 +103,28 @@ const projects = [
     type: "video",
     src: "https://cdn.godly.website/videos/1280/r4gepm6h61qab7rexr31.mp4",
     label: "Financial Tools",
-    aspect: "aspect-[3/4.5]",
+    aspect: "aspect-square",
   },
 ];
 
 const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Ignore errors from interrupted play requests
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <motion.div
       layout
@@ -115,46 +132,33 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="flex flex-col gap-3 group mb-8 break-inside-avoid"
+      className="group mb-6 break-inside-avoid rounded-xl border border-border bg-card overflow-hidden shadow-md hover:shadow-2xl hover:border-primary/50 transition-all duration-300 hover:scale-[1.01]"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <div
-        className={`relative ${
-          project.aspect
-        } bg-muted rounded-3xl overflow-hidden shadow-sm group-hover:shadow-md transition-all duration-500 border border-border/50`}
-      >
-        {/* Overlay Content */}
-        <div className="absolute inset-0 z-10 p-5 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20 backdrop-blur-[2px]">
-            <div className="flex justify-between items-start">
-                 <span className="px-3 py-1 bg-background/90 backdrop-blur-md text-foreground text-[10px] font-bold uppercase tracking-wider rounded-full border border-border/50">
-                    {project.title}
-                 </span>
-                 <div className="w-8 h-8 rounded-full bg-background/90 flex items-center justify-center text-foreground shadow-sm">
-                    <ArrowUpRight size={14} />
-                 </div>
-            </div>
+      {/* Card Header */}
+      <div className="p-4 flex justify-between items-start gap-4 border-b border-border bg-muted/30 backdrop-blur-sm">
+        <div className="flex flex-col gap-1">
+          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-none">
+            {project.title}
+          </h3>
+          <span className="text-xs font-medium text-muted-foreground/80">{project.label}</span>
         </div>
-
-        {/* Media */}
-        <div className="absolute inset-0 z-0">
-            <video
-              src={project.src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
+        <div className="p-2 rounded-full text-muted-foreground/70 group-hover:text-primary transition-colors duration-300">
+          <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </div>
       </div>
-      
-      {/* Label below card */}
-      <div className="flex justify-between items-center px-1">
-          <span className="text-sm font-medium text-foreground/80">
-            {project.title}
-          </span>
-          <span className="text-xs text-muted-foreground">
-            {project.label}
-          </span>
+
+      {/* Media */}
+      <div className={`relative w-full ${project.aspect} bg-muted`}>
+        <video
+          ref={videoRef}
+          src={project.src}
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+        />
       </div>
     </motion.div>
   );
@@ -196,7 +200,7 @@ const ProjectGallery = () => {
       </div>
 
       {/* Masonry Layout via CSS Columns */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
