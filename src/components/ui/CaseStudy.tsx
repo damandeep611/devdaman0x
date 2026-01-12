@@ -1,199 +1,268 @@
 "use client";
 import React from "react";
-import { ArrowUpRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Wifi, Battery, Signal } from "lucide-react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-// Duplicating project data for "Web Apps" from ProjectGallery.tsx
-const projects = [
-  {
-    id: 2,
-    title: "Nexus",
-    category: ["Web Apps", "Design"],
-    type: "video",
-    src: "https://cdn.godly.website/videos/1440/xanenlqyomi71vuoaidc.mp4",
-    label: "System Architecture",
-    aspect: "aspect-[2/1]",
-    rotation: "rotate-[-1.5deg]",
-    className: "md:col-span-5 md:col-start-2",
-  },
-  {
-    id: 4,
-    title: "Vantage",
-    category: ["Design", "Web Apps"],
-    type: "video",
-    src: "https://cdn.godly.website/videos/1280/htlsiutyvjm0yjygym2i.mp4",
-    label: "Analytics Dashboard",
-    aspect: "aspect-square",
-    rotation: "rotate-[1deg]",
-    className: "md:col-span-4",
-  },
-  {
-    id: 7,
-    title: "Cipher",
-    category: ["Web Apps"],
-    type: "video",
-    src: "https://cdn.godly.website/videos/1280/40dd5971-e408-42f3-9fb1-50da0571356d.mp4",
-    label: "Crypto Exchange",
-    aspect: "aspect-[2/1]",
-    rotation: "rotate-[0.5deg]",
-    className: "md:col-span-4 md:col-start-3 md:translate-y-2",
-  },
-  {
-    id: 9,
-    title: "Prism",
-    category: ["Web Apps", "Design"],
-    type: "video",
-    src: "https://cdn.godly.website/videos/1440/frglqedef4x9xjij0hei.mp4",
-    label: "Photo Editor",
-    aspect: "aspect-[4/3]",
-    rotation: "rotate-[-1deg]",
-    className: "md:col-span-4 md:-translate-y-2",
-  },
-];
+// --- Phone Card Components ---
 
-const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Ignore errors from interrupted play requests
-      });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
-
+const PhoneMockup = () => {
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4 }}
-      className={`group rounded-xl border border-border bg-card overflow-hidden shadow-md hover:shadow-2xl hover:border-primary/50 transition-all duration-500 hover:scale-[1.02] hover:rotate-0 hover:z-10 ${project.rotation} ${project.className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Card Header */}
-      <div className="p-4 flex justify-between items-start gap-4 border-b border-border bg-muted/30 backdrop-blur-sm">
-        <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-none">
-            {project.title}
-          </h3>
-          <span className="text-xs font-medium text-muted-foreground/80">
-            {project.label}
+    <div className="relative w-full h-full flex items-center justify-center p-6 md:p-10 perspective-1000">
+      {/* Phone Frame */}
+      <motion.div
+        whileHover={{ rotateY: 5, rotateX: 5, scale: 1.02 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="relative w-full max-w-[300px] aspect-[9/19] bg-white dark:bg-zinc-950 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] dark:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border-[8px] border-zinc-900 overflow-hidden transform rotate-[-4deg] transition-all duration-500 ease-out"
+      >
+        {/* Status Bar & Dynamic Island */}
+        <div className="h-10 w-full flex items-center justify-between px-8 pt-4 relative z-50">
+          <span className="text-[11px] font-bold text-zinc-900 dark:text-zinc-100">
+            9:41
           </span>
-        </div>
-        <div className="p-2 rounded-full text-muted-foreground/70 group-hover:text-primary transition-colors duration-300">
-          <ArrowUpRight
-            size={18}
-            className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-          />
-        </div>
-      </div>
 
-      {/* Media */}
-      <div className={`relative w-full ${project.aspect} bg-muted`}>
-        <video
-          ref={videoRef}
-          src={project.src}
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-        />
-      </div>
-    </motion.div>
+          {/* Dynamic Island */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-4 w-20 h-5 bg-black rounded-full" />
+
+          <div className="flex gap-1.5 text-zinc-900 dark:text-zinc-100">
+            <Signal size={12} strokeWidth={2.5} />
+            <Wifi size={12} strokeWidth={2.5} />
+            <Battery size={12} strokeWidth={2.5} className="rotate-90" />
+          </div>
+        </div>
+
+        {/* App Content */}
+        <div className="p-6 flex flex-col h-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8 mt-4">
+            <div className="w-10 h-10 rounded-2xl bg-zinc-900 dark:bg-zinc-100 flex items-center justify-center text-white dark:text-zinc-900 shadow-lg shadow-zinc-200 dark:shadow-none">
+              <span className="text-sm font-bold">⌘</span>
+            </div>
+            <div className="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 px-3 py-2 rounded-full border border-zinc-200/50 dark:border-zinc-800/50">
+              <span className="text-[10px] font-medium text-zinc-500">
+                Meet with
+              </span>
+              <div className="w-5 h-5 rounded-full bg-indigo-500 border-2 border-white dark:border-zinc-800" />
+              <span className="text-[10px] font-bold">Jess</span>
+            </div>
+          </div>
+
+          {/* Calendar Strip */}
+          <div className="flex justify-between mb-8 gap-2">
+            <div className="flex-1 flex flex-col items-center gap-1 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-2xl py-3 shadow-xl shadow-zinc-200/50 dark:shadow-none">
+              <span className="text-[10px] font-medium opacity-70 uppercase tracking-wider">
+                Mon
+              </span>
+              <span className="text-xl font-black">21</span>
+            </div>
+            <div className="flex-1 flex flex-col items-center gap-1 py-3 opacity-30">
+              <span className="text-[10px] font-medium uppercase tracking-wider">
+                Tue
+              </span>
+              <span className="text-xl font-bold">22</span>
+            </div>
+            <div className="flex-1 flex flex-col items-center gap-1 py-3 opacity-30">
+              <span className="text-[10px] font-medium uppercase tracking-wider">
+                Wed
+              </span>
+              <span className="text-xl font-bold">23</span>
+            </div>
+          </div>
+
+          {/* Main Title */}
+          <div className="mb-8">
+            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em] mb-1 block">
+              Calendar
+            </span>
+            <h3 className="text-3xl font-black tracking-tight leading-tight">
+              Monday,
+              <br />
+              Nov 21st
+            </h3>
+          </div>
+
+          {/* Schedule */}
+          <div className="flex flex-col gap-5 relative">
+            {/* Time Marker */}
+            <div className="absolute left-0 top-[-12px] text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
+              9 AM
+            </div>
+
+            {/* Event 1 */}
+            <div className="ml-10 bg-indigo-50/50 dark:bg-indigo-500/10 border-l-4 border-indigo-500 p-4 rounded-xl relative group/item transition-all hover:translate-x-1">
+              <div className="text-[11px] font-black text-indigo-900 dark:text-indigo-200 mb-0.5">
+                Daily Standup
+              </div>
+              <div className="text-[10px] text-indigo-700/70 dark:text-indigo-300/70 mb-3">
+                10:00am - 11:00am
+              </div>
+              <div className="flex items-center gap-2 bg-white dark:bg-zinc-800 w-fit px-2 py-1 rounded-lg border border-indigo-100 dark:border-indigo-900/50 shadow-sm">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                <span className="text-[9px] font-bold text-zinc-600 dark:text-zinc-400">
+                  you@work.com
+                </span>
+              </div>
+              {/* Duration Badge */}
+              <div className="absolute right-4 top-4 bg-red-500 text-white flex flex-col items-center justify-center w-9 h-11 rounded-xl shadow-lg shadow-red-200 dark:shadow-none">
+                <span className="text-sm font-black">1</span>
+                <span className="text-[7px] uppercase font-black tracking-tighter">
+                  hour
+                </span>
+              </div>
+            </div>
+
+            {/* Time Marker */}
+            <div className="absolute left-0 top-[125px] text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
+              11 AM
+            </div>
+
+            {/* Event 2 */}
+            <div className="ml-10 bg-emerald-50/50 dark:bg-emerald-500/10 border-l-4 border-emerald-500 p-4 rounded-xl opacity-60">
+              <div className="text-[11px] font-black text-emerald-900 dark:text-emerald-200 mb-0.5">
+                1-on-1 Interview
+              </div>
+              <div className="text-[10px] text-emerald-700/70 dark:text-emerald-300/70 mb-3">
+                11:00am - 12:00pm
+              </div>
+              <div className="flex items-center gap-2 bg-white dark:bg-zinc-800 w-fit px-2 py-1 rounded-lg border border-emerald-100 dark:border-emerald-900/50 shadow-sm">
+                <div className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+                <span className="text-[9px] font-bold text-zinc-600 dark:text-zinc-400">
+                  you@work.com
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
+// --- Main Component ---
+
 const CaseStudy: React.FC = () => {
   return (
-    <section className="flex py-24 flex-col gap-16 text-foreground relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-linear-to-b from-orange-500/5 to-transparent -z-10 blur-3xl opacity-50 pointer-events-none" />
+    <section className="flex py-24 flex-col gap-12 text-foreground relative overflow-hidden px-4 md:px-8">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden -z-10 opacity-50">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full" />
+      </div>
 
-      {/* Section Header */}
-      <div className="flex flex-col mb-8">
-        <span className="font-(family-name:--font-geist-caveat) text-xl md:text-2xl text-muted-foreground ml-32 md:ml-56 mb-[-0.6rem] md:-mb-4 -rotate-6 z-10 w-fit">
-          Recent Projects
-        </span>
-        <div className="flex items-end justify-between w-full group/header">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.85] text-foreground">
-            WORK
+      {/* Header */}
+      <div className="w-full max-w-[104rem] mx-auto flex flex-col gap-2 mb-8">
+        <div className="flex items-center gap-4">
+          <h2 className="text-4xl md:text-7xl font-black tracking-tighter uppercase text-foreground leading-none">
+            Selected Work
           </h2>
-          <motion.svg
-            width="48"
-            height="48"
-            viewBox="0 0 92 120"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            strokeWidth="2px"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 mb-1 md:mb-2 cursor-pointer"
-            whileHover={{
-              scale: 1.1,
-              rotate: 5,
-              filter: "drop-shadow(0 0 8px rgba(34, 158, 255, 0.4))",
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            <path
-              d="M47.5303 62.6201L45.3903 61.5501L34.8903 56.3001L27.5303 52.6201L2.46027 26.8201L22.4603 36.8201L36.9703 51.7501L45.7503 60.7801L47.5303 62.6201Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M89.6503 38.31L64.5803 93.06L52.3003 100.15L77.3703 45.4L66.8003 34.53L52.3003 19.6L57.9903 16.31L64.5803 12.5L89.6503 38.31Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M64.5803 12.5L57.9903 16.31L52.3003 19.6L32.3003 9.6L44.5803 2.5L64.5803 12.5Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M34.7503 29.73L28.1603 33.53L22.4603 36.82L2.46027 26.82L14.7503 19.73L34.7503 29.73Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M47.5303 62.6201L35.8703 88.0901L34.4403 91.2201L22.4603 117.38L2.46027 107.38L27.5303 52.6201L34.8903 56.3001L45.3903 61.5501L47.5303 62.6201Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M77.3703 45.3999L52.3003 100.15L41.7903 94.8999L59.8203 55.5299L58.0303 53.6899L51.8903 47.3699L57.3703 35.3999C57.3703 35.3999 60.7103 37.1499 64.6703 39.1799C69.9203 41.8799 76.2503 45.0899 77.3703 45.3999Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M59.8203 55.53L41.7903 94.9L34.7503 110.28L22.4603 117.38L34.4403 91.22L35.8703 88.09L47.5303 62.62L45.7503 60.78L36.9703 51.75L22.4603 36.82L28.1603 33.53L34.7503 29.73L51.8903 47.37L58.0303 53.69L59.8203 55.53Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M77.3703 45.4001C76.2503 45.0901 69.9203 41.8801 64.6703 39.1801C60.7103 37.1501 57.3703 35.4001 57.3703 35.4001L32.3003 9.6001L52.3003 19.6001L66.8003 34.5301L77.3703 45.4001Z"
-              stroke="#229EFF"
-              strokeLinejoin="round"
-            />
-          </motion.svg>
+          <div className="h-[2px] flex-1 bg-linear-to-r from-zinc-200 via-zinc-200 to-transparent dark:from-zinc-800 dark:via-zinc-800 dark:to-transparent mt-4" />
         </div>
       </div>
 
-      {/* Grid Layout for Web Apps */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 w-full max-w-6xl mx-auto p-4">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+      {/* Bento Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full max-w-[104rem] mx-auto auto-rows-min">
+        {/* 1. Buildxskill Phone Card (Left, Tall) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="md:col-span-5 md:row-span-2 min-h-[600px] md:min-h-[720px] bg-white dark:bg-zinc-900 rounded-[3rem] relative overflow-hidden group border border-zinc-100 dark:border-zinc-800/50 shadow-sm hover:shadow-2xl transition-all duration-700"
+        >
+          {/* Subtle Gradient Overlay */}
+          <div className="absolute inset-0 bg-linear-to-br from-indigo-500/[0.02] to-transparent pointer-events-none" />
+
+          <div className="absolute top-8 left-8 z-20">
+            <div className="flex flex-col gap-1">
+              <span className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                Buildxskill
+              </span>
+            </div>
+          </div>
+
+          <PhoneMockup />
+
+          {/* Link Icon */}
+          <div className="absolute bottom-8 left-8 z-20 w-14 h-14 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg cursor-pointer">
+            <ArrowUpRight size={24} />
+          </div>
+        </motion.div>
+
+        {/* 2. Plib Card (Top Center) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="md:col-span-4 min-h-[340px] bg-zinc-50 dark:bg-zinc-900 rounded-[3rem] relative overflow-hidden group flex items-center justify-center border border-zinc-100 dark:border-zinc-800/50 shadow-sm hover:shadow-xl transition-all duration-500"
+        >
+          <div className="text-center px-8">
+            <h3 className="text-6xl md:text-7xl font-serif text-zinc-300 dark:text-zinc-600 mb-1 tracking-tight group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-all duration-700 scale-95 group-hover:scale-100">
+              Plib
+            </h3>
+            <span className="text-xl font-serif italic text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors duration-500">
+              AI Library
+            </span>
+          </div>
+          <div className="absolute bottom-8 left-8 z-20 w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 group-hover:scale-110 transition-all duration-500 shadow-md cursor-pointer">
+            <ArrowUpRight size={20} />
+          </div>
+        </motion.div>
+
+        {/* 3. Logo Card (Top Right) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="md:col-span-3 min-h-[340px] bg-zinc-50 dark:bg-zinc-900 rounded-[3rem] relative overflow-hidden group flex items-center justify-center border border-zinc-100 dark:border-zinc-800/50 shadow-sm hover:shadow-xl transition-all duration-500"
+        >
+          {/* Abstract 3D Logo Shape constructed with CSS */}
+          <div className="relative w-36 h-36 perspective-1000 group-hover:scale-110 transition-transform duration-700">
+            <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 transform translate-x-6 translate-y-6 rounded-[2rem] opacity-50" />
+            <div className="absolute inset-0 bg-zinc-300 dark:bg-zinc-700 transform translate-x-3 translate-y-3 rounded-[2rem] opacity-70" />
+            <div className="absolute inset-0 bg-zinc-400 dark:bg-zinc-600 rounded-[2rem] flex items-center justify-center shadow-2xl">
+              <span className="text-7xl font-black text-white dark:text-zinc-900">
+                E
+              </span>
+            </div>
+          </div>
+          <div className="absolute bottom-8 left-8 z-20 w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 group-hover:scale-110 transition-all duration-500 shadow-md cursor-pointer">
+            <ArrowUpRight size={20} />
+          </div>
+        </motion.div>
+
+        {/* 4. reuse motion Card (Bottom Center) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="md:col-span-4 min-h-[340px] bg-zinc-50 dark:bg-zinc-900 rounded-[3rem] relative overflow-hidden group flex flex-col items-center justify-center border border-zinc-100 dark:border-zinc-800/50 shadow-sm hover:shadow-xl transition-all duration-500"
+        >
+          <span className="text-sm font-black text-zinc-400 dark:text-zinc-500 mb-3 tracking-[0.3em] uppercase group-hover:text-indigo-500 transition-colors duration-500">
+            Animation Library
+          </span>
+          <h3 className="text-5xl md:text-6xl font-black text-zinc-300 dark:text-zinc-700 uppercase tracking-tighter group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-all duration-700 group-hover:tracking-normal">
+            REUSE MOTION
+          </h3>
+          <div className="absolute bottom-8 left-8 z-20 w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 group-hover:scale-110 transition-all duration-500 shadow-md cursor-pointer">
+            <ArrowUpRight size={20} />
+          </div>
+        </motion.div>
+
+        {/* 5. Arch Card (Bottom Right) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="md:col-span-3 min-h-[340px] bg-zinc-50 dark:bg-zinc-900 rounded-[3rem] relative overflow-hidden group flex items-center justify-center border border-zinc-100 dark:border-zinc-800/50 shadow-sm hover:shadow-xl transition-all duration-500"
+        >
+          <div className="w-36 h-44 rounded-t-full border-[8px] border-zinc-200 dark:border-zinc-800 group-hover:border-zinc-900 dark:group-hover:border-zinc-100 transition-all duration-700 group-hover:scale-105" />
+          <div className="absolute bottom-8 left-8 z-20 w-12 h-12 rounded-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 group-hover:scale-110 transition-all duration-500 shadow-md cursor-pointer">
+            <ArrowUpRight size={20} />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
