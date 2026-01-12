@@ -35,7 +35,7 @@ const itemVariants: Variants = {
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto flex flex-col pt-20 md:pt-32 px-4">
+    <section className="w-full mx-auto flex flex-col pt-8 md:pt-24 px-4">
       <motion.div
         initial="hidden"
         animate="visible"
@@ -49,41 +49,13 @@ export default function HeroSection() {
         >
           <div className="flex items-center gap-5">
             {/* Profile Image */}
-            <motion.div
-              className="relative w-16 h-16 sm:w-20 sm:h-20 cursor-pointer"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <motion.div
-                className="relative w-full h-full"
-                variants={{
-                  tap: { scale: 0.96 },
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              >
-                <motion.div
-                  className="relative z-10 w-full h-full rounded-2xl border-2 border-primary overflow-hidden bg-background shadow-sm"
-                  variants={{
-                    hover: {
-                      y: -2,
-                      rotate: -2,
-                      scale: 1.02,
-                      transition: {
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      },
-                    },
-                  }}
-                >
-                  <img
-                    src="/pfp-main.png"
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-              </motion.div>
-            </motion.div>
+            <div className="w-20 h-20 rounded-2xl border-[1.5px] border-slate-900 p-0.5 bg-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] shrink-0">
+              <img
+                src="pfp-main.png"
+                alt="Avatar"
+                className="w-full h-full object-cover grayscale opacity-90 scale-110"
+              />
+            </div>
 
             <div className="flex flex-col gap-1">
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
