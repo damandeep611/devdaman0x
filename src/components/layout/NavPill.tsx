@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
-import { Mail, Sparkles, MessageSquare, Copy, Check, X, ArrowLeft, Send, Loader2, Calendar } from "lucide-react";
+import { Mail, MessageSquare, Check, X, ArrowLeft, Send, Loader2, Calendar } from "lucide-react";
 import { ModeToggle } from "../theme/mode-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,7 +24,6 @@ const isActiveRoute = (pathname: string, href: string): boolean => {
 
 export default function NavPill() {
   const [isOpen, setIsOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
   const pathname = usePathname();
 
   // Contact Logic
@@ -32,12 +31,6 @@ export default function NavPill() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("hello@devdaman.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -104,7 +97,7 @@ export default function NavPill() {
               {/* Brand or Back Button */}
               <div className="flex items-center gap-2">
                  <AnimatePresence mode="popLayout" initial={false}>
-                    {isOpen && contactView !== "selection" && contactView !== "success" ? (
+                    {isOpen && contactView !== "selection" && contactView !== "success" && (
                         <motion.button
                             initial={{ opacity: 0, x: -10, scale: 0.8 }}
                             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -114,30 +107,6 @@ export default function NavPill() {
                         >
                             <ArrowLeft size={18} />
                         </motion.button>
-                    ) : (
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <div className="relative w-6 h-6 flex items-center justify-center bg-zinc-200 dark:bg-zinc-800 rounded-full text-zinc-600 dark:text-zinc-300 group-hover:scale-110 transition-transform">
-                            <Sparkles size={12} fill="currentColor" />
-                            </div>
-                            {!isOpen && (
-                                <motion.span
-                                    initial={{ opacity: 0, width: 0 }}
-                                    animate={{ opacity: 1, width: "auto" }}
-                                    className="text-sm font-bold tracking-tight text-zinc-800 dark:text-zinc-100 whitespace-nowrap overflow-hidden"
-                                >
-                                    devDaman
-                                </motion.span>
-                            )}
-                            {isOpen && (
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="text-sm font-bold tracking-tight text-zinc-800 dark:text-zinc-100"
-                                >
-                                    devDaman
-                                </motion.span>
-                            )}
-                        </Link>
                     )}
                  </AnimatePresence>
               </div>
@@ -201,13 +170,20 @@ export default function NavPill() {
                   layout
                   onClick={isOpen ? handleClose : () => setIsOpen(true)}
                   className={cn(
-                    "flex items-center justify-center w-8 h-8 rounded-full transition-colors",
+                    "flex items-center justify-center h-8 rounded-full transition-colors gap-2",
                     isOpen
-                        ? "bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-                        : "hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400"
+                        ? "w-8 bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
+                        : "px-3 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400"
                   )}
                 >
-                  {isOpen ? <X size={16} /> : <Mail size={16} />}
+                  {isOpen ? (
+                    <X size={16} />
+                  ) : (
+                    <>
+                      <Mail size={16} />
+                      <span className="text-sm font-medium">Contact</span>
+                    </>
+                  )}
                 </motion.button>
                 <div className="scale-90">
                     <ModeToggle />
@@ -274,24 +250,6 @@ export default function NavPill() {
                                             <div className="text-[10px] text-zinc-500">15 min intro</div>
                                         </div>
                                     </button>
-                                </div>
-
-                                <div
-                                    onClick={handleCopy}
-                                    className="group flex items-center justify-between p-3 mt-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-xl cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300">
-                                            <Mail size={14} />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-xs font-medium text-zinc-900 dark:text-zinc-100">hello@devdaman.com</span>
-                                            <span className="text-[10px] text-zinc-500">Click to copy</span>
-                                        </div>
-                                    </div>
-                                    <div className="text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-colors">
-                                        {copied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
-                                    </div>
                                 </div>
                            </motion.div>
                        )}

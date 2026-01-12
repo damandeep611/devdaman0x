@@ -1,7 +1,7 @@
 "use client";
 import React, { type SVGProps } from "react";
 import { motion, Variants } from "framer-motion";
-import { Linkedin, FileText } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const GitHub = (props: SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 1024 1024" fill="none">
@@ -35,17 +35,17 @@ const itemVariants: Variants = {
 
 export default function HeroSection() {
   return (
-    <section className="w-full mx-auto flex flex-col pt-12 md:pt-24 px-4">
+    <section className="w-full mx-auto flex flex-col pt-20 md:pt-32 px-4">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={itemVariants}
-        className="max-w-3xl mx-auto w-full flex flex-col gap-12"
+        className="max-w-3xl mx-auto w-full flex flex-col gap-8"
       >
         {/* Header Section - Inspired by heroimage.png */}
         <motion.div
           variants={itemVariants}
-          className="flex items-center justify-between w-full border-b border-dashed border-border pb-8"
+          className="flex items-center justify-between w-full"
         >
           <div className="flex items-center gap-5">
             {/* Profile Image */}
@@ -95,8 +95,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Social Links Stacked - Desktop */}
-          <div className="hidden sm:flex flex-col items-end gap-2">
+          {/* Social Links Stacked */}
+          <div className="flex flex-col items-end gap-2">
             <SocialLinkVertical
               href="#"
               icon={<XformerlyTwitter width={14} height={14} />}
@@ -141,30 +141,6 @@ export default function HeroSection() {
             </p>
           </motion.div>
         </div>
-
-        {/* Mobile Socials */}
-        <motion.div
-          variants={itemVariants}
-          className="flex items-center justify-between pt-2 border-t border-dashed border-border sm:hidden"
-        >
-          <div className="flex items-center gap-5">
-            <SocialLink
-              href="#"
-              icon={<XformerlyTwitter width={18} height={18} />}
-              label="Twitter"
-            />
-            <SocialLink
-              href="#"
-              icon={<GitHub width={18} height={18} />}
-              label="GitHub"
-            />
-            <SocialLink
-              href="#"
-              icon={<Linkedin size={18} />}
-              label="LinkedIn"
-            />
-          </div>
-        </motion.div>
       </motion.div>
     </section>
   );
@@ -184,20 +160,5 @@ const SocialLinkVertical: React.FC<{
       {icon}
     </span>
     <span className="font-mono">{label}</span>
-  </motion.a>
-);
-
-const SocialLink: React.FC<{
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-}> = ({ href, icon, label }) => (
-  <motion.a
-    href={href}
-    whileHover={{ y: -2 }}
-    className="text-muted-foreground hover:text-foreground transition-colors"
-    aria-label={label}
-  >
-    {icon}
   </motion.a>
 );
