@@ -203,7 +203,7 @@ export default function MobileNavPill() {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
-                            className="h-[400px] bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-700/50 relative mx-1"
+                            className="h-[480px] bg-white dark:bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-700/50 relative p-[1px] mx-1"
                         >
                              <iframe
                                 src="https://cal.com/daman-deep-lbx8oq"

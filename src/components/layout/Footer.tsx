@@ -30,29 +30,6 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
           {/* Left Side: Brand/CTA */}
           <div className="flex flex-col gap-4 max-w-md">
-            <div className="flex flex-col">
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-1">
-                System Core
-              </span>
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl md:text-4xl font-black tracking-tighter leading-none text-foreground"
-              >
-                NEURAL CODEX
-              </motion.h2>
-            </div>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-sm text-muted-foreground font-medium"
-            >
-              Building digital artifacts through clean design and technical
-              precision.
-            </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}

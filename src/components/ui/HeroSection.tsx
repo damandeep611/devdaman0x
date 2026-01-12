@@ -88,28 +88,31 @@ export default function HeroSection() {
             className="text-xl md:text-2xl font-light leading-snug text-muted-foreground tracking-tight max-w-2xl"
           >
             <p>
-              I&apos;m a{" "}
-              <span className="text-foreground font-medium">designer</span> in
-              pursuit of{" "}
-              <span className="text-foreground font-medium">aesthetics</span>{" "}
-              and <span className="text-foreground font-medium">function</span>.
-              I hope to create a world of{" "}
-              <span className="text-foreground font-medium">seeing</span>,{" "}
-              <span className="text-foreground font-medium">learning</span>,{" "}
-              <span className="text-foreground font-medium">thinking</span>,{" "}
-              <span className="text-foreground font-medium">building</span>, and{" "}
-              <span className="text-foreground font-medium">loving</span>.
-            </p>
-            <p className="mt-6">
-              Currently a{" "}
               <span className="text-foreground font-medium">
-                full-stack developer
-              </span>{" "}
-              and designer who loves turning{" "}
+                Developer and designer
+              </span>
+              . Help products{" "}
+              <span className="text-foreground font-medium">work better</span>
+              —<span className="text-foreground font-medium">
+                faster checkouts
+              </span>
+              ,{" "}
               <span className="text-foreground font-medium">
-                abstract ideas
+                clearer interfaces
+              </span>
+              —from{" "}
+              <span className="text-foreground font-medium">
+                concept to deployment
+              </span>
+              .{" "}
+              <span className="text-foreground font-medium">
+                Technical decisions
               </span>{" "}
-              into functional, beautiful products.
+              that serve{" "}
+              <span className="text-foreground font-medium">
+                business outcomes
+              </span>
+              .
             </p>
           </motion.div>
         </div>

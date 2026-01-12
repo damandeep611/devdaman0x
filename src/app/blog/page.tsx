@@ -56,9 +56,9 @@ export default function BlogPage() {
               variants={itemVariants}
               className="text-lg text-muted-foreground leading-relaxed max-w-xl"
             >
-              I have a blog that doesn&apos;t really adhere to any fixed themes.
-              From software engineering to design philosophy to shower thoughts,
-              it really is the wild west.
+              Blog that doesn&apos;t really adhere to any fixed themes. From
+              software engineering to design philosophy to random AI
+              automations.
             </motion.p>
           </div>
 

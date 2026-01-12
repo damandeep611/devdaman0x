@@ -132,25 +132,12 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="group mb-6 break-inside-avoid rounded-xl border border-border bg-card overflow-hidden shadow-md hover:shadow-2xl hover:border-primary/50 transition-all duration-300 hover:scale-[1.01]"
+      className="group mb-8 break-inside-avoid"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Card Header */}
-      <div className="p-4 flex justify-between items-start gap-4 border-b border-border bg-muted/30 backdrop-blur-sm">
-        <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-none">
-            {project.title}
-          </h3>
-          <span className="text-xs font-medium text-muted-foreground/80">{project.label}</span>
-        </div>
-        <div className="p-2 rounded-full text-muted-foreground/70 group-hover:text-primary transition-colors duration-300">
-          <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </div>
-      </div>
-
-      {/* Media */}
-      <div className={`relative w-full ${project.aspect} bg-muted`}>
+      {/* Media Card */}
+      <div className={`relative w-full ${project.aspect} bg-muted rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-lg hover:border-foreground/20 transition-all duration-300`}>
         <video
           ref={videoRef}
           src={project.src}
@@ -159,6 +146,22 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
           playsInline
           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
         />
+        
+        {/* Overlay gradient for better depth on some videos */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none" />
+      </div>
+
+      {/* Info Below Card */}
+      <div className="mt-3 flex justify-between items-start gap-4 px-1">
+        <div className="flex flex-col gap-1">
+          <h3 className="text-base font-semibold text-foreground tracking-tight leading-none group-hover:text-primary transition-colors duration-300">
+            {project.title}
+          </h3>
+          <span className="text-xs font-medium text-muted-foreground">{project.label}</span>
+        </div>
+        <div className="text-muted-foreground/50 group-hover:text-foreground transition-colors duration-300">
+          <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </div>
       </div>
     </motion.div>
   );
@@ -200,7 +203,7 @@ const ProjectGallery = () => {
       </div>
 
       {/* Masonry Layout via CSS Columns */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
