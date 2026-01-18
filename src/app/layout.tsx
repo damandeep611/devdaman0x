@@ -37,7 +37,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" enableSystem disableTransitionOnChange>
           <NavPill />
-          <main className="overflow-x-hidden">{children}</main>
+          <main>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
