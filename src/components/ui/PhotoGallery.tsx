@@ -3,25 +3,27 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Folder,
-  ThumbsUp,
-  ThumbsDown,
-  Heart,
-  Smile,
-  Meh,
   Search,
   Command,
+  Copy,
+  Sliders,
+  ChevronDown,
+  Sparkles,
+  Zap,
+  Wand2,
+  Layers,
+  Image as ImageIcon
 } from "lucide-react";
 import Arrow38 from "./icons/Arrow38";
 
 export type CardType =
   | "gallery"
-  | "input-simple"
-  | "tags"
-  | "folder"
-  | "status"
-  | "reaction"
-  | "input-button";
+  | "search-bar"
+  | "style-tags"
+  | "prompt-viewer"
+  | "model-selector"
+  | "generation-settings"
+  | "generate-action";
 
 export interface PortfolioCard {
   id: number;
@@ -32,17 +34,16 @@ export interface PortfolioCard {
 
 const CARDS_DATA: PortfolioCard[] = [
   { id: 1, type: "gallery", rotation: -5, zIndex: 1 },
-  { id: 2, type: "input-simple", rotation: 3, zIndex: 2 },
-  { id: 3, type: "tags", rotation: -4, zIndex: 3 },
-  { id: 4, type: "folder", rotation: 0, zIndex: 4 },
-  { id: 5, type: "status", rotation: 4, zIndex: 5 },
-  { id: 6, type: "reaction", rotation: -3, zIndex: 4 },
-  { id: 7, type: "input-button", rotation: 5, zIndex: 3 },
+  { id: 2, type: "search-bar", rotation: 3, zIndex: 2 },
+  { id: 3, type: "style-tags", rotation: -4, zIndex: 3 },
+  { id: 4, type: "prompt-viewer", rotation: 0, zIndex: 4 },
+  { id: 5, type: "model-selector", rotation: 4, zIndex: 5 },
+  { id: 6, type: "generation-settings", rotation: -3, zIndex: 4 },
+  { id: 7, type: "generate-action", rotation: 5, zIndex: 3 },
 ];
 
 const BASE_X = [-480, -320, -160, 0, 160, 320, 480];
 const BASE_Y = [15, -5, 10, 0, 10, -5, 15];
-
 
 const CardStack: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(
@@ -112,7 +113,7 @@ const CardItem: React.FC<CardItemProps> = ({
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="absolute bg-card dark:bg-card/95 backdrop-blur-sm rounded-3xl  dark:shadow-black/50 border border-border pointer-events-auto cursor-pointer flex flex-col justify-center items-center overflow-hidden"
+      className="absolute bg-card dark:bg-card/95 backdrop-blur-sm rounded-3xl dark:shadow-black/50 border border-border pointer-events-auto cursor-pointer flex flex-col justify-center items-center overflow-hidden"
       style={{
         width: 260,
         height: 260,
@@ -153,19 +154,29 @@ const CardContent = ({ type }: { type: CardType }) => {
         </div>
       );
 
-    case "input-simple":
+    case "search-bar":
       return (
-        <div className="w-full h-full flex items-center justify-center p-6 bg-card">
-          <div className="w-full bg-muted/50 rounded-full h-12 flex items-center px-4 text-muted-foreground text-sm shadow-inner border border-input/20">
-            Email
+        <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-card">
+          <div className="w-full bg-card border border-input rounded-full h-12 flex items-center pl-4 pr-3 shadow-sm hover:shadow-md transition-shadow">
+            <Search size={18} className="text-muted-foreground" />
+            <div className="flex-1 ml-3 text-sm text-muted-foreground/70 font-light truncate">
+              search library...
+            </div>
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <Command size={12} />
+              <span className="text-xs font-medium">K</span>
+            </div>
           </div>
+          <p className="text-[10px] text-muted-foreground/60 mt-3 uppercase tracking-widest font-medium text-center pointer-events-none">
+            10,000+ items
+          </p>
         </div>
       );
 
-    case "tags":
+    case "style-tags":
       return (
         <div className="w-full h-full flex flex-wrap content-center justify-center gap-2 p-4 bg-card">
-          {["Playlists", "Albums", "Liked", "Artists", "Downloads"].map(
+          {["Cyberpunk", "Realistic", "Anime", "3D Render", "Watercolor", "Sci-Fi"].map(
             (tag) => (
               <span
                 key={tag}
@@ -178,69 +189,93 @@ const CardContent = ({ type }: { type: CardType }) => {
         </div>
       );
 
-    case "folder":
+    case "prompt-viewer":
       return (
-        <div className="w-full h-full flex flex-col items-center justify-center bg-card gap-3">
-          <div className="relative">
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-12 bg-sky-200 dark:bg-sky-900 rounded-lg rotate-6 border border-card" />
-            <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-12 bg-sky-300 dark:bg-sky-800 rounded-lg -rotate-3 border border-card" />
-            <div className="relative w-20 h-16 bg-sky-400 dark:bg-sky-600 rounded-xl flex items-center justify-center shadow-lg text-white border-t border-white/20">
-              <Folder size={32} fill="currentColor" strokeWidth={1.5} />
+        <div className="w-full h-full flex flex-col items-center justify-center bg-card gap-0 p-0 relative group">
+          <div className="w-full h-full bg-zinc-950 p-5 flex flex-col font-mono text-xs text-zinc-300 leading-relaxed overflow-hidden relative">
+            <div className="absolute top-3 right-3 text-zinc-500 hover:text-white cursor-pointer transition-colors">
+              <Copy size={14} />
             </div>
-          </div>
-          <div className="text-center">
-            <p className="font-semibold text-card-foreground">Images</p>
-            <p className="text-xs text-muted-foreground">3 items</p>
+            <div className="flex gap-2 mb-2 opacity-50">
+              <span className="text-purple-400 font-bold">/imagine</span>
+            </div>
+            <p className="line-clamp-6 opacity-90">
+              <span className="text-zinc-100">futuristic city</span> with flying cars,
+              neon signs, rain-slicked streets, cinematic lighting,
+              highly detailed, 8k, photorealistic
+              <span className="text-yellow-500"> --v 6.0</span>
+              <span className="text-blue-400"> --ar 16:9</span>
+            </p>
           </div>
         </div>
       );
 
-    case "status":
+    case "model-selector":
       return (
-        <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-card">
-          <div className="w-full bg-card border border-input rounded-full h-12 flex items-center pl-4 pr-3 shadow-sm hover:shadow-md transition-shadow">
-            <Search size={18} className="text-muted-foreground" />
-            <div className="flex-1 ml-3 text-sm text-muted-foreground/70 font-light truncate">
-              find anything...
-            </div>
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <Command size={12} />
-              <span className="text-xs font-medium">K</span>
+        <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-card gap-4">
+          <div className="w-full flex flex-col gap-2">
+            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold ml-1">
+              Model
+            </label>
+            <div className="w-full bg-secondary/30 border border-input rounded-xl h-10 flex items-center justify-between px-3 shadow-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]" />
+                <span className="text-xs font-medium">SDXL Turbo</span>
+              </div>
+              <ChevronDown size={14} className="text-muted-foreground" />
             </div>
           </div>
-          <p className="text-[10px] text-muted-foreground/60 mt-3 uppercase tracking-widest font-medium text-center pointer-events-none">
-            search projects
-          </p>
-        </div>
-      );
-
-    case "reaction":
-      return (
-        <div className="w-full h-full flex flex-col items-center justify-between p-6 bg-card">
-          <div className="flex-1 flex items-center justify-center w-full">
-            <div className="w-24 h-24 border-2 border-dashed border-border rounded-2xl flex flex-col items-center justify-center text-center p-2 bg-muted/20">
-              <span className="text-[10px] text-muted-foreground font-medium">
-                Double tap to react
-              </span>
+          <div className="w-full bg-secondary/10 border border-input/50 border-dashed rounded-xl h-10 flex items-center justify-between px-3 opacity-60">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500" />
+              <span className="text-xs font-medium">Midjourney v6</span>
             </div>
-          </div>
-          <div className="flex gap-3 bg-card shadow-sm border border-border px-3 py-2 rounded-full">
-            <ThumbsUp size={16} className="text-yellow-500/80 dark:text-yellow-400" />
-            <ThumbsDown size={16} className="text-muted-foreground" />
-            <Heart size={16} className="text-red-500/80 dark:text-red-400 fill-red-500/80 dark:fill-red-400" />
-            <Smile size={16} className="text-yellow-500/80 dark:text-yellow-400" />
-            <Meh size={16} className="text-muted-foreground" />
           </div>
         </div>
       );
 
-    case "input-button":
+    case "generation-settings":
+      return (
+        <div className="w-full h-full flex flex-col justify-center p-6 bg-card gap-6">
+           <div className="flex items-center gap-2 mb-1 text-muted-foreground">
+             <Sliders size={14} />
+             <span className="text-xs font-semibold uppercase tracking-wider">Settings</span>
+           </div>
+          <div className="space-y-3">
+            <div className="flex justify-between text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
+              <span>Guidance</span>
+              <span className="text-foreground">7.5</span>
+            </div>
+            <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
+              <div className="h-full w-[60%] bg-primary rounded-full" />
+            </div>
+          </div>
+          <div className="space-y-3">
+            <div className="flex justify-between text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
+              <span>Steps</span>
+              <span className="text-foreground">40</span>
+            </div>
+            <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
+              <div className="h-full w-[80%] bg-primary rounded-full" />
+            </div>
+          </div>
+        </div>
+      );
+
+    case "generate-action":
       return (
         <div className="w-full h-full flex items-center justify-center p-6 bg-card">
-          <div className="w-full bg-muted/50 rounded-full h-12 flex items-center pl-4 pr-1 justify-between shadow-inner border border-input/20">
-            <span className="text-muted-foreground text-sm">Email</span>
-            <button className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-2 rounded-full hover:bg-primary/90 transition-colors">
-              Sign up
+          <div className="w-full flex flex-col gap-4">
+             <div className="flex items-center gap-2 text-primary mb-1">
+                <Wand2 size={16} />
+                <span className="text-sm font-bold">Dream it.</span>
+             </div>
+            <div className="w-full bg-muted/40 rounded-2xl h-10 flex items-center px-4 text-xs text-muted-foreground border border-input/20 shadow-inner">
+              Astronaut in a jungle...
+            </div>
+            <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-10 rounded-full text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md active:scale-95">
+              <Sparkles size={14} className="animate-pulse" />
+              Generate
             </button>
           </div>
         </div>
