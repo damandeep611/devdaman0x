@@ -1,0 +1,354 @@
+---
+title: "Developing Engineering Judgment in the Age of AI"
+description: "Why fundamentals matter more than ever in the age of AI coding assistants, and how to build engineering judgment."
+date: "2026-01-19"
+author: "Dev Daman"
+tags: ["AI", "ReactJs", "WebDev", "JavaScript"]
+image: "/images/engineering-judgement.png"
+---
+
+# Building in the Age of AI: Why Fundamentals Matter More Than Ever
+
+Over the last few months, I've been working on a lot of codebases that were vibe-coded. And they all have something in common.
+
+Components with over a thousand lines of React code—sometimes fifteen hundred lines. These components are doing everything: fetching data from the database, refreshing the UI, handling animations, managing state. Everything crammed into one place.
+
+And this is becoming more and more common. People are so focused on shipping fast and vibe-coding that they're not thinking through a feature before they implement it.
+
+When I open these codebases, I can see the architectural and messy problems immediately. But here's what gets me: these new developers have been shipping features fast for months with AI. Getting results. Feeling productive.
+
+And they've created something that nobody—including them—can actually maintain.
+
+Because...
+
+## Everyone's Building Fast. Nobody's Talking About What Happens Next.
+
+And You also see these Posts on twitter and reddit daily. I know you do.
+
+"Built a terminal for my subscription spending tracking in 3 hours."
+"AI wrote my entire backend."
+"Shipped a SaaS product in 45 minutes."
+
+The replies are always the same.. half amazement, half existential dread. And look, I get it. The speed is genuinely wild the way these ai tools are progressing. And I've built features in an afternoon that would've taken me a week two years ago.
+
+But here's what I keep seeing in Discord chats, GitHub issues, and messages from devs that people struggling to modify code they generated a week ago. Developers who can ship features at lightning speed but can't change them without breaking three other things. Codebases that work perfectly at 100 users and completely fall apart at 1,000.
+
+Here's the thing nobody's saying out loud: **AI coding assistants haven't made engineering easier. They've just moved the difficulty somewhere else.**
+
+And most of us haven't noticed yet.
+
+## Let Me Show You What This Looks Like
+
+A developer needs to build a feature. They describe it to the AI.
+The AI generates code -> Tab -> accept. It works. They ship it.
+
+This happens every day for a few weeks.
+
+And then you have:
+
+Components with 1,200 lines because nobody knew how to break them down. API endpoints that each follow completely different patterns because they were generated in isolation. A database schema that's technically correct but impossible to evolve without rewriting half the app. Security measures that exist but don't actually protect what matters. Performance that's "fine" until you hit any kind of scale and everything just... explodes.
+
+I want to be really clear about something: **the AI didn't do anything wrong.** It did exactly what it was asked to do.
+
+The developer just never learned to ask the right questions.
+
+- "Should this be one component or three?"
+- "What's the migration strategy for this schema change?"
+- "How do I make this testable?"
+- "What happens when this scales to 10x traffic?"
+
+Because Without fundamentals, you can't direct AI. You're just hoping it gives you the right answer. And here's the confusing part ->you won't even know if it does.
+
+## The Skill That Actually Matters Now (And It's Not What You Think)
+
+Stay with me here, because this is where things get messy
+
+AI is amazing at syntax. It can write clean, correct code in any language you want. It knows the patterns, handles edge cases, follows conventions. That's not the valuable skill anymore.... knowing basic language syntax, I mean.
+
+I know that feels weird to hear. We spent years getting good at writing code, and now it's just... less important?
+
+But think about it: **the valuable skill was never memorizing syntax.** But when to use which pattern and when to avoid. If you've worked with any complex Codebase, you know the real skill was always knowing _what_ to build without breaking related components and files and _how_ to architect it.
+
+AI is a superpowered implementation tool. It can turn your architectural decisions into code faster than you ever could manually. But it's not making those decisions for you to choose the best system for your specific use Case. It can't. As AI by fundamental nature chooses the most Average pattern for the problem you are giving it to solve.
+
+When you ask AI to "build a user management system," here's what it doesn't know:
+
+- Your team's actual coding standards (not the theoretical ones on tech blogs, but the real Design patterns you use)
+- Your existing architecture and how this needs to fit in
+- Your performance requirements and constraints
+- Your deployment environment and the bugs your team encounters usually during deploy.
+- Your technical debt and what patterns to avoid
+- Your security model and compliance requirements
+
+**You need to know this stuff to work with AI effectively.**
+
+And here's what I've noticed: the developers who understand these concepts intuitively can describe their ideas with precision. They materialize complex features quickly because they know how to break them down. They catch bugs in AI-generated code immediately because they recognize the patterns.
+
+The developers who jump straight to shipping fast without considering constraints and deciding how to actually build the feature? They're stuck in an endless loop of "make it work" without understanding _why_ it works or _when_ it will break.
+
+and here's the another thing
+
+## The Context Window Problem (Or: Why You Can't Just Explain Everything)
+
+![The Context Window Problem](/images/context-window.png)
+
+Let me back up for a second and explain what this means
+
+A context window is the amount of text an AI can process at once—like a workspace with limited space. It includes your messages, the AI's responses, and any files you share. When it fills up (typically 100,000-200,000 words), the AI can't reference earlier parts of the conversation anymore. and then starts to hallucinate and give weird or unrelated answers to the context of your conversations with it.
+
+This matters because of what I call "the nuance problem."
+
+Your system has the nuances that would take thousands of words to explain to an AI. How your team thinks about component composition. Why you made certain architectural decisions. What your actual performance constraints are. Where your technical debt lives and why it's there.
+
+You _could_ spend 10 minutes writing a massive prompt explaining all this context every single time. Or maybe You could create detailed markdown files for every folder. Some people do this.
+
+Or you could have the judgment to make these decisions yourself quickly and use AI to implement them.
+
+**This is where human skills become irreplaceable:**
+
+- **Problem framing**—defining what actually needs solving
+- **User understanding**—knowing needs AI can't observe
+- **Quality judgment**—recognizing what clean, maintainable code actually looks like
+- **Strategic thinking**—connecting technical decisions to business goals
+
+The move isn't to compete with AI at writing code. The move is to get excellent at the things AI can't do—and then use it to multiply your output on everything else.
+
+And you can only do that if you deeply understand what you're trying to build.
+
+## Okay, But What Do You Actually Learn?
+
+Look, "learn fundamentals" is the kind of advice that sounds right but means nothing. What fundamentals? In what order? How deep?
+
+and this is Not a speed-run-everything-in-a-month plan, but a systematic approach that builds real judgment.
+
+### Phase 1: The Stuff That Never Changes
+
+Learn how the web actually works. I know, I know—it's 2026, who cares about HTTP when frameworks abstract everything away?
+
+You should care. Because when things break (and they will), you need to know what's actually happening between client and server.
+
+Start with JavaScript. Not because it's the best language, but because it's the foundation of web development. Understand the core principles before touching frameworks.
+
+And here's something critical: build frontend and backend _separately_ first. and not jump straight to Next.js without understanding the actual communication flow happening between client and server.
+
+You don't need to build 20 web apps to get this. Build _one thing_ that's actually useful to you. Not another todo app—something you'll keep coming back to. Maybe a learning tracker where you document all these fundamentals you're learning. Something you can grow as your skills grow.
+
+and you can easily learn these by going through them using gpt and learn faster
+
+#### JavaScript Fundamentals (The Ones That Actually Matter)
+
+1. **How closures actually work in React hooks** - Because stale closures will drive you insane, and you need to understand why `useCallback` exists
+2. **The event loop and React's rendering cycle** - Why your `useEffect` runs when it does, why state updates batch, and why async operations behave the way they do
+3. **Async/await patterns in real applications** - Not the textbook examples, but how to handle loading states, error boundaries, and race conditions
+4. **The `this` keyword (and when it matters)** - Spoiler: arrow functions solved most of this, but you'll still encounter it in legacy code and class components
+5. **Promises and proper error handling** - Understanding promise chains, `Promise.all`, and why swallowing errors is a production disaster waiting to happen
+6. **Map, filter, reduce (and when to use each)** - Including the performance implications and why `forEach` might sometimes be better
+7. **Object mutation vs immutability** - Why React's rendering depends on this, and how to avoid bugs that only appear intermittently
+8. **Memory leaks in JavaScript** - Event listeners that never clean up, closures that hold references, and how to actually find these in production
+9. **Debouncing vs throttling** - Real implementations in search inputs, scroll handlers, and when each pattern actually makes sense
+10. **Higher-order functions and composition** - The foundation for understanding hooks, HOCs, and functional programming patterns
+11. **Reference vs value types** - Why arrays and objects behave differently, and how this affects state management
+12. **The prototype chain** - Less important now, but essential for understanding older codebases and class-based patterns
+13. **Currying and partial application** - Actual use cases beyond the academic examples
+14. **Memoization (before React's version)** - Understanding the concept so you know what `useMemo` is actually doing
+15. **Module systems and scope** - How imports work, what tree-shaking means, and why bundle size matters
+
+and you don't have to master every concept but have some intuitive overview of them and you can move to phase 2.
+
+### Phase 2: React and the Patterns That Save You Later
+
+React looks simple at first. Components, state, effects. Easy, right?
+
+Then you build something complex and realize there's a whole world of patterns React doesn't force on you but will absolutely save you when things get complicated and needs performance improvement.
+
+As you will learn more in depth about
+
+#### React Patterns (The Ones You'll Actually Use)
+
+1. **How components actually re-render** - Understanding the rendering cycle deeply enough to fix performance issues, not just guess
+2. **useState vs useReducer** - Not the theory, but when complex state actually needs a reducer and when it's overkill
+3. **useEffect dependency arrays** - What actually goes in them, what React's exhaustive-deps rule is telling you, and when to ignore it
+4. **Refs for mutable values** - Using `useRef` for things that change but shouldn't trigger renders, and why this matters for animations and timers
+5. **Custom hooks that don't suck** - Extracting reusable logic without creating dependency hell or infinite loop bugs
+6. **Context patterns that scale** - How to avoid re-rendering your entire app when one context value changes
+7. **Controlled vs uncontrolled inputs** - When each pattern makes sense, and the performance implications you don't read about
+8. **Keys and reconciliation** - Why keys actually matter beyond silencing warnings, and how React decides what to update
+9. **Code splitting that works** - `React.lazy`, `Suspense`, and route-based splitting that doesn't create loading waterfalls
+10. **Error boundaries** - Implementing fallback UIs and error logging that actually helps you debug production issues
+11. **Portals for overlays** - Modals and tooltips that escape parent constraints without fighting CSS
+12. **Compound component patterns** - Building flexible APIs like Radix UI or Headless UI
+13. **Server Components vs Client Components** - Understanding the actual boundary and data flow, not just memorizing rules
+14. **useTransition and useDeferredValue** - When to actually use concurrent features for real performance wins
+15. **Memoization patterns** - When `useMemo`, `useCallback`, and `React.memo` help, and when they make things worse
+
+### Phase 3: Backend and the Systems That Scale
+
+You need to understand the systems that make applications secure, fast, and reliable. Not just "add caching" as a vague gesture, but _why_ you cache, _what_ you cache, and _when_ caching actually makes things worse.
+
+And these Concepts are important to understand: -
+
+**Authentication flows.** We're not building auth from scratch in 2025 that would be madness. But you absolutely need to understand what's happening under the hood. What tokens are, why sessions exist, what validation actually protects against.
+
+**Database design.** Not just "here's how to write SQL," but how to design schemas that can evolve and every dev now uses prisma or drizzle orm for these queries and schemas so to better design these schema you need to understand. How relationships work. When to denormalize. What migrations actually are and why they're terrifying.
+
+**Error handling that doesn't suck.** Proper logging. Graceful degradation. How to fail in a way that doesn't cascade across your entire system.
+
+Developers who understand these systems can debug production issues without creating more bugs. They can make informed decisions about tradeoffs. They can explain to AI _exactly_ what they need instead of hoping it figures it out.
+
+And here are the Concepts -
+
+#### Backend Fundamentals (Framework-Agnostic)
+
+1. **HTTP in practice** - Status codes that actually matter, headers you'll use, and what's really happening in that request/response cycle
+2. **REST API design that makes sense** - Not REST purism, but endpoints that are intuitive and easy to modify and don't require rewriting when requirements change
+3. **Authentication and authorization patterns** - JWTs, sessions, refresh tokens, and what actually makes each approach secure
+4. **Database relationships and normalization** - When to normalize, when to denormalize, and how to design schemas that can evolve
+5. **SQL queries that don't kill your database** - Indexes, query planning, N+1 problems, and why your ORM might be lying to you
+6. **Transactions and data integrity** - ACID properties in practice, when to use transactions, and how to avoid corrupting data
+7. **Caching strategies that work** - What to cache, cache invalidation patterns, and common mistakes that make things slower
+8. **Error handling and logging** - Structured logging, error levels that matter, and how to debug production without access to the server
+9. **Environment variables and secrets** - Managing configs across environments without committing credentials to git
+10. **Rate limiting and basic security** - CORS explained properly, SQL injection prevention, and why you can't trust any input
+11. **Background jobs and queues** - When to push work to the background, job retry logic, and why synchronous processing doesn't scale
+12. **File uploads and storage** - Handling files without destroying your disk, presigned URLs, and dealing with large uploads
+13. **Pagination strategies** - Cursor vs offset pagination, infinite scroll patterns, and query performance at scale
+14. **API versioning** - How to evolve APIs without breaking existing clients
+15. **Monitoring that matters** - What metrics actually predict problems, and setting up alerts that don't cry wolf
+
+### Phase 4: The Long Game
+
+Here's the part nobody wants to hear: **there's no finish line.**
+
+I still allocate time to solving problems. Trying out LeetCode, Codeforces, building side projects, refactoring old code sometimes. Not because I'm grinding for interviews, but because it's how you develop intuition for better engineering judgement.
+
+This isn't something you complete. It's continuous learning. And yeah, it's okay if you can't solve problems immediately. Look at solutions and try again. Learn the patterns. The goal is developing an instinct for what works.
+
+Every developer you see doing magic with the code does this. It's not about memorizing algorithms—it's about building pattern recognition that lets you see solutions quickly.
+
+### Phase 5: Distributed Systems (When You're Ready)
+
+Eventually, if you're building anything that needs to scale or Career switch, you'll need to understand distributed systems. This fundamentally changes how you think about software. as it will make you understand more deeply about the ->
+
+**Failure models.** Production systems fail by default. Networks are unreliable. Understanding this means designing systems that handle failure gracefully instead of just exploding.
+
+**Consistency and coordination.** When state is distributed across machines, correctness becomes a serious design problem.
+
+**Observability and logging** If you can't observe what your system is doing, you fundamentally cannot operate it. Tracing, metrics, logs—these aren't optional.
+
+I'm not saying you need this on day one. But if you want to build systems that handle real scale, this is where you're eventually headed.
+
+#### Distributed Systems & Infrastructure
+
+1. **Concurrency and parallelism** - Event loops, async patterns, and why your Node.js server blocks
+2. **Networking fundamentals** - TCP vs UDP, TLS, and why every API call is fighting network unreliability
+3. **Failure modes in production** - Timeouts, retries, circuit breakers, and cascading failures
+4. **CAP theorem in practice** - What consistency, availability, and partition tolerance actually mean for your design
+5. **Distributed storage patterns** - How databases replicate data, sharding strategies, and consistency models
+6. **Time and ordering in distributed systems** - Why timestamps lie, logical clocks, and event ordering
+7. **Message queues and streaming** - At least once vs exactly once semantics, backpressure, and handling consumer lag
+8. **Load balancing and traffic management** - Health checks, failover strategies, and graceful degradation
+9. **Observability** - Distributed tracing, metrics that matter, and log aggregation that actually helps debug issues
+10. **Security in distributed systems** - Identity, authentication across services, and zero-trust architecture
+11. **Deployment strategies** - Blue-green deployments, canary releases, and rollback procedures
+12. **Resource constraints and tradeoffs** - Latency vs throughput, memory vs CPU, and the economics of scaling
+
+#### The question is how this changes how you work with AI
+
+Now here's where it gets interesting.
+
+When you understand fundamentals, your prompts becomes more specific and not vague so
+
+Instead of: "Make this component faster"
+
+You say: "Memoize this part, and use this state differently using x library with this design pattern, and you will start getting more specific about how you structure your react components and the imports"
+
+And with backend systems
+Instead of: "Build me API endpoints"
+
+You prompt: "Design a REST API with versioning for these resources, using cursor-based pagination and including rate limiting"
+
+**This is the difference.** With fundamentals, you use AI to implement patterns you've deliberately chosen. You generate code that fits a coherent architecture. You build systems that can be understood and maintained.
+
+Without fundamentals, you're just accepting whatever AI generates and hoping it works.
+
+## What does This Means for Future
+
+![Future of Engineering](/images/Ai-fundamentals.png)
+
+Let me be direct about something.
+
+In four or five years, the difference between senior and junior engineers won't be who uses AI. Everyone will use AI.
+
+**It will be who uses these systems effectively.**
+
+The engineers who thrive will:
+
+- Direct these agents with precise, informed prompts and maintaining .md files for agents
+- Recognize immediately when AI's output doesn't fit their architecture
+- Catch subtle bugs and design flaws in generated code
+- Make informed tradeoffs between different approaches
+- Build maintainable systems, not just working code
+
+The engineers who struggle will:
+
+- Accept whatever AI generates without understanding it
+- Build systems that work today but break tomorrow
+- Create increasingly chaotic, unmaintainable codebases
+- Miss security issues and performance problems until production
+- Be completely stuck when debugging goes beyond googling error messages
+
+The difference between these groups? **Fundamentals and engineering judgment**
+
+## The Question That Defines Everything
+
+Here's what you need to ask yourself:
+
+**In a world where everyone has access to AI that can write code, what makes YOUR code valuable?**
+
+It's not that you wrote it faster. AI is faster.
+It's not that you wrote it without bugs. AI can do that too.
+
+It's that you wrote code that:
+
+- Fits your system's architecture
+- Can be maintained by your team
+- Scales when it needs to
+- Degrades gracefully when things fail
+- Follows your company's actual patterns
+- Solves the real problem your team is trying to solve, not just implements the feature description
+
+This is what fundamentals give you: **the ability to produce quality, not just quantity. The judgment to know the difference.**
+
+and at last
+
+## The Reality is that
+
+Programming has changed. Let's just acknowledge that.
+
+Writing code The mechanical act of typing syntax Is less important than it used to be. Understanding _what_ to build with clear goal and methods and _how_ to architect it with systematic manner is more important than ever.
+
+It doesn't matter if the AI bubble pops. It doesn't matter if YC backed AI startups lose money or if some CEO says something absurd on Twitter/X. **The way we build software has changed permanently.**
+
+I know some people want to resist this. Ignore AI, stick to the old ways, hope it all goes away.
+
+But here's the thing: you can't control what's happening by refusing to participate. Skipping AI won't protect your career. It will just make you irrelevant faster.
+
+So?
+
+**Test these tools.** Not in a five-minute demo where you confirm your existing beliefs. Spend real time with them. Find ways to multiply your output with AI as a partner.
+
+If it doesn't click immediately, try again in a few weeks. The tools are improving constantly.
+
+But and this is crucial **build your fundamentals first.** Learn how systems work. Develop the judgment to recognize good code from bad. Understand the principles that make software maintainable, scalable, and secure.
+
+Then use AI to implement those principles faster than you ever could before.
+
+That's how you don't just survive this shift. That's how you thrive in it.
+
+The goal isn't to memorize syntax or compete with developers who have decades of pattern recognition. The goal is to understand not just _what_ to code, but _why_ you're coding it that way.
+
+That's the distinction between developers who work effectively with AI and those who are just copy-pasting without comprehension.
+
+That's the future.
+
+Now let's get to work.

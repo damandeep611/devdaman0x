@@ -4,15 +4,12 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Search,
-  Command,
   Copy,
   Sliders,
-  ChevronDown,
   Sparkles,
-  Zap,
   Wand2,
-  Layers,
-  Image as ImageIcon
+  Command,
+  ChevronDown,
 } from "lucide-react";
 import Arrow38 from "./icons/Arrow38";
 
@@ -130,7 +127,7 @@ const CardContent = ({ type }: { type: CardType }) => {
     case "gallery":
       return (
         <div className="w-full h-full p-2 flex gap-2 items-center justify-center overflow-hidden bg-muted/50">
-          <div className="w-1/3 h-24 rounded-lg bg-muted overflow-hidden shadow-sm rotate-[-6deg] translate-y-2 border border-border">
+          <div className="w-1/3 h-24 rounded-lg bg-muted overflow-hidden shadow-sm -rotate-6 translate-y-2 border border-border">
             <img
               src="https://picsum.photos/id/10/200/300"
               alt="img1"
@@ -144,7 +141,7 @@ const CardContent = ({ type }: { type: CardType }) => {
               className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
             />
           </div>
-          <div className="w-1/3 h-24 rounded-lg bg-muted overflow-hidden shadow-sm rotate-[6deg] translate-y-2 border border-border">
+          <div className="w-1/3 h-24 rounded-lg bg-muted overflow-hidden shadow-sm rotate-6 translate-y-2 border border-border">
             <img
               src="https://picsum.photos/id/12/200/300"
               alt="img3"
@@ -176,16 +173,21 @@ const CardContent = ({ type }: { type: CardType }) => {
     case "style-tags":
       return (
         <div className="w-full h-full flex flex-wrap content-center justify-center gap-2 p-4 bg-card">
-          {["Cyberpunk", "Realistic", "Anime", "3D Render", "Watercolor", "Sci-Fi"].map(
-            (tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1.5 bg-secondary/80 hover:bg-secondary rounded-full text-xs font-medium text-secondary-foreground border border-border/50 transition-colors"
-              >
-                {tag}
-              </span>
-            )
-          )}
+          {[
+            "Cyberpunk",
+            "Realistic",
+            "Anime",
+            "3D Render",
+            "Watercolor",
+            "Sci-Fi",
+          ].map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1.5 bg-secondary/80 hover:bg-secondary rounded-full text-xs font-medium text-secondary-foreground border border-border/50 transition-colors"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       );
 
@@ -200,9 +202,9 @@ const CardContent = ({ type }: { type: CardType }) => {
               <span className="text-purple-400 font-bold">/imagine</span>
             </div>
             <p className="line-clamp-6 opacity-90">
-              <span className="text-zinc-100">futuristic city</span> with flying cars,
-              neon signs, rain-slicked streets, cinematic lighting,
-              highly detailed, 8k, photorealistic
+              <span className="text-zinc-100">futuristic city</span> with flying
+              cars, neon signs, rain-slicked streets, cinematic lighting, highly
+              detailed, 8k, photorealistic
               <span className="text-yellow-500"> --v 6.0</span>
               <span className="text-blue-400"> --ar 16:9</span>
             </p>
@@ -219,7 +221,7 @@ const CardContent = ({ type }: { type: CardType }) => {
             </label>
             <div className="w-full bg-secondary/30 border border-input rounded-xl h-10 flex items-center justify-between px-3 shadow-sm">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]" />
+                <div className="w-4 h-4 rounded-full bg-linear-to-br from-indigo-500 to-purple-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]" />
                 <span className="text-xs font-medium">SDXL Turbo</span>
               </div>
               <ChevronDown size={14} className="text-muted-foreground" />
@@ -227,7 +229,7 @@ const CardContent = ({ type }: { type: CardType }) => {
           </div>
           <div className="w-full bg-secondary/10 border border-input/50 border-dashed rounded-xl h-10 flex items-center justify-between px-3 opacity-60">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500" />
+              <div className="w-4 h-4 rounded-full bg-linear-to-br from-emerald-500 to-teal-500" />
               <span className="text-xs font-medium">Midjourney v6</span>
             </div>
           </div>
@@ -237,10 +239,12 @@ const CardContent = ({ type }: { type: CardType }) => {
     case "generation-settings":
       return (
         <div className="w-full h-full flex flex-col justify-center p-6 bg-card gap-6">
-           <div className="flex items-center gap-2 mb-1 text-muted-foreground">
-             <Sliders size={14} />
-             <span className="text-xs font-semibold uppercase tracking-wider">Settings</span>
-           </div>
+          <div className="flex items-center gap-2 mb-1 text-muted-foreground">
+            <Sliders size={14} />
+            <span className="text-xs font-semibold uppercase tracking-wider">
+              Settings
+            </span>
+          </div>
           <div className="space-y-3">
             <div className="flex justify-between text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
               <span>Guidance</span>
@@ -266,10 +270,10 @@ const CardContent = ({ type }: { type: CardType }) => {
       return (
         <div className="w-full h-full flex items-center justify-center p-6 bg-card">
           <div className="w-full flex flex-col gap-4">
-             <div className="flex items-center gap-2 text-primary mb-1">
-                <Wand2 size={16} />
-                <span className="text-sm font-bold">Dream it.</span>
-             </div>
+            <div className="flex items-center gap-2 text-primary mb-1">
+              <Wand2 size={16} />
+              <span className="text-sm font-bold">Dream it.</span>
+            </div>
             <div className="w-full bg-muted/40 rounded-2xl h-10 flex items-center px-4 text-xs text-muted-foreground border border-input/20 shadow-inner">
               Astronaut in a jungle...
             </div>
