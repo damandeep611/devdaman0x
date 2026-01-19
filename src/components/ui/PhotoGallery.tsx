@@ -43,11 +43,10 @@ const CARDS_DATA: PortfolioCard[] = [
 const BASE_X = [-480, -320, -160, 0, 160, 320, 480];
 const BASE_Y = [15, -5, 10, 0, 10, -5, 15];
 
-interface CardStackProps {}
 
-const CardStack: React.FC<CardStackProps> = () => {
+const CardStack: React.FC = () => {
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
+    typeof window !== "undefined" ? window.innerWidth : 1200,
   );
 
   useEffect(() => {
@@ -61,12 +60,12 @@ const CardStack: React.FC<CardStackProps> = () => {
   return (
     <div className="relative w-full h-[550px] mb-32 flex justify-center items-center pointer-events-none">
       <div className="absolute top-[15%] right-4 sm:top-0 sm:right-[10%] z-0 opacity-60 scale-75 sm:scale-100">
-         <div className="relative">
-            <Arrow38 className="w-32 h-20 text-muted-foreground rotate-12" />
-            <p className="font-handwriting text-xl text-muted-foreground absolute -top-8 -left-12 -rotate-6 w-32 text-center leading-tight">
-               Prompt and image library
-            </p>
-         </div>
+        <div className="relative">
+          <Arrow38 className="w-32 h-20 text-muted-foreground rotate-12" />
+          <p className="font-handwriting text-xl text-muted-foreground absolute -top-8 -left-12 -rotate-6 w-32 text-center leading-tight">
+            Prompt and image library
+          </p>
+        </div>
       </div>
 
       {CARDS_DATA.map((card, index) => (
@@ -113,7 +112,7 @@ const CardItem: React.FC<CardItemProps> = ({
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="absolute bg-card dark:bg-card/95 backdrop-blur-sm rounded-3xl shadow-2xl dark:shadow-black/50 border border-border pointer-events-auto cursor-pointer flex flex-col justify-center items-center overflow-hidden"
+      className="absolute bg-card dark:bg-card/95 backdrop-blur-sm rounded-3xl  dark:shadow-black/50 border border-border pointer-events-auto cursor-pointer flex flex-col justify-center items-center overflow-hidden"
       style={{
         width: 260,
         height: 260,
