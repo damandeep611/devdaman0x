@@ -1,7 +1,6 @@
 "use client";
 import React, { type SVGProps } from "react";
 import { motion, Variants } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 
 const GitHub = (props: SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 1024 1024" fill="none">
@@ -85,15 +84,15 @@ export default function HeroSection() {
         <div className="flex flex-col gap-6">
           <motion.div
             variants={itemVariants}
-            className="text-xl md:text-2xl font-light leading-snug text-muted-foreground tracking-tight max-w-2xl"
+            className="text-xl md:text-2xl font-fraunces font-light leading-snug text-muted-foreground tracking-tight max-w-2xl"
           >
             <p>
               <span className="text-foreground font-medium">
                 Developer and designer
               </span>
               . Help products{" "}
-              <span className="text-foreground font-medium">work better</span>
-              —<span className="text-foreground font-medium">
+              <span className="text-foreground font-medium">work better</span>—
+              <span className="text-foreground font-medium">
                 faster checkouts
               </span>
               ,{" "}

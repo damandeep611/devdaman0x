@@ -13,6 +13,7 @@ const navItems = [
   { id: "home", label: "Home", href: "/" },
   { id: "blog", label: "Blog", href: "/blog" },
   { id: "work", label: "Work", href: "/work" },
+  { id: "mindmap", label: "Mindmap", href: "/mindmap" },
 ];
 
 type ContactView = "selection" | "message" | "calendar" | "success";

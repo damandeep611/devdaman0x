@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Caveat, Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Geist, Geist_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import NavPill from "@/components/layout/NavPill";
 import Footer from "@/components/layout/Footer";
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["SOFT"],
+});
 
 const geistCaveat = Caveat({
   variable: "--font-geist-caveat",
@@ -33,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${geistCaveat.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${geistCaveat.variable} ${fraunces.variable} antialiased`}
       >
         <ThemeProvider attribute="class" enableSystem disableTransitionOnChange>
           <NavPill />

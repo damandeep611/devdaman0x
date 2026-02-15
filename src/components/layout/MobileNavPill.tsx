@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Check, MessageSquare, X, ArrowLeft, Send, Loader2, Calendar, Home, BookOpen, Briefcase, Github, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Mail, Check, MessageSquare, X, ArrowLeft, Send, Loader2, Calendar, Home, BookOpen, Briefcase, Github, Linkedin, Twitter, Youtube, Brain } from "lucide-react";
 import { ModeToggle } from "../theme/mode-toggle";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +12,7 @@ const navItems = [
   { id: "home", label: "Home", href: "/", icon: Home },
   { id: "blog", label: "Blog", href: "/blog", icon: BookOpen },
   { id: "work", label: "Work", href: "/work", icon: Briefcase },
+  { id: "mindmap", label: "Mindmap", href: "/mindmap", icon: Brain },
 ];
 
 type ContactView = "selection" | "message" | "calendar" | "success";
